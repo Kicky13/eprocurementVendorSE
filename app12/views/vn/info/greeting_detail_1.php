@@ -8,17 +8,17 @@
   $msrItem  = $this->vendor_lib->msrItem($row->msr_no)->result();
   $msrItemList = [];
   foreach ($msrItem as $key => $value) {
-  	$msrItemList[] = $value->line_item;
+    $msrItemList[] = $value->line_item;
   }
   $t_bid_bond  = $this->vendor_lib->tBidBond($bled_no, $vendor_id)->result();
   $bidHead = $this->vendor_lib->tBidHead($bled_no, $this->session->userdata('ID'))->row();
 ?>
 <div class="app-content content">
-	<div class="content-wrapper">
-		<div class="content-header row">
-			<div class="content-header-left col-md-6 col-12 mb-1">
-				<h3 class="content-header-title">Bid Proposal For <?=$bled_no?></h3>
-			</div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-1">
+                <h3 class="content-header-title">Bid Proposal For <?=$bled_no?></h3>
+            </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                   <ol class="breadcrumb">
@@ -27,299 +27,299 @@
                   </ol>
                 </div>
             </div>
-		</div>
-		<div class="content-body">
-			<section id="configuration">
-				<div class="content-body">
-					<section id="icon-tabs">
-						<div class="card">
-							<div class="card-content collapse show">
-								<div class="card-body">
-                            		<div class="icons-tab-steps wizard-circl">
-                            			<h6><i class="step-icon fa fa-info"></i> Invitation</h6>
-                            			<fieldset>
-                            				<div class="row">
-                            					<div class="col-md-12">
-                        							<table class="table table-condensed table-striped" style="font-size: 12px;">
-                        								<tbody>
-                        									<tr>
-                        										<td width="20%">Company</td>
-                        										<td width="30%"><?=$row->company_name?></td>
-                        										<td width="20%">Currency</td>
-                        										<td width="30%"><?=$row->currency?></td>
-                        									</tr>
-                        									<tr>
-                        										<td>Enquiry No</td>
-                        										<td><?=$row->bled_no?></td>
-                        										<td>Envelope System</td>
-                        										<td><?=@$row->envelope_system == 1 ? "1 Envelope":"2 Envelopes" ?></td>
-                        									</tr>
-                        									<tr>
-                        										<td>Subject Title</td>
-                        										<td><?=$row->title?></td>
-                        										<td>Packet/Itemize</td>
-                        										<td><?=@$row->packet == 1 ? "Itemize":"Packet" ?></td>
-                        									</tr>
-                        									<tr>
-                        										<td>Invitation Date</td>
-                        										<td><?=dateToIndo($row->issued_date)?></td>
-                        										<td>Bid Bond</td>
-                        										<td>
-                        											<?php
-                        											if ($row->bid_bond_type == 2) {
-                        												echo 'Not Applicable';
-                        											} elseif ($row->bid_bond_type == 1) {
-                        												echo $row->bid_bond.' %';
-                        											}elseif ($row->bid_bond_type == 3) {
-                        												echo $row->currency.' '.numIndo($row->bid_bond);
-                        											} else {
-                        												echo '-';
-                        											}
-                        											?>
-                        										</td>
-                        									</tr>
-                        									<tr>
-                        										<td>Bid Validity</td>
-                        										<td><?=dateToIndo($row->bid_validity)?></td>
-                        										<td>Bid Bond Validity</td>
-                        										<td><?=dateToIndo($row->bid_bond_validity)?></td>
-                        									</tr>
-                        									<tr>
-                        										<td>Pre Bid Address</td>
-                        										<td><?=nl2br($row->prebid_address)?></td>
+        </div>
+        <div class="content-body">
+            <section id="configuration">
+                <div class="content-body">
+                    <section id="icon-tabs">
+                        <div class="card">
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="icons-tab-steps wizard-circl">
+                                        <h6><i class="step-icon fa fa-info"></i> Invitation</h6>
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table class="table table-condensed table-striped" style="font-size: 12px;">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="20%">Company</td>
+                                                                <td width="30%"><?=$row->company_name?></td>
+                                                                <td width="20%">Currency</td>
+                                                                <td width="30%"><?=$row->currency?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Enquiry No</td>
+                                                                <td><?=$row->bled_no?></td>
+                                                                <td>Envelope System</td>
+                                                                <td><?=@$row->envelope_system == 1 ? "1 Envelope":"2 Envelopes" ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Subject Title</td>
+                                                                <td><?=$row->title?></td>
+                                                                <td>Packet/Itemize</td>
+                                                                <td><?=@$row->packet == 1 ? "Itemize":"Packet" ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Invitation Date</td>
+                                                                <td><?=dateToIndo($row->issued_date)?></td>
+                                                                <td>Bid Bond</td>
+                                                                <td>
+                                                                    <?php
+                                                                    if ($row->bid_bond_type == 2) {
+                                                                        echo 'Not Applicable';
+                                                                    } elseif ($row->bid_bond_type == 1) {
+                                                                        echo $row->bid_bond.' %';
+                                                                    }elseif ($row->bid_bond_type == 3) {
+                                                                        echo $row->currency.' '.numIndo($row->bid_bond);
+                                                                    } else {
+                                                                        echo '-';
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Bid Validity</td>
+                                                                <td><?=dateToIndo($row->bid_validity)?></td>
+                                                                <td>Bid Bond Validity</td>
+                                                                <td><?=dateToIndo($row->bid_bond_validity)?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Pre Bid Address</td>
+                                                                <td><?=nl2br($row->prebid_address)?></td>
                                                                 <?php if ($row->id_msr_type == 'MSR01') { ?>
-                        										<td>Incoterm</td>
-                        										<td>
-                        											<?=@$row->incoterm?>
-                        										</td>
+                                                                <td>Incoterm</td>
+                                                                <td>
+                                                                    <?=@$row->incoterm?>
+                                                                </td>
                                                                 <?php } ?>
-                        									</tr>
-                        									<tr>
-                        										<td>Pre Bid Date</td>
-                        										<td><?=dateToIndo($row->prebiddate, false, true)?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Pre Bid Date</td>
+                                                                <td><?=dateToIndo($row->prebiddate, false, true)?></td>
                                                                 <?php if ($row->id_msr_type == 'MSR01') { ?>
-                        										<td>Delivery Point</td>
-                        										<td>
-                        											<?=@$row->loc ?>
-                        										</td>
+                                                                <td>Delivery Point</td>
+                                                                <td>
+                                                                    <?=@$row->loc ?>
+                                                                </td>
                                                                 <?php } ?>
-                        									</tr>
-                        									<tr>
-                        										<td>Closing Date</td>
-                        										<td <?= $row->status_closing_date == 'Close' ? 'style="color: #FF0000"':'' ?>><?=dateToIndo($row->closing_date, false, true)?></td>
-                        									</tr>
-                        								</tbody>
-                        							</table>
-                            					</div>
-                            				</div>
-                            			</fieldset>
-                            			<h6><i class="step-icon fa fa-download"></i>Attachment</h6>
-                            			<fieldset id="form-attachment">
-                            				<div class="row">
-                            					<div class="col-md-12">
-                            						<div class="table-responsive">
-                            							<table class="table table-condensed">
-                            								<thead>
-                            									<tr>
-                            										<th>Type</th>
-                            										<th>File Name</th>
-                            										<th>Uploaded Date</th>
-                            										<th>Uploaded By</th>
-                            									</tr>
-                            								</thead>
-                            								<tbody>
-                            									<?php foreach ($doc as $key => $value) {
-                            										echo "<tr>
-	                            										<td>".biduploadtype($value->tipe, true)."</td>
-	                            										<td><a href='".base_url('userfiles/temp/'.$value->file_path)."' target='_blank'>".$value->file_name."</a></td>
-	                            										<td>".dateToIndo($value->created_at,false,true)."</td>
-	                            										<td>".user($value->created_by)->NAME."</td>
-                            										</tr>";
-                            									}?>
-                            								</tbody>
-                            							</table>
-                            						</div>
-                            					</div>
-                            				</div>
-                            			</fieldset>
-                            			<h6><i class="step-icon fa fa-info"></i>Clarification</h6>
-			                            <fieldset>
-			                                <?php
-			                                    if (($row->confirmed == 1  && strtotime($row->closing_date) >= strtotime(date('Y-m-d H:i:s'))) || $row->bid_opening == 1) {
-			                                        $allow_send = true;
-			                                    } else {
-			                                        $allow_send = false;
-			                                    }
-			                                    $this->load->view('V_note_clarification',['module_kode'=>'bidnote','data_id'=>$bled_no, 'allow_send' => $allow_send]);
-			                                ?>
-			                            </fieldset>
-			                            <h6><i class="step-icon fa fa-info"></i>Quotation</h6>
-										<fieldset>
-										    <form action="<?=base_url('vn/info/greetings/quotation')?>" id="quotation" class="icons-tab-steps wizard-circle" method="post" enctype="multipart/form-data">
-										        <input type="hidden" name="bled_no" value="<?=$row->bled_no?>">
-										        <input type="hidden" name="msr_no" value="<?=$row->msr_no?>">
-										        <input type="hidden" name="id_currency" value="<?=$row->id_currency?>">
-										        <input type="hidden" name="id_currency_base" value="<?=$row->id_currency_base?>">
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Administration <i class="fa fa-info-circle"></i></label>
-														</div>
-														<div class="form-group row">
-														   <label class="col-md-4">Statement of Conformity  (PDF Files)</label>
-    										                <div class="col-md-8">
-    										                    <input type="file" name="soc" required="">
-    										                    <input name="soc_file" type="hidden" value="<?= @$bidHead->soc ?>">
-    										                    <?php if (@$bidHead->soc) { ?>
-    										                        <a href="<?= base_url('upload/bid/'.$bidHead->soc) ?>" class="download-link-form" target="_blank"><i class="fa fa-download"></i> Statement of Conformity File</a>
-    										                    <?php } ?>
-    										                </div>
-														</div>
-														<br>
-														<div class="form-group row">
-															<label class="col-12" style="font-weight:bold;">Technical <i class="fa fa-info-circle"></i></label>
-														</div>
-														<div class="form-group row">
-															<label class="col-4">Technical Proposal (PDF Files)</label>
-										                    <div class="col-md-8">
-										                        <input type="file" name="tp" required="">
-										                        <input name="tp_file" type="hidden" value="<?= @$bidHead->tp ?>">
-										                        <?php if (@$bidHead->tp) { ?>
-										                            <a href="<?= base_url('upload/bid/'.$bidHead->tp) ?>" class="download-link-form"><i class="fa fa-download"></i> Technical Proposal File</a>
-										                        <?php } ?>
-										                    </div>
-														</div>
-														<div class="form-group row">
-															<label class="col-4"><?= $row->id_msr_type == 'MSR01' ? 'Delivery Time' : 'Work Duration' ?></label>
-    										                <div class="col-md-4">
-    										                    <input name="delivery_nilai" id="delivery_nilai" class="form-control" type="text" value="<?= @$bidHead->delivery_nilai ?>" >
-    										                </div>
-    										                <div class="col-md-4">
-    										                    <select class="form-control" name="delivery_satuan" id="delivery_satuan">
-    										                        <option <?= @$bidHead->delivery_satuan == 'WEEK' ? "selected" : "" ?> value="WEEK">WEEK</option>
-    										                        <option <?= @$bidHead->delivery_satuan == 'MONTH' ? "selected" : "" ?> value="MONTH">MONTH</option>
-    										                    </select>
-    										                </div>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Commercial <i class="fa fa-info-circle"></i></label>
-														</div>
-														<div class="form-group row">
-														   <label class="col-md-4">Bid Letter No</label>
-    										                <div class="col-md-8">
-    										                    <div class="row">
-    										                        <div class="col-md-6">
-    										                            <input name="bid_letter_no" id="bid_letter_no" class="form-control" required="" value="<?= @$bidHead->bid_letter_no ?>">
-    										                            <input name="bid_letter_file" type="hidden" value="<?= @$bidHead->bid_letter_path ?>">
-    										                        </div>
-    										                        <div class="col-md-6">
-    										                            <input type="file" name="bid_letter_path" required="">
-    										                        </div>
-    										                    </div>
-    										                    <?php if (@$bidHead->bid_letter_path) { ?>
-    										                        <a href="<?= base_url('upload/bid/'.$bidHead->bid_letter_path) ?>"><i class="fa fa-download"></i> Bid Letter File</a>
-    										                    <?php } ?>
-    										                </div>
-														</div>
-														<div class="form-group row">
-															<label class="col-4">Bid validity</label>
-										                    <div class="col-md-4">
-										                      <input name="bid_validity" id="bid_validity" class="form-control mydate" value="<?= @$bidHead->bid_validity ?>" >
-										                    </div>
-														</div>
-														<div class="form-group row">
-															<label class="col-4">Local content (TKDN)</label>
-										                    <div class="col-md-4">
-																<div class="form-group">
-										                            <select name="id_local_content_type" class="form-control">
-										                                <option value="">Please Select</option>
-										                                <?php foreach($this->mvn->get_tkdn_type() as $tkdn_type) { ?>
-										                                    <option value="<?= $tkdn_type->id ?>" <?= $tkdn_type->id == @$bidHead->id_local_content_type ? 'selected' : '' ?>><?= $tkdn_type->name ?></option>
-										                                <?php } ?>
-										                            </select>
-										                        </div>
-										                    </div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<div class="input-group">
-																		<input name="local_content" id="local_content" class="form-control" required="" value="<?= @$bidHead->local_content ?>" aria-describedby="basic-addon2">
-																		<input name="local_content_file" type="hidden" value="<?= @$bidHead->local_content_path ?>">
-																		<span class="input-group-addon" id="basic-addon2">%</span>
-																	</div>
-																</div>
-															</div>
-															<div class="col-md-4"></div>
-															<div class="col-md-8">
-																<input type="file" name="local_content_path" required="">
-															</div>
-															<div class="col-md-4"></div>
-															<div class="col-md-4">
-																<?php if (@$bidHead->local_content_path) { ?>
-										                            <a href="<?= base_url('upload/bid/'.$bidHead->local_content_path) ?>" target="_blank" ><i class="fa fa-download"></i> Local content (TKDN) File</a>
-										                        <?php } ?>
-															</div>
-														</div>
-														<div class="form-group row">
-															<label class="col-4">Other Commercial Document (PDF Files)</label>
-										                    <div class="col-md-8">
-    										                    <input type="file" name="pb">
-    										                    <input name="pb_file" type="hidden" value="<?= @$bidHead->pl ?>">
-    										                    <?php if (@$bidHead->pl) { ?>
-    										                        <a href="<?= base_url('upload/bid/'.$bidHead->pl) ?>" class="download-link-form"><i class="fa fa-download"></i> Price Book/Price List File</a>
-    										                    <?php } ?>
-    										                </div>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-										            <div class="col-md-12">
-														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Note</label>
-														</div>
-														<div class="form-group row">
-															<div class="col-md-12">
-    										                    <textarea class="form-control" name="note" name="id" placeholder="Note"><?= @$bidHead->note ?></textarea>
-    										                </div>
-														</div>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Closing Date</td>
+                                                                <td <?= $row->status_closing_date == 'Close' ? 'style="color: #FF0000"':'' ?>><?=dateToIndo($row->closing_date, false, true)?></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <h6><i class="step-icon fa fa-download"></i>Attachment</h6>
+                                        <fieldset id="form-attachment">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-condensed">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Type</th>
+                                                                    <th>File Name</th>
+                                                                    <th>Uploaded Date</th>
+                                                                    <th>Uploaded By</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php foreach ($doc as $key => $value) {
+                                                                    echo "<tr>
+                                                                        <td>".biduploadtype($value->tipe, true)."</td>
+                                                                        <td><a href='".base_url('userfiles/temp/'.$value->file_path)."' target='_blank'>".$value->file_name."</a></td>
+                                                                        <td>".dateToIndo($value->created_at,false,true)."</td>
+                                                                        <td>".user($value->created_by)->NAME."</td>
+                                                                    </tr>";
+                                                                }?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <h6><i class="step-icon fa fa-info"></i>Clarification</h6>
+                                        <fieldset>
+                                            <?php
+                                                if (($row->confirmed == 1  && strtotime($row->closing_date) >= strtotime(date('Y-m-d H:i:s'))) || $row->bid_opening == 1) {
+                                                    $allow_send = true;
+                                                } else {
+                                                    $allow_send = false;
+                                                }
+                                                $this->load->view('V_note_clarification',['module_kode'=>'bidnote','data_id'=>$bled_no, 'allow_send' => $allow_send]);
+                                            ?>
+                                        </fieldset>
+                                        <h6><i class="step-icon fa fa-info"></i>Quotation</h6>
+                                        <fieldset>
+                                            <form action="<?=base_url('vn/info/greetings/quotation')?>" id="quotation" class="icons-tab-steps wizard-circle" method="post" enctype="multipart/form-data">
+                                                <input type="hidden" name="bled_no" value="<?=$row->bled_no?>">
+                                                <input type="hidden" name="msr_no" value="<?=$row->msr_no?>">
+                                                <input type="hidden" name="id_currency" value="<?=$row->id_currency?>">
+                                                <input type="hidden" name="id_currency_base" value="<?=$row->id_currency_base?>">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                          <label class="col-12" style="font-weight:bold;">Administration <i class="fa fa-info-circle"></i></label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                           <label class="col-md-4">Statement of Conformity  (PDF Files)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="file" name="soc" required="">
+                                                                <input name="soc_file" type="hidden" value="<?= @$bidHead->soc ?>">
+                                                                <?php if (@$bidHead->soc) { ?>
+                                                                    <a href="<?= base_url('upload/bid/'.$bidHead->soc) ?>" class="download-link-form" target="_blank"><i class="fa fa-download"></i> Statement of Conformity File</a>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-group row">
+                                                            <label class="col-12" style="font-weight:bold;">Technical <i class="fa fa-info-circle"></i></label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-4">Technical Proposal (PDF Files)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="file" name="tp" required="">
+                                                                <input name="tp_file" type="hidden" value="<?= @$bidHead->tp ?>">
+                                                                <?php if (@$bidHead->tp) { ?>
+                                                                    <a href="<?= base_url('upload/bid/'.$bidHead->tp) ?>" class="download-link-form"><i class="fa fa-download"></i> Technical Proposal File</a>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-4"><?= $row->id_msr_type == 'MSR01' ? 'Delivery Time' : 'Work Duration' ?></label>
+                                                            <div class="col-md-4">
+                                                                <input name="delivery_nilai" id="delivery_nilai" class="form-control" type="text" value="<?= @$bidHead->delivery_nilai ?>" >
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select class="form-control" name="delivery_satuan" id="delivery_satuan">
+                                                                    <option <?= @$bidHead->delivery_satuan == 'WEEK' ? "selected" : "" ?> value="WEEK">WEEK</option>
+                                                                    <option <?= @$bidHead->delivery_satuan == 'MONTH' ? "selected" : "" ?> value="MONTH">MONTH</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                          <label class="col-12" style="font-weight:bold;">Commercial <i class="fa fa-info-circle"></i></label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                           <label class="col-md-4">Bid Letter No</label>
+                                                            <div class="col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <input name="bid_letter_no" id="bid_letter_no" class="form-control" required="" value="<?= @$bidHead->bid_letter_no ?>">
+                                                                        <input name="bid_letter_file" type="hidden" value="<?= @$bidHead->bid_letter_path ?>">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="file" name="bid_letter_path" required="">
+                                                                    </div>
+                                                                </div>
+                                                                <?php if (@$bidHead->bid_letter_path) { ?>
+                                                                    <a href="<?= base_url('upload/bid/'.$bidHead->bid_letter_path) ?>"><i class="fa fa-download"></i> Bid Letter File</a>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-4">Bid validity</label>
+                                                            <div class="col-md-4">
+                                                              <input name="bid_validity" id="bid_validity" class="form-control mydate" value="<?= @$bidHead->bid_validity ?>" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-4">Local content (TKDN)</label>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <select name="id_local_content_type" class="form-control">
+                                                                        <option value="">Please Select</option>
+                                                                        <?php foreach($this->mvn->get_tkdn_type() as $tkdn_type) { ?>
+                                                                            <option value="<?= $tkdn_type->id ?>" <?= $tkdn_type->id == @$bidHead->id_local_content_type ? 'selected' : '' ?>><?= $tkdn_type->name ?></option>
+                                                                        <?php } ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <input name="local_content" id="local_content" class="form-control" required="" value="<?= @$bidHead->local_content ?>" aria-describedby="basic-addon2">
+                                                                        <input name="local_content_file" type="hidden" value="<?= @$bidHead->local_content_path ?>">
+                                                                        <span class="input-group-addon" id="basic-addon2">%</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4"></div>
+                                                            <div class="col-md-8">
+                                                                <input type="file" name="local_content_path" required="">
+                                                            </div>
+                                                            <div class="col-md-4"></div>
+                                                            <div class="col-md-4">
+                                                                <?php if (@$bidHead->local_content_path) { ?>
+                                                                    <a href="<?= base_url('upload/bid/'.$bidHead->local_content_path) ?>" target="_blank" ><i class="fa fa-download"></i> Local content (TKDN) File</a>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-4">Other Commercial Document (PDF Files)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="file" name="pb">
+                                                                <input name="pb_file" type="hidden" value="<?= @$bidHead->pl ?>">
+                                                                <?php if (@$bidHead->pl) { ?>
+                                                                    <a href="<?= base_url('upload/bid/'.$bidHead->pl) ?>" class="download-link-form"><i class="fa fa-download"></i> Price Book/Price List File</a>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                          <label class="col-12" style="font-weight:bold;">Note</label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-12">
+                                                                <textarea class="form-control" name="note" name="id" placeholder="Note"><?= @$bidHead->note ?></textarea>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-										        <div class="form-group">
+                                                <div class="form-group">
                                                     <label style="font-weight: bold;">SOP List Item </label>
-										            <div class="table-responsive">
-										                <table class="table table-no-wrap">
-										                    <thead>
-										                        <tr>
-										                            <th style="width: 1px">No</th>
-										                            <th>Item Type</th>
-										                            <th>Description Of Unit</th>
-										                            <th class="text-center">Qty 1</th>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-no-wrap">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 1px">No</th>
+                                                                    <th>Item Type</th>
+                                                                    <th>Description Of Unit</th>
+                                                                    <th class="text-center">Qty 1</th>
                                                                     <th class="text-center">UoM 1</th>
                                                                     <th class="text-center">Qty 2</th>
                                                                     <th class="text-center">UoM 2</th>
-										                            <th colspan="2" class="text-center">Delivery Time/Work Duration</th>
-										                            <th class="text-center">Currency</th>
+                                                                    <th colspan="2" class="text-center">Delivery Time/Work Duration</th>
+                                                                    <th class="text-center">Currency</th>
                                                                     <th class="text-right">Unit Price</th>
-										                            <th class="text-right">Sub Total</th>
-										                            <th class="text-center">Deviation</th>
-										                            <th>Remark</th>
-										                        </tr>
-										                    </thead>
-										                    <tbody>
-										                        <?php
-										                            $no=1;
-										                            $x = $this->vendor_lib->sop_get(false, $msrItemList)->result();
-										                            foreach ($x as $key => $value) :
-										                            $tBidDetail = $this->db->where(['vendor_id'=>$vendor_id,'sop_id'=>$value->id])->get('t_sop_bid')->row();
-										                            $itemPrice = @$tBidDetail->unit_price ? @$tBidDetail->unit_price : 0;
-										                        ?>
-										                        <tr>
+                                                                    <th class="text-right">Sub Total</th>
+                                                                    <th class="text-center">Deviation</th>
+                                                                    <th>Remark</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                    $no=1;
+                                                                    $x = $this->vendor_lib->sop_get(false, $msrItemList)->result();
+                                                                    foreach ($x as $key => $value) :
+                                                                    $tBidDetail = $this->db->where(['vendor_id'=>$vendor_id,'sop_id'=>$value->id])->get('t_sop_bid')->row();
+                                                                    $itemPrice = @$tBidDetail->unit_price ? @$tBidDetail->unit_price : 0;
+                                                                ?>
+                                                                <tr>
                                                                     <td><?= $no ?></td>
                                                                     <td><?=$value->id_itemtype?></td>
-										                            <td><?=$value->item?></td>
-										                            <th class="text-center">
+                                                                    <td><?=$value->item?></td>
+                                                                    <th class="text-center">
                                                                         <?=$value->qty1?>
                                                                     </td>
                                                                     <th class="text-center"><?=$value->uom1?> - <?=$value->uom1_desc?></td>
@@ -333,42 +333,42 @@
                                                                         <?php endif; ?>
                                                                         <input type="hidden" id="qty_<?=$no?>" value="<?=$qty?>" name="qty_[<?=$value->id?>]">
                                                                     </td>
-										                            <th class="text-center">
-										                                <?php if($value->uom2): ?>
+                                                                    <th class="text-center">
+                                                                        <?php if($value->uom2): ?>
                                                                             <?=$value->uom2?> - <?=$value->uom2_desc?>
                                                                         <?php else : ?>
                                                                             -
-										                                <?php endif;?>
-										                            </td>
-										                            <td style="min-width:150px;">
-										                                <input type="text" name="unit_value[<?=$value->id?>]" class="form-control text-center" value="<?= @$tBidDetail->unit_value ?>">
-										                            </td>
-										                            <td style="min-width: 150px;">
-										                                <select class="form-control text-center" name="unit_uom[<?=$value->id?>]" id="unit_uom">
-										                                    <option value="WEEK" <?= @$tBidDetail->unit_uom == 'WEEK' ? "selected":"" ?> >WEEK</option>
-										                                    <option value="MONTH" <?= @$tBidDetail->unit_uom == 'MONTH' ? "selected":"" ?>>MONTH</option>
-										                                </select>
-										                            </td>
+                                                                        <?php endif;?>
+                                                                    </td>
+                                                                    <td style="min-width:150px;">
+                                                                        <input type="text" name="unit_value[<?=$value->id?>]" class="form-control text-center" value="<?= @$tBidDetail->unit_value ?>">
+                                                                    </td>
+                                                                    <td style="min-width: 150px;">
+                                                                        <select class="form-control text-center" name="unit_uom[<?=$value->id?>]" id="unit_uom">
+                                                                            <option value="WEEK" <?= @$tBidDetail->unit_uom == 'WEEK' ? "selected":"" ?> >WEEK</option>
+                                                                            <option value="MONTH" <?= @$tBidDetail->unit_uom == 'MONTH' ? "selected":"" ?>>MONTH</option>
+                                                                        </select>
+                                                                    </td>
                                                                     <th class="text-center"><?=$row->currency?></td>
-										                            <td>
-										                                <input style="width: 140px" value="<?= $itemPrice ?>" type="text" class="form-control text-right" name="unit_price[<?=$value->id?>]" required="" id="unit_price_<?=$no?>" onchange="unitPriceChange()">
-										                            </td>
-										                            <td id="sub_total_<?=$no?>" class="text-right">
-										                                <?= numIndo($qty * $itemPrice) ?>
-										                            </td>
-										                            <td>
-										                                <select style="width: 75px" class="form-control" name="deviation[<?=$value->id?>]" id="deviation_<?=$no?>" onchange="deviationChange(<?=$no?>)">
-										                                    <option value="0" <?= @$tBidDetail->deviation == 0 ? "selected=''" : "" ?> >No</option>
-										                                    <option value="1" <?= @$tBidDetail->deviation == 1 ? "selected=''" : "" ?> >Yes</option>
-										                                </select>
-										                            </td>
-										                            <td>
+                                                                    <td>
+                                                                        <input style="width: 140px" value="<?= $itemPrice ?>" type="text" class="form-control text-right" name="unit_price[<?=$value->id?>]" required="" id="unit_price_<?=$no?>" onchange="unitPriceChange()">
+                                                                    </td>
+                                                                    <td id="sub_total_<?=$no?>" class="text-right">
+                                                                        <?= numIndo($qty * $itemPrice) ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <select style="width: 75px" class="form-control" name="deviation[<?=$value->id?>]" id="deviation_<?=$no?>" onchange="deviationChange(<?=$no?>)">
+                                                                            <option value="0" <?= @$tBidDetail->deviation == 0 ? "selected=''" : "" ?> >No</option>
+                                                                            <option value="1" <?= @$tBidDetail->deviation == 1 ? "selected=''" : "" ?> >Yes</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
                                                                         <input type="text" value="<?= @$tBidDetail->remark ?>" class="form-control" name="remark[<?= $value->id ?>]" id="remark_<?= $no ?>" readonly style="width: 150px;">
-										                            </td>
-										                        </tr>
-										                        <?php $no++;?>
-										                        <?php endforeach;?>
-										                    </tbody>
+                                                                    </td>
+                                                                </tr>
+                                                                <?php $no++;?>
+                                                                <?php endforeach;?>
+                                                            </tbody>
                                                             <tfoot>
                                                                 <tr style="border-top: 1px solid #CCC;">
                                                                     <td colspan="11">Total</td>
@@ -376,16 +376,16 @@
                                                                     <td colspan="2"></td>
                                                                 </tr>
                                                             </tfoot>
-										                </table>
-										            </div>
-										        </div>
-										        <div class="form-group row">
-										            <div class="col-md-12 text-center">
-										                <!-- <button type="submit" class="btn btn-primary">SUBMIT</button> -->
-										                <input type="hidden" id="jmlUnitPrice" class="form-control text-center" value="0">
-										            </div>
-										        </div>
-										        <?php if ($row->bid_bond_type <> 2) { ?>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12 text-center">
+                                                        <!-- <button type="submit" class="btn btn-primary">SUBMIT</button> -->
+                                                        <input type="hidden" id="jmlUnitPrice" class="form-control text-center" value="0">
+                                                    </div>
+                                                </div>
+                                                <?php if ($row->bid_bond_type <> 2) { ?>
                                                      <div class="form-group row">
                                                         <div class="col-md-6">
                                                             <label style="font-weight: bold;">Bid Bond</label>
@@ -396,77 +396,77 @@
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-										            <div class="form-group">
-										                <div class="table-responsive">
-										                    <table class="table">
-										                        <thead>
-										                            <tr>
-										                                <th>Bid Bond No</th>
-										                                <th>Issuer</th>
-										                                <th>Issued Date</th>
-										                                <th class="text-right">Value</th>
-										                                <th class="text-center">Currency</th>
-										                                <th>Effective Date</th>
-										                                <th>Expired Date</th>
-										                                <th class="text-center">Document</th>
-										                                <th class="text-center">Status</th>
-										                                <th>Description</th>
-										                                <th class="text-center">Action</th>
-										                            </tr>
-										                        </thead>
-										                        <tbody id="bidbond-tbody">
-										                        <?php
-										                            $td = "";
-										                            foreach ($t_bid_bond as $key => $value) {
-										                                $td .= "<tr>
-										                                <td>$value->bid_bond_no</td>
-										                                <td>$value->issuer</td>
-										                                <td>".dateToIndo($value->issued_date)."</td>
-										                                <td class='text-right'>".numIndo($value->nominal)."</td>
-										                                <td class='text-center'>$value->currency_name</td>
-										                                <td>".dateToIndo($value->effective_date)."</td>
-										                                <td>".dateToIndo($value->expired_date)."</td>
-										                                <td class='text-center'>".($value->bid_bond_file ? '<a href="'.base_url('upload/bid/'.$value->bid_bond_file).'" class="btn btn-info btn-sm">Download</a>' : '-')."</td>
-										                                <td class='text-center'>".statusBid($value->status)."</td>
-										                                <td>$value->description</td>
-										                                <td class='text-center'><button type='button' class='btn btn-danger btn-sm' onclick='deleteBidBond(\"".$value->id."\")'>Delete</button></td>
-										                                </tr>";
-										                            }
-										                            echo $td;
-										                        ?>
-										                        </tbody>
-										                    </table>
-										                </div>
-										            </div>
-										        <?php } ?>
-										        <?php if ($row->confirmed == 1 && strtotime($row->closing_date) >= strtotime(date('Y-m-d H:i:s'))) { ?>
-										            <div class="form-group text-right">
-										                <a href="javascript:void(0)" class="btn btn-danger" id="withdraw-btn" >Withdraw</a>
+                                                    <div class="form-group">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Bid Bond No</th>
+                                                                        <th>Issuer</th>
+                                                                        <th>Issued Date</th>
+                                                                        <th class="text-right">Value</th>
+                                                                        <th class="text-center">Currency</th>
+                                                                        <th>Effective Date</th>
+                                                                        <th>Expired Date</th>
+                                                                        <th class="text-center">Document</th>
+                                                                        <th class="text-center">Status</th>
+                                                                        <th>Description</th>
+                                                                        <th class="text-center">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="bidbond-tbody">
+                                                                <?php
+                                                                    $td = "";
+                                                                    foreach ($t_bid_bond as $key => $value) {
+                                                                        $td .= "<tr>
+                                                                        <td>$value->bid_bond_no</td>
+                                                                        <td>$value->issuer</td>
+                                                                        <td>".dateToIndo($value->issued_date)."</td>
+                                                                        <td class='text-right'>".numIndo($value->nominal)."</td>
+                                                                        <td class='text-center'>$value->currency_name</td>
+                                                                        <td>".dateToIndo($value->effective_date)."</td>
+                                                                        <td>".dateToIndo($value->expired_date)."</td>
+                                                                        <td class='text-center'>".($value->bid_bond_file ? '<a href="'.base_url('upload/bid/'.$value->bid_bond_file).'" class="btn btn-info btn-sm">Download</a>' : '-')."</td>
+                                                                        <td class='text-center'>".statusBid($value->status)."</td>
+                                                                        <td>$value->description</td>
+                                                                        <td class='text-center'><button type='button' class='btn btn-danger btn-sm' onclick='deleteBidBond(\"".$value->id."\")'>Delete</button></td>
+                                                                        </tr>";
+                                                                    }
+                                                                    echo $td;
+                                                                ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if ($row->confirmed == 1 && strtotime($row->closing_date) >= strtotime(date('Y-m-d H:i:s'))) { ?>
+                                                    <div class="form-group text-right">
+                                                        <a href="javascript:void(0)" class="btn btn-danger" id="withdraw-btn" >Withdraw</a>
                                                         <a href="javascript:void(0)" class="btn btn-success" id="bidsumbissionBtn" onclick="sendBidProposal()">Bid Submission</a>
-										            </div>
-										        <?php } ?>
-										    </form>
-										</fieldset>
-										<h6><i class="fa fa-pencil"></i> Addendum</h6>
-			                            <fieldset>
-			                                <h4>Log Resume</h4>
-			                                <?php foreach ($addendum as $r_addendum) { ?>
-			                                  	<div>
-			                                    	<p><i>#<?= $r_addendum->no_addendum ?></i><br><small><span class="fa fa-user"></span> <?= $r_addendum->creator ?> | <span class="fa fa-clock-o"></span> <?= dateToIndo($r_addendum->created_at, false, true) ?></small></p>
-			                                    	<p><?= nl2br($r_addendum->resume) ?></p>
-			                                  	</div>
-			                                  	<hr>
-			                                <?php } ?>
-			                            </fieldset>
-                            		</div>
-                            	</div>
+                                                    </div>
+                                                <?php } ?>
+                                            </form>
+                                        </fieldset>
+                                        <h6><i class="fa fa-pencil"></i> Addendum</h6>
+                                        <fieldset>
+                                            <h4>Log Resume</h4>
+                                            <?php foreach ($addendum as $r_addendum) { ?>
+                                                <div>
+                                                    <p><i>#<?= $r_addendum->no_addendum ?></i><br><small><span class="fa fa-user"></span> <?= $r_addendum->creator ?> | <span class="fa fa-clock-o"></span> <?= dateToIndo($r_addendum->created_at, false, true) ?></small></p>
+                                                    <p><?= nl2br($r_addendum->resume) ?></p>
+                                                </div>
+                                                <hr>
+                                            <?php } ?>
+                                        </fieldset>
+                                    </div>
+                                </div>
                             </div>
-						</div>
-					</section>
-				</div>
-			</section>
-		</div>
-	</div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="myWith" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -621,8 +621,8 @@
   });
 
   function saveBidBond() {
-  	$('#frm-bid-modal-error').remove();
-  	var form = $('#frm-bid-modal')[0];
+    $('#frm-bid-modal-error').remove();
+    var form = $('#frm-bid-modal')[0];
     var formData = new FormData(form);
     $.ajax({
       type:'POST',
@@ -632,13 +632,13 @@
       contentType: false,
       url:"<?=base_url('vn/info/greetings/savebidbond')?>",
       success:function(e){
-      	var r = $.parseJSON(e);
-      	if (r.error) {
-      		$('#frm-bid-modal').prepend('<div id="frm-bid-modal-error" class="alert alert-danger" style="font-size:12px;">'+r.error+'</div>');
-      	} else {
-        	$("#bidbond-tbody").html(r.data);
-        	$("#bidBondModal").modal('hide');
-        	isBidBondExists();
+        var r = $.parseJSON(e);
+        if (r.error) {
+            $('#frm-bid-modal').prepend('<div id="frm-bid-modal-error" class="alert alert-danger" style="font-size:12px;">'+r.error+'</div>');
+        } else {
+            $("#bidbond-tbody").html(r.data);
+            $("#bidBondModal").modal('hide');
+            isBidBondExists();
         }
       }
     });
@@ -743,17 +743,18 @@ function sendBidProposal() {
                         cache: false,
                         timeout: 600000,
                         beforeSend:function(){
-                          //start($('#icon-tabs'));
+                          start($('#icon-tabs'));
                         },
                         success: function (data) {
                           var x = eval("("+data+")");
+                          stop($('#icon-tabs'));
                           window.open("<?=base_url('vn/info/greetings')?>","_self");
                         },
                         error: function (e) {
                           setTimeout(function() {
                             swal('<?= __('warning') ?>', 'Bid Submission Fail, Try Again', 'warning');
                           }, swalDelay);
-                          //stop($('#icon-tabs'));
+                          stop($('#icon-tabs'));
                         }
                     });
                   }
@@ -773,7 +774,7 @@ function sendBidProposal() {
         }
         else
         {
-        	send_bid_proposal()
+            send_bid_proposal()
         }
     });
   }
@@ -793,20 +794,20 @@ function send_bid_proposal() {
         cache: false,
         timeout: 600000,
         beforeSend:function(){
-          //start($('#icon-tabs'));
+          start($('#icon-tabs'));
         },
         success: function (data) {
           var x = eval("("+data+")");
           //swal('<?= __('warning') ?>', x.msg, 'warning');
           $("#bidsumbissionModal").modal('hide');
-          //stop($('#icon-tabs'));
+          stop($('#icon-tabs'));
           window.open("<?=base_url('vn/info/greetings')?>","_self");
         },
         error: function (e) {
           setTimeout(function() {
             swal('<?= __('warning') ?>', 'Bid Submission Fail, Try Again', 'warning');
           }, swalDelay);
-          //stop($('#icon-tabs'));
+          stop($('#icon-tabs'));
         }
     });
 }
@@ -820,15 +821,15 @@ function myValidation() {
     return false;
   }
   if($("select[name='id_local_content_type']").val() === ''){
-  	swal('<?= __('warning') ?>', 'Local Content Type, must be select', 'warning');
+    swal('<?= __('warning') ?>', 'Local Content Type, must be select', 'warning');
     return false;
   }
   if($("input[name='local_content']").val() === ''){
-  	swal('<?= __('warning') ?>', 'Local Content, must be upload', 'warning');
+    swal('<?= __('warning') ?>', 'Local Content, must be upload', 'warning');
     return false;
   }
   if($("input[name='local_content_path']").val() === '' && $("input[name='local_content_file']").val() === ''){
-  	swal('<?= __('warning') ?>', 'Local content file, must be upload', 'warning');
+    swal('<?= __('warning') ?>', 'Local content file, must be upload', 'warning');
     return false;
   }
   if($("input[name='delivery_satuan']").val() === ''){
@@ -840,19 +841,19 @@ function myValidation() {
     return false;
   }
   if($("input[name='bid_validity']").val() === ''){
-  	swal('<?= __('warning') ?>', 'Bid Validity, must be filled', 'warning');
+    swal('<?= __('warning') ?>', 'Bid Validity, must be filled', 'warning');
     return false;
   }
   if($("input[name='soc']").val() === '' && $("input[name='soc_file']").val() === ''){
-  	swal('<?= __('warning') ?>', 'Statement of Conformity file, must be upload', 'warning');
+    swal('<?= __('warning') ?>', 'Statement of Conformity file, must be upload', 'warning');
     return false;
   }
   if($("input[name='tp']").val() === '' && $("input[name='tp_file']").val() === ''){
-  	swal('<?= __('warning') ?>', 'Technical Proposal file, must be upload', 'warning');
+    swal('<?= __('warning') ?>', 'Technical Proposal file, must be upload', 'warning');
     return false;
   }
   /*if($("input[name='pb']").val() === '' && $("input[name='pb_file']").val() === ''){
-  	alert('Price Book file, must be upload');
+    alert('Price Book file, must be upload');
     return false;
   }*/
   for(i=1; i <= <?=$no-1?>; i++){
@@ -919,24 +920,24 @@ function deviationChange(no) {
 }
 
 $(function() {
-	<?php if($row->confirmed == 1  && strtotime($row->closing_date) >= strtotime(date('Y-m-d H:i:s'))):?>
-		$('#quotation').addClass('open-this');
-		$('#form-attachment').addClass('open-this');
-  	<?php endif;?>
-	isBidBondExists();
-	$('#local_content').keyup(function() {
-		var value = $('#local_content').val();
-		if (!$.isNumeric(value)) {
-			$('#local_content').val(0);
-		} else {
-			if (value > 100) {
-				$('#local_content').val(100);
-			}
-			if (value < 0) {
-				$('#local_content').val(0);
-			}
-		}
-	});
+    <?php if($row->confirmed == 1  && strtotime($row->closing_date) >= strtotime(date('Y-m-d H:i:s'))):?>
+        $('#quotation').addClass('open-this');
+        $('#form-attachment').addClass('open-this');
+    <?php endif;?>
+    isBidBondExists();
+    $('#local_content').keyup(function() {
+        var value = $('#local_content').val();
+        if (!$.isNumeric(value)) {
+            $('#local_content').val(0);
+        } else {
+            if (value > 100) {
+                $('#local_content').val(100);
+            }
+            if (value < 0) {
+                $('#local_content').val(0);
+            }
+        }
+    });
 });
 
 function deleteBidBond(id) {
@@ -953,11 +954,11 @@ function deleteBidBond(id) {
 }
 
 function isBidBondExists() {
-	if ($("#bidbond-tbody tr").length == 0) {
-		$('#addBidBond').show();
-	} else {
-		$('#addBidBond').hide();
-	}
+    if ($("#bidbond-tbody tr").length == 0) {
+        $('#addBidBond').show();
+    } else {
+        $('#addBidBond').hide();
+    }
 }
 
 $(function() {
