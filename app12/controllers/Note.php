@@ -29,7 +29,7 @@ class Note extends CI_Controller {
     public function store_clarification_vendor()
     {
         $data = $this->input->post();
-        $config['upload_path']  = './upload/CLARIFICATION/';
+        $config['upload_path']  = './upload/CLARIFICATION_VENDOR/';
         if (!is_dir($config['upload_path'])) {
             mkdir($config['upload_path'],0755,TRUE);
         }
@@ -61,8 +61,10 @@ class Note extends CI_Controller {
             $auth = $r->author_type == 'm_vendor' ? $auhtor->NAMA : $auhtor->NAME;
             $tbody .= $auth;
             $tbody .= "<br><small>".dateToIndo($r->created_at,false,true)."</small><br>".$r->description;
+            $full_path = '';
             if($r->path):
-            $tbody .= "<br><a target='_blank' href='".base_url('upload/CLARIFICATION/'.$r->path)."' class='btn btn-sm btn-info'><i class='fa fa-download'></i> Download</a>";
+                $full_path = $r->author_type == 'm_vendor' ? 'upload/CLARIFICATION_VENDOR/'.$r->path : 'upload/CLARIFICATION/'.$r->path;
+                $tbody .= "<br><a target='_blank' href='".base_url($full_path)."' class='btn btn-sm btn-info'><i class='fa fa-download'></i> Download</a>";
             endif;
             $tbody .= "</td></tr>";
         }

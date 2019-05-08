@@ -185,7 +185,7 @@
 										                        <input type="file" name="tp" required="">
 										                        <input name="tp_file" type="hidden" value="<?= @$bidHead->tp ?>">
 										                        <?php if (@$bidHead->tp) { ?>
-										                            <a href="<?= base_url('upload/bid/'.$bidHead->tp) ?>" class="download-link-form"><i class="fa fa-download"></i> Technical Proposal File</a>
+										                            <a target="_blank" href="<?= base_url('upload/bid/'.$bidHead->tp) ?>" class="download-link-form"><i class="fa fa-download"></i> Technical Proposal File</a>
 										                        <?php } ?>
 										                    </div>
 														</div>
@@ -219,7 +219,7 @@
     										                        </div>
     										                    </div>
     										                    <?php if (@$bidHead->bid_letter_path) { ?>
-    										                        <a href="<?= base_url('upload/bid/'.$bidHead->bid_letter_path) ?>"><i class="fa fa-download"></i> Bid Letter File</a>
+    										                        <a target="_blank" href="<?= base_url('upload/bid/'.$bidHead->bid_letter_path) ?>"><i class="fa fa-download"></i> Bid Letter File</a>
     										                    <?php } ?>
     										                </div>
 														</div>
@@ -267,7 +267,7 @@
     										                    <input type="file" name="pb">
     										                    <input name="pb_file" type="hidden" value="<?= @$bidHead->pl ?>">
     										                    <?php if (@$bidHead->pl) { ?>
-    										                        <a href="<?= base_url('upload/bid/'.$bidHead->pl) ?>" class="download-link-form"><i class="fa fa-download"></i> Price Book/Price List File</a>
+    										                        <a target="_blank" href="<?= base_url('upload/bid/'.$bidHead->pl) ?>" class="download-link-form"><i class="fa fa-download"></i> Price Book/Price List File</a>
     										                    <?php } ?>
     										                </div>
 														</div>
@@ -426,7 +426,7 @@
 										                                <td class='text-center'>$value->currency_name</td>
 										                                <td>".dateToIndo($value->effective_date)."</td>
 										                                <td>".dateToIndo($value->expired_date)."</td>
-										                                <td class='text-center'>".($value->bid_bond_file ? '<a href="'.base_url('upload/bid/'.$value->bid_bond_file).'" class="btn btn-info btn-sm">Download</a>' : '-')."</td>
+										                                <td class='text-center'>".($value->bid_bond_file ? '<a target="_blank" href="'.base_url('upload/bid/'.$value->bid_bond_file).'" class="btn btn-info btn-sm">Download</a>' : '-')."</td>
 										                                <td class='text-center'>".statusBid($value->status)."</td>
 										                                <td>$value->description</td>
 										                                <td class='text-center'><button type='button' class='btn btn-danger btn-sm' onclick='deleteBidBond(\"".$value->id."\")'>Delete</button></td>
