@@ -1000,7 +1000,7 @@ class Greetings extends CI_Controller {
     public function negotiation_submit($id) {
         $post = $this->input->post();
         $response = array();
-        $config['upload_path'] = './upload/NEGOTIATION';
+        $config['upload_path'] = './upload/NEGOTIATION_VENDOR';
         $config['allowed_types'] = 'pdf|jpg|jpeg|doc|docx';
         $config['max_size'] = '2048';
         $config['encrypt_name'] = TRUE;
