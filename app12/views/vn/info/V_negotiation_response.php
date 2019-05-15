@@ -61,6 +61,7 @@
                                 <div class="col-md-2">
                                     <?php if ($negotiation->status == 0 && $negotiation->closed == 0) { ?>
                                         <input type="file" name="bid_letter_file" style="padding: 0px !important;">
+                                        <br><small>Max Size 2Mb</small>
                                     <?php } else { ?>
                                         <a href="<?= base_url('upload/NEGOTIATION_VENDOR/'.$negotiation->bid_letter_file) ?>" class="btn btn-info btn-sm">Download</a>
                                     <?php } ?>
@@ -91,6 +92,7 @@
                                 <div class="col-md-2">
                                     <?php if ($negotiation->status == 0 && $negotiation->closed == 0) { ?>
                                         <input type="file" name="local_content_file" style="padding: 0px !important;">
+                                        <br><small>Max Size 2Mb</small>
                                     <?php } else { ?>
                                         <a href="<?= base_url('upload/NEGOTIATION_VENDOR/'.$negotiation->local_content_file) ?>" class="btn btn-info btn-sm">Download</a>
                                     <?php } ?>

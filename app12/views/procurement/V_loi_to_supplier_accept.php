@@ -47,7 +47,7 @@ body {
         </table>
       </div>
       <div class="col-md-4">
-          <table class="table table-condensed">
+          <!-- <table class="table table-condensed">
             <tr>
               <td width="30%">MSR No.</td>
               <td width="5%">:</td>
@@ -58,7 +58,7 @@ body {
               <td>:</td>
               <td><?= $loi->rfq_no ?></td>
             </tr>
-          </table>
+          </table> -->
         </div>
         <div class="col-md-4">
           <table class="table table-condensed">
