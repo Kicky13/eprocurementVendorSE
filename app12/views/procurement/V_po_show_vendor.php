@@ -562,7 +562,7 @@ $('#po_required_doc<?= $po_rdoc->doc_type ?>').DataTable({
     { 'data': 'expired_date', 'title': 'Expired date' },
     { 'data': 'description', 'title': 'Description' },
     { 'data': 'file_name', 'title': 'File', 'createdCell': function(td, cellData, rowData, row, col) {
-        $(td).html('<a href="'+ rowData.file_url +'">'+ rowData.file_name + '</a>')
+        $(td).html('<a target="_blank" href="'+ rowData.file_url +'">'+ rowData.file_name + '</a>')
     }},
     { 'data': 'file_url', 'title': 'File URL', 'visible': false }
   ]
@@ -622,7 +622,7 @@ $.get('<?= base_url('procurement/purchase_order/getPODocumentAgreement/'.$po->id
   if (data.data.length > 0) {
     var item = data.data[0]
     var p = $('#po_document3_file').parent()
-    p.append('<a href="'+ item.file_url +'">'+ item.file_name +'</a>');
+    p.append('<a target="_blank"  href="'+ item.file_url +'">'+ item.file_name +'</a>');
   }
 
   $('#po_document3_file').val('').removeClass('required').hide()
