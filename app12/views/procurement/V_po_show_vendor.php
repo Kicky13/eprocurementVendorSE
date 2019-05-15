@@ -387,9 +387,9 @@ body {
                                 <div class="col-md-2"><?= $attachment->created_by_name ?></div>
                                 <div class="col-md-1">
                                   <a href="<?= base_url($attachment->file_path.$attachment->file_name) ?>" target="_blank">
-                                    <button type="button" class="btn btn-icon btn-sm">
+                                    
                                       <i class="icon-cloud-download"></i>
-                                    </button>
+                                    
                                   </a>
                                 </div>
                               </div>
