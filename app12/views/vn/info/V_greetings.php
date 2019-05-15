@@ -306,28 +306,6 @@
           </a>
       </div>
       <div class="col-xl-3 col-lg-6 col-12">
-          <a href="<?= base_url('vn/info/greetings/award/1')?>" class="card">
-              <div class="card-content">
-                  <div class="card-body">
-                      <div class="media d-flex">
-                          <div class="align-self-center">
-                              <i class="icon-doc primary icons font-large-3 float-left"></i>
-                          </div>
-                          <div class="media-body text-right">
-                              <h6><b>Acceptance Award Nomination</b></h6>
-                              <?php
-                                $un   = $this->vendor_lib->accept_award_nomination(1)->num_rows();
-                                $a    = $un > 0 ? "<a href='".base_url('vn/info/greetings/award/1')."'>" : "";
-                                $aend = $un > 0 ? "</a>" : "";
-                              ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/greetings/regretLetterList')?>" class="card">
               <div class="card-content">
                   <div class="card-body">
