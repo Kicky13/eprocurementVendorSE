@@ -398,7 +398,7 @@ class Vendor_lib
 		->join('t_msr','t_msr.msr_no = t_bl.msr_no')
 		->join('m_company','m_company.ID_COMPANY = t_msr.id_company')
 		->join('m_pmethod','m_pmethod.ID_PMETHOD = t_bl.pmethod')
-		->join('m_location','m_location.ID_LOCATION = t_eq_data.prebid_loc')
+		->join('m_location','m_location.ID_LOCATION = t_eq_data.prebid_loc', 'left')
 		->get('t_bl_detail');
 	}
 	public function award_form($bled_no='')
