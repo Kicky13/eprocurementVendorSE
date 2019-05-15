@@ -923,7 +923,7 @@ class Greetings extends CI_Controller {
         $msr = $this->M_msr->find($po->msr_no);
         $po_items = $this->M_purchase_order_detail->findByPOId($po->id);
         $po_attachments = $this->M_purchase_order_attachment->getByDocument($po->id, [
-            $this->M_purchase_order_attachment::TYPE_DRAFT_PO,
+            $this->M_purchase_order_attachment::TYPE_SIGNED_PO,
             $this->M_purchase_order_attachment::TYPE_COUNTER_SIGNED_PO
         ]);
         $po_required_doc = [];
