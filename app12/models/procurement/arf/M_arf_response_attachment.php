@@ -4,7 +4,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 class M_arf_response_attachment extends M_base {
 
     protected $table = 't_arf_response_attachment';
-    protected $fillable = array('doc_id', 'type', 'file');
+    protected $fillable = array('doc_id', 'type', 'file', 'created_by', 'created_at','file_name');
 
     public function enum_type() {
         return array(

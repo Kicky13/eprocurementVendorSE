@@ -24,21 +24,23 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="table-responsive">
-                                                <table id="dt" class="table table-condensed table-striped table-no-wrap">
+                                                <table id="tbl" class="table table-condensed table-striped table-no-wrap">
                                                     <thead>
                                                         <tr>
+                                                            <th>No</th>
                                                             <th>Agreement No</th>
                                                             <th>Amendment No</th>
                                                             <th>Subject Work</th>
                                                             <th>Company</th>
                                                             <th>Amendment Notification Date</th>
                                                             <th class="text-center">Reponsed At</th>
-                                                            <th></th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($model as $row) { ?>
+                                                        <?php foreach ($model as $index=>$row) { ?>
                                                             <tr>
+                                                                <td><?= $index+1 ?></td>
                                                                 <td><?= $row->po_no ?></td>
                                                                 <td><?= substr($row->doc_no, -5) ?></td>
                                                                 <td><?= $row->title ?></td>
@@ -64,3 +66,28 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#tbl tfoot th').each(function (i) {
+      var title = $('#tbl thead th').eq($(this).index()).text();
+      if ($(this).text() == 'No') {
+        $(this).html('');
+      } else if ($(this).text() == 'Action') {
+        $(this).html('');
+      } else {
+        $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" data-index="' + i + '" />');
+      }
+
+    });
+    var table = $('#tbl').DataTable({
+      scrollX : true,
+      fixedColumns: {
+          leftColumns: 0,
+          rightColumns: 1
+      },
+    });
+    $(table.table().container()).on('keyup', 'tfoot input', function () {
+      table.column($(this).data('index')).search(this.value).draw();
+    });
+  })
+</script>

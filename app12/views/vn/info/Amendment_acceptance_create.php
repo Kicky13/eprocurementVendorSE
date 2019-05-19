@@ -70,7 +70,7 @@
                                                     <?= numIndo($arf->estimated_value+$arf->amount_po_arf) ?>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" style="margin-top:20px">
+                                            <div class="form-group row" style="margin-top:20px;display: none !important">
                                                 <div class="col-md-6">
                                                     BOD Approval for this Value Amendment Request is required
                                                     <br>
@@ -124,7 +124,10 @@
                                                             Up to
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <?= dateToIndo($arf->amended_date,false,false) ?>
+                                                            <?php if (isset($arf->revision['time'])) { ?>
+                                                                <?= dateToIndo($arf->revision['time']->value,false,false ) ?>
+                                                            <?php } else { ?>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +227,7 @@
                                         <h6><i class="step-icon fa fa-calendar"></i> Schedule of Price</h6>
                                         <fieldset>
                                             <div id="po-detail">
-                                                <h4>Original</h4>
+                                                <h4>Contract List Item</h4>
                                                 <div class="table-responsive">
                                                   <table width="100%" id="po_item-table" class="table table-bordered table-sm">
                                                     <thead>
@@ -266,69 +269,7 @@
                                                         <?= numIndo($arf->amount_po) ?>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h4>Amendment</h4>
-                                                    </div>
-                                                </div><br>
-                                                <div class="table-responsive">
-                                                    <table id="arf_item-table" class="table table-bordered table-sm" style="font-size: 12px;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Item Type</th>
-                                                                <th>Description</th>
-                                                                <th class="text-center">Qty</th>
-                                                                <th class="text-center">UoM</th>
-                                                                <th class="text-center">Qty 2</th>
-                                                                <th class="text-center">UoM 2</th>
-                                                                <th class="text-center">Item Modif</th>
-                                                                <th class="text-center">Inventory Type</th>
-                                                                <th class="text-center">Cost Center</th>
-                                                                <th class="text-center">Acc Sub</th>
-                                                                <th class="text-right">Unit Price</th>
-                                                                <th class="text-right">Total</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php foreach ($arf->item as $item) { ?>
-                                                                <tr id="arf_item-row-<?= $item->item_semic_no_value ?>" data-row-id="<?= $item->item_semic_no_value ?>">
-                                                                    <td><?= $item->item_type ?></td>
-                                                                    <td><?= $item->item ?></td>
-                                                                    <td class="text-center"><?= $item->response_qty1 ?></td>
-                                                                    <td class="text-center"><?= $item->uom1 ?></td>
-                                                                    <td class="text-center"><?= $item->response_qty2 ? $item->response_qty2 : '-' ?></td>
-                                                                    <td class="text-center"><?= $item->uom2 ? $item->uom2 : '-' ?></td>
-                                                                    <td class="text-center"><?= ($item->item_modification) ? '<i class="fa fa-check-square text-success"></i>' : '<i class=" fa fa-times text-danger"></i>' ?></td>
-                                                                    <td class="text-center"><?= $item->inventory_type ?></td>
-                                                                    <td class="text-center"><?= $item->id_costcenter ?> - <?= $item->costcenter_desc ?></td>
-                                                                    <td class="text-center"><?= $item->id_accsub ?> - <?= $item->accsub_desc ?></td>
-                                                                    <td class="text-right"><?= numIndo($item->response_unit_price) ?></td>
-                                                                    <td class="text-right">
-                                                                        <?php
-                                                                            $total = $item->response_unit_price * $item->response_qty1;
-                                                                            if ($item->response_qty2) {
-                                                                                $total *= $item->response_qty2;
-                                                                            }
-                                                                        ?>
-                                                                        <?= numIndo($total) ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="offset-md-6 col-md-3">Total</label>
-                                                    <div class="col-md-3 text-right">
-                                                        <?= numIndo($arf->response_subtotal) ?>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="offset-md-6 col-md-3">Total Summary</label>
-                                                    <div class="col-md-3 text-right">
-                                                        <?= numIndo(($arf->amount_po+$arf->response_subtotal)) ?>
-                                                    </div>
-                                                </div>
+                                                <?php $this->load->view('procurement/V_all_amd', ['dataTotalSummary'=>0]) ?>
                                             </div>
                                         </fieldset>
                                         <h6><i class="step-icon fa fa-paperclip"></i> Amendment Document</h6>
@@ -364,11 +305,11 @@
                                                             ?>
                                                                 <tr>
                                                                     <td><?= $docType ?></td>
-                                                                    <td><?= $document->file_path ?></td>
+                                                                    <td><?= $document->file_name ?></td>
                                                                     <td><?= dateToIndo($document->created_at, false, true) ?></td>
                                                                     <td><?= $userName ?></td>
                                                                     <td>
-                                                                      <a href="<?= base_url('upload/ARFRECOMPREP/'.$document->file_path) ?>" target="_blank" class="btn btn-primary btn-sm">Download</a>
+                                                                      <a href="<?= base_url($document->file_path) ?>" target="_blank" class="btn btn-primary btn-sm">Download</a>
                                                                       <?php if($document->tipe == 2)
                                                                       {
                                                                         echo "<a href='#' class='btn btn-sm btn-danger btn-hapus-file' onclick='hapusFile($document->id)'>Hapus</a>";
@@ -454,7 +395,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php $no = 1 ?>
-                                                    <?php foreach ($po->doc_insurance as $doc) { ?>
+                                                    <?php foreach ($po->doc_issurance as $doc) { ?>
                                                         <tr>
                                                             <td><?= $no ?></td>
                                                             <td><?= $doc->doc_no ?></td>
@@ -727,7 +668,7 @@
             html += '<td class="text-center"><input type="hidden" name="document['+data.type+']['+document_row[data.type]+'][expired_date]" value="'+data.expired_date+'">'+data.expired_date+'</td>';
             html += '<td><input type="hidden" name="document['+data.type+']['+document_row[data.type]+'][description]" value="'+data.description+'">'+data.description+'</td>';
             html += '<td>';
-                html +='<a href="<?= base_url($document_path) ?>/'+data.file.file_name+'" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a> ';
+                html +='<a href="<?= base_url('upload/amd_acceptance_vendor') ?>/'+data.file.file_name+'" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a> ';
                 html += '<button type="button" class="btn btn-danger btn-sm" onclick="remove_document(\''+document_row[data.type]+'\')"><i class="fa fa-trash"></i></button>';
             html += '</td>';
         html += '</tr>';

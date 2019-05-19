@@ -32,7 +32,7 @@
                                                             <th>Subject Work</th>
                                                             <th>Company</th>
                                                             <th>Amendment Notification Date</th>
-                                                            <th class="text-center">Status</th>
+                                                            <!-- <th class="text-center">Status</th> -->
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -44,17 +44,17 @@
                                                                 <td><?= $row->title ?></td>
                                                                 <td><?= $row->company ?></td>
                                                                 <td><?= dateToIndo($row->dated) ?></td>
-                                                                <td class="text-center">
+                                                                <!-- <td class="text-center">
                                                                     <?php if ($row->open) { ?>
                                                                         <span class="badge badge-success">Open</span>
                                                                     <?php } else { ?>
                                                                         <span class="badge badge-danger">Closed</span>
                                                                     <?php } ?>
-                                                                </td>
+                                                                </td> -->
                                                                 <td class="text-right">
-                                                                    <?php if ($row->open) { ?>
+                                                                    
                                                                         <a href="<?= base_url('vn/info/arf_notification/response/'.$row->id) ?>" class="btn btn-primary btn-sm">Response</a>
-                                                                    <?php } ?>
+                                                                    
                                                                 </td>
                                                             </tr>
                                                         <?php } ?>
