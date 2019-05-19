@@ -55,17 +55,17 @@
                                                     <?= numIndo($arf->amount_po) ?>
                                                 </div>
                                                 <label class="col-md-3">Additional Value</label>
-                                                <div class="col-md-3 text-right">
+                                                <div class="col-md-3 text-right" id="additional-value">
                                                     <?= numIndo($arf->estimated_value) ?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3">Latest Agreement Value</label>
-                                                <div class="col-md-3 text-right">
+                                                <div class="col-md-3 text-right" id="latest-agreement-value">
                                                     <?= numIndo($arf->amount_po_arf) ?>
                                                 </div>
                                                 <label class="col-md-3">New Agreement Value</label>
-                                                <div class="col-md-3 text-right">
+                                                <div class="col-md-3 text-right" id="new-agreement-value">
                                                     <?= numIndo($arf->estimated_value+$arf->amount_po_arf) ?>
                                                 </div>
                                             </div>
@@ -487,5 +487,22 @@
                 finish: 'Done'
             }
         });
+        const numberWithCommas = (x) => {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        function numberNormal(n='',separator='.') {
+            n = n.replace(/\,/g, '');
+            return n;
+        }
+        var additionalValue = $("#amd-total-<?= $arf->doc_no ?>").html();
+        $("#additional-value").html(additionalValue)
+        // var originalValue = '<?= $arf->amount_po ?>';
+        var new_agreement = $("#all-amd-<?= $arf->doc_no ?>").text();
+        // var total = toFloat(originalValue) +
+        $("#new-agreement-value").text(new_agreement) 
+        var latest_agreement_value = (toFloat(numberNormal(new_agreement)) - toFloat(numberNormal(additionalValue)));
+        $("#latest-agreement-value").text(Localization.number(latest_agreement_value))
+
+        
     });
 </script>

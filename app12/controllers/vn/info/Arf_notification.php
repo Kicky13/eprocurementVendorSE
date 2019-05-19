@@ -113,7 +113,7 @@ class Arf_notification extends CI_Controller {
         $data['document_path'] = $this->document_path;
         $t_arf_notification = $this->db->where(['doc_no'=>$arf->doc_no])->get('t_arf_notification')->row();
         
-        $findAll = $this->db->where(['po_no'=>$t_arf_notification->po_no])->get('t_arf_notification');
+        $findAll = $this->db->where(['po_no'=>$t_arf_notification->po_no, 'id <= '=>$t_arf_notification->id])->get('t_arf_notification');
         
         $findAllResult = [];
         if($findAll->num_rows() > 0)
