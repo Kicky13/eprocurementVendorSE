@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Amendment_acceptance extends CI_Controller {
 
     protected $document_path = 'upload/ARF';
-    protected $document_allowed_types = 'jpg|jpeg|pdf|doc|docx';
+    protected $document_allowed_types = 'jpg|jpeg|pdf|doc|docx|xls|xlsx';
     protected $document_max_size = '2048';
 
     public function __construct() {
@@ -73,9 +73,30 @@ class Amendment_acceptance extends CI_Controller {
         $po->doc_other = $this->m_arf_po_document->view('document')->scope('other')
         ->where('po_id', $po->id)
         ->get();
+        foreach ($this->m_arf_detail_revision->where('doc_id', $arf->doc_id)->get() as $revision) {
+            $arf->revision[$revision->type] = $revision;
+        }
+        $t_arf_notification = $this->db->where(['doc_no'=>$arf->doc_no])->get('t_arf_notification')->row();
+        
+        $findAll = $this->db->where(['po_no'=>$t_arf_notification->po_no])->get('t_arf_notification');
+        
+        $findAllResult = [];
+        if($findAll->num_rows() > 0)
+        {
+            foreach ($findAll->result() as $r) {
+                $findAllResult[$r->doc_no] = $this->m_arf_sop->view('response')
+                ->select('arf_nego.unit_price new_price')
+                ->join("(select t_arf_nego_detail.unit_price, arf_nego.arf_response_id, t_arf_nego_detail.arf_sop_id from 
+                    (select * from t_arf_nego where status = 2 order by id desc limit 1) arf_nego
+                    left join t_arf_nego_detail on arf_nego.id = t_arf_nego_detail.arf_nego_id
+                    WHERE t_arf_nego_detail.is_nego = 1) arf_nego", "t_arf_sop.id = arf_nego.arf_sop_id", "left")
+                ->where('t_arf_sop.doc_id', $r->id)->get();
+            }
+        }
         $data['arf'] = $arf;
         $data['po'] = $po;
         $data['document_path'] = $this->document_path;
+        $data['findAllResult'] = $findAllResult;
         $this->template->display_vendor('vn/info/Amendment_acceptance_create', $data);
     }
 
@@ -125,7 +146,7 @@ class Amendment_acceptance extends CI_Controller {
         $po->doc_performance_bond = $this->m_arf_po_document->view('document')->scope('performance_bond')
         ->where('po_id', $po->id)
         ->get();
-        $po->doc_issurance = $this->m_arf_po_document->view('document')->scope('issurance')
+        $po->doc_insurance = $this->m_arf_po_document->view('document')->scope('issurance')
         ->where('po_id', $po->id)
         ->get();
         $po->doc_other = $this->m_arf_po_document->view('document')->scope('other')
@@ -134,6 +155,25 @@ class Amendment_acceptance extends CI_Controller {
         $data['arf'] = $arf;
         $data['po'] = $po;
         $data['document_path'] = $this->document_path;
+
+        $t_arf_notification = $this->db->where(['doc_no'=>$arf->doc_no])->get('t_arf_notification')->row();
+        
+        $findAll = $this->db->where(['po_no'=>$t_arf_notification->po_no, 'id <= '=>$t_arf_notification->id])->get('t_arf_notification');
+        
+        $findAllResult = [];
+        if($findAll->num_rows() > 0)
+        {
+            foreach ($findAll->result() as $r) {
+                $findAllResult[$r->doc_no] = $this->m_arf_sop->view('response')
+                ->select('arf_nego.unit_price new_price')
+                ->join("(select t_arf_nego_detail.unit_price, arf_nego.arf_response_id, t_arf_nego_detail.arf_sop_id from 
+                    (select * from t_arf_nego where status = 2 order by id desc limit 1) arf_nego
+                    left join t_arf_nego_detail on arf_nego.id = t_arf_nego_detail.arf_nego_id
+                    WHERE t_arf_nego_detail.is_nego = 1) arf_nego", "t_arf_sop.id = arf_nego.arf_sop_id", "left")
+                ->where('t_arf_sop.doc_id', $r->id)->get();
+            }
+        }
+        $data['findAllResult'] = $findAllResult;
         $this->template->display_vendor('vn/info/Amendment_acceptance_view', $data);
     }
 
@@ -203,7 +243,7 @@ class Amendment_acceptance extends CI_Controller {
             echo json_encode($response);
             exit;
         }
-        $config['upload_path'] = $this->document_path;
+        $config['upload_path'] = './upload/amd_acceptance_vendor/';
         $config['allowed_types'] = $this->document_allowed_types;
         $config['max_size'] = $this->document_max_size;
         $this->load->library('upload', $config);
@@ -226,7 +266,7 @@ class Amendment_acceptance extends CI_Controller {
     }
     public function attachment_upload($value='')
     {
-        $config['upload_path']  = './upload/ARFRECOMPREP/';
+        $config['upload_path']  = './upload/ARFRECOMPREP_VENDOR/';
         if (!is_dir($config['upload_path'])) {
             mkdir($config['upload_path'],0755,TRUE);
         }
@@ -240,7 +280,9 @@ class Amendment_acceptance extends CI_Controller {
         {
             $data = $this->upload->data();
             $field = $this->input->post();
-            $field['file_path'] = $data['file_name'];
+            $field['file_path'] = $config['upload_path'].$data['file_name'];
+            $field['file_name'] = $data['file_name'];
+            $field['creator_type'] = 'vendor';
             $field['created_by'] = $this->session->userdata('ID');
             $this->db->insert('t_upload',$field);
         }
@@ -252,7 +294,7 @@ class Amendment_acceptance extends CI_Controller {
         $upload = $this->db->get('t_upload')->row();
         $data_id = $upload->data_id;
         $module_kode = $upload->module_kode;
-        @unlink('upload/ARFRECOMPREP/'.$upload->file_path);
+        @unlink($upload->file_path);
 
         $this->db->where('id',$value);
         $this->db->delete('t_upload');
@@ -278,11 +320,11 @@ class Amendment_acceptance extends CI_Controller {
             }
             echo "<tr>
               <td>".$docType."</td>
-              <td>".$value->file_path."</td>
+              <td>".$value->file_name."</td>
               <td>".$value->created_at."</td>
               <td>$userName</td>
               <td>
-                <a href='".base_url('upload/ARFRECOMPREP/'.$value->file_path)."' target='_blank' class='btn btn-sm btn-primary'>Download</a>
+                <a href='".base_url($value->file_path)."' target='_blank' class='btn btn-sm btn-primary'>Download</a>
                 $delBtn
               </td>
             </tr>";
