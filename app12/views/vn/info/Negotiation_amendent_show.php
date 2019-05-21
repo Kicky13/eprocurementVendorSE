@@ -52,12 +52,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label class="col-md-3">Bid Letter No</label>
+                                                <label class="col-md-3">Negotiation Response Letter</label>
                                                 <div class="col-md-9">
                                                     <input class="form-control" value="<?= $model->bid_letter_no ?>" name="bid_letter_no" required="">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <!-- <div class="form-group row">
                                                 <label class="col-md-3">Local Content</label>
                                                 <div class="col-md-3">
                                                     <select name="id_local_content_type" class="form-control">
@@ -75,7 +75,7 @@
                                                         <span class="input-group-addon" id="basic-addon2">%</span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group row">
                                                 <label class="col-md-3">&nbsp;</label>
                                                 <div class="col-md-9">
@@ -124,7 +124,7 @@
                                                                 $total_old_price = $qty*$old_price;
                                                                 $newPrice = '';
                                                                 
-                                                                $totalNewPrice = "<label class='form-control' style='background:#ccc;padding:0.3rem 1rem' id='subtotal_$value->nego_detail_id'>&nbsp;</label>";
+                                                                $totalNewPrice = "<label class='form-control' style='background:#ccc;padding:0.3rem 1rem' id='subtotal_$value->nego_detail_id'>0</label>";
                                                                 if($value->qty2 > 0)
                                                                 {
                                                                   $qty = "QTY1 = ".$value->qty1."<br>QTY2 = ".$value->qty2;
@@ -140,7 +140,7 @@
                                                                 }
                                                                 if($value->is_nego > 0)
                                                                 {
-                                                                    $newPrice = "<input class='form-control just-number' name='new_price[$value->nego_detail_id]' id='new_price_$value->nego_detail_id' onchange=\"new_price_change('$value->nego_detail_id','$qtynum')\">";
+                                                                    $newPrice = "<input value='0' class='form-control just-number' name='new_price[$value->nego_detail_id]' id='new_price_$value->nego_detail_id' onkeyup=\"new_price_change('$value->nego_detail_id','$qtynum')\">";
                                                                 }
                                                                 echo "<tr><td>$no</td><td>$value->item</td><td>$qty</td><td>$uom</td><td>$currency</td><td>".numIndo($old_price)."</td><td>".numIndo($total_old_price)."</td><td>$newPrice</td><td>$totalNewPrice</td></tr>";
                                                                 $no++;
@@ -177,7 +177,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.just-number').number(true, 2, bahasa.thousand_separator, bahasa.decimal_separator);
+        $('.just-number').number(true, 2);
         $("#frm").submit(function(e){
             e.preventDefault();
             swalConfirm('Submit Confirmation', 'Are you sure to Response Negotiation?', function() {
@@ -220,11 +220,11 @@
     })
     function new_price_change(param,qty){
         var price = $("#new_price_"+param).val();
-        console.log(price);
+        // console.log(price);
         // var res = price.replace(/\./g, "");
 
-        var result = parseInt(qty)*parseInt(price)
-        $("#subtotal_"+param).text(numberWithCommas(result))
+        var result = toFloat(qty)*toFloat(price)
+        $("#subtotal_"+param).text(Localization.number(result))
         total_sum()
       }
       const numberWithCommas = (x) => {
@@ -235,9 +235,9 @@
         $("[id^=subtotal_]").each(function(){
           var nilai = $(this).text();
           console.log($(this).attr('id'))
-          var res = nilai.replace(/\./g, "");
-          total_sum += parseInt(res);
+          var res = nilai.replace(/\,/g, "");
+          total_sum += toFloat(res);
         })
-        $("#total_sum").text(numberWithCommas(total_sum))
+        $("#total_sum").text(Localization.number(total_sum))
       }
 </script>

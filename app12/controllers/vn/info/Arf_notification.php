@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 class Arf_notification extends CI_Controller {
 
-    protected $document_path = 'upload/ARF';
+    protected $document_path = 'upload/arf_notif_vendor';
     protected $document_allowed_types = 'jpg|jpeg|pdf|doc|docx';
     protected $document_max_size = '2048';
 
@@ -41,7 +41,7 @@ class Arf_notification extends CI_Controller {
 
     public function index() {
         $data['model'] = $this->m_arf_notification->view('arf_notification')
-        ->scope(array('auth_vendor', 'unresponse', 'open'))
+        ->scope(array('auth_vendor', 'unresponse'))
         ->get();
         $this->template->display_vendor('vn/info/arf_notification', $data);
     }
@@ -67,7 +67,7 @@ class Arf_notification extends CI_Controller {
         if (!$arf) {
             $this->redirect->back();
         }
-        $arf->item = $this->m_arf_sop->view('sop')->where('t_arf_sop.doc_id', $id)->get();
+        $arf->item = $this->m_arf_sop->view('sop')->where('t_arf_sop.doc_id', $id)->order_by('t_arf_sop.id','asc')->get();
         foreach ($this->m_arf_notification_detail_revision->where('doc_id', $id)->get() as $revision) {
             $arf->revision[$revision->type] = $revision;
         }
@@ -100,7 +100,7 @@ class Arf_notification extends CI_Controller {
         $arf->attachment = $this->m_arf_notification_attachment->view('notification_attachment')
         ->where('t_arf_notification_upload.doc_id', $arf->id)
         ->get();
-        $arf->response_attachment = $this->m_arf_response_attachment->where('t_arf_response_attachment.doc_id', $arf->response_id)
+        $arf->response_attachment = $this->m_arf_response_attachment->where('t_arf_response_attachment.doc_id', $arf->doc_id)
         ->get();
         $po = $this->m_arf_po->where('t_purchase_order.po_no', $arf->po_no)
         ->first();
@@ -111,6 +111,24 @@ class Arf_notification extends CI_Controller {
         $data['arf'] = $arf;
         $data['po'] = $po;
         $data['document_path'] = $this->document_path;
+        $t_arf_notification = $this->db->where(['doc_no'=>$arf->doc_no])->get('t_arf_notification')->row();
+        
+        $findAll = $this->db->where(['po_no'=>$t_arf_notification->po_no, 'id <= '=>$t_arf_notification->id])->get('t_arf_notification');
+        
+        $findAllResult = [];
+        if($findAll->num_rows() > 0)
+        {
+            foreach ($findAll->result() as $r) {
+                $findAllResult[$r->doc_no] = $this->m_arf_sop->view('response')
+                ->select('arf_nego.unit_price new_price')
+                ->join("(select t_arf_nego_detail.unit_price, arf_nego.arf_response_id, t_arf_nego_detail.arf_sop_id from 
+                    (select * from t_arf_nego where status = 2 order by id desc limit 1) arf_nego
+                    left join t_arf_nego_detail on arf_nego.id = t_arf_nego_detail.arf_nego_id
+                    WHERE t_arf_nego_detail.is_nego = 1) arf_nego", "t_arf_sop.id = arf_nego.arf_sop_id", "left")
+                ->where('t_arf_sop.doc_id', $r->id)->get();
+            }
+        }
+        $data['findAllResult'] = $findAllResult;
         $this->template->display_vendor('vn/info/arf_notification_view', $data);
     }
 
@@ -180,9 +198,9 @@ class Arf_notification extends CI_Controller {
             foreach ($post['attachment'] as $attachment) {
                 $record_attachment[] = array(
                     'doc_id' => $arf->id,
-                    'type' => $attachment['type'],
+                    'file_name' => $attachment['nama_file'],
                     'file' => $attachment['file'],
-                    'created_by' =>  $this->session->userdata('ID_USER'),
+                    'created_by' =>  $this->session->userdata('ID'),
                     'created_at' => $responsed_at
                 );
             }
@@ -198,7 +216,7 @@ class Arf_notification extends CI_Controller {
 
     public function attachment_upload() {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('type', 'Type', 'required');
+        $this->form_validation->set_rules('file_name', 'File Name', 'required');
         if (!$this->form_validation->run()) {
             $response = array(
                 'success' => false,
@@ -216,7 +234,8 @@ class Arf_notification extends CI_Controller {
             $response = array(
                 'success' => true,
                 'message' => 'Successfully uploded document',
-                'data' => $this->upload->data()
+                'data' => $this->upload->data(),
+				'nama_file' => $this->input->post('file_name')
             );
         } else {
             $response = array(

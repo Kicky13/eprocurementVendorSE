@@ -55,46 +55,18 @@
                                                     <?= numIndo($arf->amount_po) ?>
                                                 </div>
                                                 <label class="col-md-3">Additional Value</label>
-                                                <div class="col-md-3 text-right">
+                                                <div class="col-md-3 text-right" id="additional-value">
                                                     <?= numIndo($arf->estimated_value) ?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3">Latest Agreement Value</label>
-                                                <div class="col-md-3 text-right">
+                                                <div class="col-md-3 text-right" id="latest-agreement-value">
                                                     <?= numIndo($arf->amount_po_arf) ?>
                                                 </div>
                                                 <label class="col-md-3">New Agreement Value</label>
-                                                <div class="col-md-3 text-right">
+                                                <div class="col-md-3 text-right" id="new-agreement-value">
                                                     <?= numIndo($arf->estimated_value+$arf->amount_po_arf) ?>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row" style="margin-top:20px">
-                                                <div class="col-md-6">
-                                                    BOD Approval for this Value Amendment Request is required
-                                                    <br>
-                                                    <?php if ($arf->bod_approval) { ?>
-                                                        <i class="fa fa-square-o"></i> No
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <i class="fa fa-check-square-o text-success"></i> Yes, Bod Review Required
-                                                    <?php } else { ?>
-                                                        <i class="fa fa-check-square-o text-success"></i> No
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <i class="fa fa-square-o"></i> Yes, Bod Review Required
-                                                    <?php } ?>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    Accumulative Amendment
-                                                    <br>
-                                                    <?php if ($arf->aa) { ?>
-                                                        <i class="fa fa-square-o"></i> No
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <i class="fa fa-check-square-o text-success"></i> Yes, requires 1 level up for the Amendment signature as per AAS
-                                                    <?php } else { ?>
-                                                        <i class="fa fa-check-square-o text-success"></i> No
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <i class="fa fa-square-o"></i> Yes, requires 1 level up for the Amendment signature as per AAS
-                                                    <?php } ?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -228,6 +200,7 @@
                                                 </table>
                                             </div>
                                         </fieldset>
+                                        <?php if(isset($arf->revision['value'])):?>
                                         <h6><i class="step-icon fa fa-calendar"></i> Schedule of Price</h6>
                                         <fieldset>
                                             <div id="po-detail">
@@ -272,71 +245,12 @@
                                                         <?= numIndo($arf->amount_po) ?>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h4>Amendment</h4>
-                                                    </div>
-                                                </div><br>
-                                                <div class="table-responsive">
-                                                    <table id="arf_item-table" class="table table-bordered table-sm" style="font-size: 12px;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Item Type</th>
-                                                                <th>Description</th>
-                                                                <th class="text-center">Qty</th>
-                                                                <th class="text-center">UoM</th>
-                                                                <th class="text-center">Qty 2</th>
-                                                                <th class="text-center">UoM 2</th>
-                                                                <th class="text-center">Item Modif</th>
-                                                                <th class="text-center">Inventory Type</th>
-                                                                <th class="text-center">Cost Center</th>
-                                                                <th class="text-center">Acc Sub</th>
-                                                                <th class="text-right">Unit Price</th>
-                                                                <th class="text-right">Total</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php foreach ($arf->item as $item) { ?>
-                                                                <tr id="arf_item-row-<?= $item->item_semic_no_value ?>" data-row-id="<?= $item->item_semic_no_value ?>">
-                                                                    <td><?= $item->item_type ?></td>
-                                                                    <td><?= $item->item ?></td>
-                                                                    <td class="text-center"><?= $item->response_qty1 ?></td>
-                                                                    <td class="text-center"><?= $item->uom1 ?></td>
-                                                                    <td class="text-center"><?= $item->response_qty2 ? $item->response_qty2 : '-' ?></td>
-                                                                    <td class="text-center"><?= $item->uom2 ? $item->uom2 : '-' ?></td>
-                                                                    <td class="text-center"><?= ($item->item_modification) ? '<i class="fa fa-check-square text-success"></i>' : '<i class=" fa fa-times text-danger"></i>' ?></td>
-                                                                    <td class="text-center"><?= $item->inventory_type ?></td>
-                                                                    <td class="text-center"><?= $item->id_costcenter ?> - <?= $item->costcenter_desc ?></td>
-                                                                    <td class="text-center"><?= $item->id_accsub ?> - <?= $item->accsub_desc ?></td>
-                                                                    <td class="text-right"><?= numIndo($item->response_unit_price) ?></td>
-                                                                    <td class="text-right">
-                                                                        <?php
-                                                                            $total = $item->response_unit_price * $item->response_qty1;
-                                                                            if ($item->response_qty2) {
-                                                                                $total *= $item->response_qty2;
-                                                                            }
-                                                                        ?>
-                                                                        <?= numIndo($total) ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="offset-md-6 col-md-3">Total</label>
-                                                    <div class="col-md-3 text-right">
-                                                        <?= numIndo($arf->estimated_value) ?>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="offset-md-6 col-md-3">Total Summary</label>
-                                                    <div class="col-md-3 text-right">
-                                                        <?= numIndo($arf->estimated_new_value) ?>
-                                                    </div>
-                                                </div>
+                                                <?php $this->load->view('procurement/V_all_amd', ['dataTotalSummary'=>0]) ?>
+                                                
                                             </div>
                                         </fieldset>
+                                        <?php endif;?>
+                                        
                                         <h6><i class="step-icon fa fa-paperclip"></i> Amendment Document</h6>
                                         <fieldset>
                                             <table id="attachment-table" class="table" style="font-size: 12px;">
@@ -353,7 +267,7 @@
                                                     <?php 
                                                         foreach ($arf->document as $document) { 
                                                             $docType = arfIssuedDoc($document->tipe);
-                                                            if($document->tipe == 2)
+                                                            if($document->creator_type == 'vendor')
                                                             {
                                                               $userName = $this->db->where(['ID'=>$document->created_by])->get('m_vendor')->row();
                                                               $userName = $userName->NAMA;
@@ -365,11 +279,11 @@
                                                     ?>
                                                         <tr>
                                                             <td><?= $docType ?></td>
-                                                            <td><?= $document->file_path ?></td>
+                                                            <td><?= $document->file_name ?></td>
                                                             <td><?= dateToIndo($document->created_at, false, true) ?></td>
                                                             <td><?= $userName ?></td>
                                                             <td>
-                                                              <a href="<?= base_url('upload/ARFRECOMPREP/'.$document->file_path) ?>" target="_blank" class="btn btn-primary btn-sm">Download</a>
+                                                              <a href="<?= base_url($document->file_path) ?>" target="_blank" class="btn btn-primary btn-sm">Download</a>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -427,7 +341,7 @@
                                                             <td class="text-center"><?= dateToIndo($doc->effective_date) ?></td>
                                                             <td class="text-center"><?= dateToIndo($doc->expired_date) ?></td>
                                                             <td><?= $doc->description ?></td>
-                                                            <td class="text-right"><a href="<?= base_url($document_path.'/'.$doc->file) ?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a></td>
+                                                            <td class="text-right"><a href="<?= base_url('./upload/amd_acceptance_vendor/'.$doc->file) ?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a></td>
                                                         </tr>
                                                         <?php $no++ ?>
                                                     <?php } ?>
@@ -472,7 +386,7 @@
                                                         </tr>
                                                         <?php $no++ ?>
                                                     <?php } ?>
-                                                    <?php foreach ($arf->Insurance as $doc) { ?>
+                                                    <?php foreach ($arf->insurance as $doc) { ?>
                                                         <tr>
                                                             <td><?= $no ?></td>
                                                             <td><?= $doc->no ?></td>
@@ -483,7 +397,7 @@
                                                             <td class="text-center"><?= dateToIndo($doc->effective_date) ?></td>
                                                             <td class="text-center"><?= dateToIndo($doc->expired_date) ?></td>
                                                             <td><?= $doc->description ?></td>
-                                                            <td class="text-right"><a href="<?= base_url($document_path.'/'.$doc->file) ?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a></td>
+                                                            <td class="text-right"><a href="<?= base_url('./upload/amd_acceptance_vendor/'.$doc->file) ?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a></td>
                                                         </tr>
                                                         <?php $no++ ?>
                                                     <?php } ?>
@@ -539,7 +453,7 @@
                                                             <td class="text-center"><?= dateToIndo($doc->effective_date) ?></td>
                                                             <td class="text-center"><?= dateToIndo($doc->expired_date) ?></td>
                                                             <td><?= $doc->description ?></td>
-                                                            <td class="text-right"><a href="<?= base_url($document_path.'/'.$doc->file) ?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a></td>
+                                                            <td class="text-right"><a href="<?= base_url('./upload/amd_acceptance_vendor/'.$doc->file) ?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a></td>
                                                         </tr>
                                                         <?php $no++ ?>
                                                     <?php } ?>
@@ -573,5 +487,22 @@
                 finish: 'Done'
             }
         });
+        const numberWithCommas = (x) => {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        function numberNormal(n='',separator='.') {
+            n = n.replace(/\,/g, '');
+            return n;
+        }
+        var additionalValue = $("#amd-total-<?= $arf->doc_no ?>").html();
+        $("#additional-value").html(additionalValue)
+        // var originalValue = '<?= $arf->amount_po ?>';
+        var new_agreement = $("#all-amd-<?= $arf->doc_no ?>").text();
+        // var total = toFloat(originalValue) +
+        $("#new-agreement-value").text(new_agreement) 
+        var latest_agreement_value = (toFloat(numberNormal(new_agreement)) - toFloat(numberNormal(additionalValue)));
+        $("#latest-agreement-value").text(Localization.number(latest_agreement_value))
+
+        
     });
 </script>

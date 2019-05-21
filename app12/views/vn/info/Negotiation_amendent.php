@@ -33,13 +33,12 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
+                                                            <th>Agreement No</th>
                                                             <th>Amendment No</th>
                                                             <th>Subject</th>
                                                             <th>Company</th>
-                                                            <th>Department</th>
-                                                            <th>Amendment Notification  Date</th>
-                                                            <th>Procurement Specialist</th>
-                                                            <th>Vendor Response Date</th>
+                                                            <th>Negotiation Request  Date</th>
+                                                            <th>Supplier Response Date</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -49,13 +48,12 @@
                                                         foreach ($model as $row) { ?>
                                                             <tr>
                                                                 <td><?= $no++ ?></td>
+                                                                <td><?= $row->po_no ?></td>
                                                                 <td><?= substr($row->doc_no, -5) ?></td>
                                                                 <td><?= $row->title ?></td>
                                                                 <td><?= $row->company ?></td>
-                                                                <td><?= $row->department ?></td>
-                                                                <td><?= dateToIndo($row->notification_date) ?></td>
-                                                                <td><?= $row->ps ?></td>
-                                                                <td><?= dateToIndo($row->close_date) ?></td>
+                                                                <td><?= dateToIndo($row->nego_date) ?></td>
+                                                                <td><?= $row->vendor_response_date ?dateToIndo($row->vendor_response_date) : '' ?></td>
                                                                 <td class="text-center" style="overflow-y:hidden;">
                                                                     <a href="<?= base_url('vn/info/negotiation_amendment/show/'.$row->nego_id) ?>" class="btn btn-primary btn-sm">Process</a>
                                                                 </td>
@@ -65,7 +63,6 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th></th>
                                                             <th></th>
                                                             <th></th>
                                                             <th></th>

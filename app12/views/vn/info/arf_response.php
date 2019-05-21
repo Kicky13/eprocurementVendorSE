@@ -62,7 +62,7 @@
                             <div class="card-content collapse show">
                                 <div class="card-body">
                                     <div class="icons-tab-steps wizard-circl">
-                                        <h6><i class="step-icon fa fa-info"></i> Amendment Request</h6>
+                                        <h6><i class="step-icon fa fa-info"></i> Amendment Notification</h6>
                                         <fieldset>
                                             <table class="table">
                                                 <thead>
@@ -83,7 +83,7 @@
                                                         <td>Value</td>
                                                         <td>
                                                             <?php if (isset($arf->revision[1])) { ?>
-                                                                <?= $arf->currency ?> <?= numIndo(@$arf->revision[1]->value) ?>
+                                                                <!-- <?= $arf->currency ?> <?= numIndo(@$arf->revision[1]->value) ?> -->
                                                             <?php } ?>
                                                         </td>
                                                         <td><?= @$arf->revision[1]->remark ?></td>
@@ -127,18 +127,10 @@
                                                 </tbody>
                                             </table>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group row">
-                                                        <label class="col-md-5">Estimated New Value</label>
-                                                        <div class="col-md-7">
-                                                            <?= $arf->currency ?> <?= numIndo($arf->estimated_value_new) ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-md-5">Contractor/Vendor to Response no Later then</label>
-                                                        <div class="col-md-7">
+                                                        <label class="col-md-4">Contractor/Vendor to Response no Later then</label>
+                                                        <div class="col-md-4">
                                                             <?= dateToIndo($arf->response_date, false, true) ?>
                                                         </div>
                                                     </div>
@@ -148,7 +140,7 @@
                                             <table class="table" style="font-size: 12px;">
                                                 <thead>
                                                     <tr>
-                                                        <th>Type</th>
+                                                        <th>File Name</th>
                                                         <th>File</th>
                                                         <th>Upload At</th>
                                                         <th>Uploader</th>
@@ -157,8 +149,8 @@
                                                 <tbody>
                                                     <?php foreach ($arf->attachment as $attachment) { ?>
                                                         <tr>
-                                                            <td><?= $attachment->file_type ?></td>
-                                                            <td><a href="<?= base_url($attachment->file_path) ?>" target="_blank"><?= $attachment->file_name ?></a></td>
+                                                            <td><?= $attachment->file_name ?></td>
+                                                            <td><a href="<?= base_url($attachment->file_path) ?>" target="_blank">Download</a></td>
                                                             <td><?= dateToIndo($attachment->create_date, false, true) ?></td>
                                                             <td><?= $attachment->creator ?></td>
                                                         </tr>
@@ -166,10 +158,60 @@
                                                 </tbody>
                                             </table>
                                         </fieldset>
+                                        <h6><i class="step-icon fa fa-exclamation"></i> Amendment Notification Response</h6>
+                                        <fieldset>
+                                            <h4>Amendment Notification Response</h4>
+                                            <hr>
+                                            <table class="table">
+                                                <tr>
+                                                    <td width="1px"><?= $this->form->radio('confirm', 1, null) ?></td>
+                                                    <td>Confirm</td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="1px"><?= $this->form->radio('confirm', 2, null) ?></td>
+                                                    <td>
+                                                        Confirm With Note
+                                                        <?= $this->form->textarea('note', null, 'class="form-control"') ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <?php 
+
+                                                        if (isset($arf->revision[1]))
+                                                        {   
+                                                            $con = "";
+                                                        }
+                                                        else
+                                                        {   
+                                                            $con = "disabled=''";
+                                                        }
+                                                    ?>
+                                                    <td width="1px"><?= $this->form->radio('confirm', 3, null, $con) ?></td>
+                                                    <td>Quotation refer to schedule of price and attachment</td>
+                                                </tr>
+                                            </table>
+                                            <h4>Attachment</h4>
+                                            <hr>
+                                            <div class="form-group text-right">
+                                                <button type="button" id="btn-attachment" class="btn btn-primary">Upload File</button>
+                                            </div>
+                                            <table id="attachment-table" class="table" style="font-size: 12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>File Name</th>
+                                                        <th>File</th>
+                                                        <th>Upload At</th>
+                                                        <th>Uploader</th>
+                                                        <th class="text-right">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </fieldset>
                                         <h6><i class="step-icon fa fa-calendar"></i> Schedule of Price</h6>
                                         <fieldset>
                                             <div id="po-detail">
-                                                <h4>Original</h4>
+                                                <!-- <h4>Contract List Item</h4>
                                                 <div class="table-responsive">
                                                     <table width="100%" id="po_item-table" class="table table-bordered table-sm table-sm table-no-wrap" style="font-size: 12px;">
                                                         <thead>
@@ -210,10 +252,11 @@
                                                         <?= $this->form->hidden('po_total', $arf->amount_po, 'id="po-total"') ?>
                                                         <?= numIndo($arf->amount_po) ?>
                                                     </div>
-                                                </div>
+                                                </div> -->
+                                                <?= $this->form->hidden('po_total', 0, 'id="po-total"') ?>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <h4>Amendment</h4>
+                                                        <h4>ARF List Item</h4>
                                                     </div>
                                                 </div><br>
                                                 <div class="table-responsive">
@@ -260,9 +303,9 @@
                                                                     <!--<td class="text-right"><?= numIndo($item->unit_price) ?></td>-->
                                                                     <td class="text-right">
                                                                         <?php if ($item->po_item_id) { ?>
-                                                                            <?= $this->form->text('arf_item['.$item->id.'][unit_price]', $item->unit_price, 'class="form-control text-right" data-input-type="number-format" style="width:125px" onkeyup="count_total_row(\''.$item->id.'\')" readonly') ?>
+                                                                            <?= $this->form->text('arf_item['.$item->id.'][unit_price]', 0, 'class="form-control text-right" data-input-type="number-format" style="width:125px" onkeyup="count_total_row(\''.$item->id.'\')"  ') ?>
                                                                         <?php } else { ?>
-                                                                            <?= $this->form->text('arf_item['.$item->id.'][unit_price]', $item->unit_price, 'class="form-control text-right" data-input-type="number-format" style="width:125px" onkeyup="count_total_row(\''.$item->id.'\')"') ?>
+                                                                            <?= $this->form->text('arf_item['.$item->id.'][unit_price]', 0, 'class="form-control text-right" data-input-type="number-format" style="width:125px" onkeyup="count_total_row(\''.$item->id.'\')"') ?>
                                                                         <?php } ?>
                                                                     </td>
                                                                     <td class="text-right">
@@ -271,10 +314,13 @@
                                                                             if ($item->qty2) {
                                                                                 $total *= $item->qty2;
                                                                             }
+
+                                                                            $total = 0;
+                                                                            
                                                                             $total_amendment += $total;
                                                                         ?>
                                                                         <?= $this->form->hidden('arf_item['.$item->id.'][total]', $total) ?>
-                                                                        <span data-m="arf_item-<?= $item->id ?>-total"><?= numIndo($total) ?></span>
+                                                                        <span data-m="arf_item-<?= $item->id ?>-total"><!-- <?= numIndo($total) ?> --></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -291,51 +337,13 @@
                                                 <div class="form-group row">
                                                     <label class="offset-md-6 col-md-3">Total Summary</label>
                                                     <div class="col-md-3 text-right">
-                                                        <?= $this->form->hidden('arf_po_total', ($arf->amount_po + $total_amendment), 'id="arf-po-total"') ?>
-                                                        <span data-m="arf-po-total"><?= numIndo(($arf->amount_po + $total_amendment)) ?></span>
+                                                        <?= $this->form->hidden('arf_po_total', ($total_amendment), 'id="arf-po-total"') ?>
+                                                        <span data-m="arf-po-total"><?= numIndo($total_amendment) ?></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <h6><i class="step-icon fa fa-exclamation"></i> Amendment Notification Response</h6>
-                                        <fieldset>
-                                            <h4>Amendment Notification Response</h4>
-                                            <hr>
-                                            <table class="table">
-                                                <tr>
-                                                    <td width="1px"><?= $this->form->radio('confirm', 1, null) ?></td>
-                                                    <td>Confirm</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="1px"><?= $this->form->radio('confirm', 2, null) ?></td>
-                                                    <td>
-                                                        Confirm With Note
-                                                        <?= $this->form->textarea('note', null, 'class="form-control"') ?>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="1px"><?= $this->form->radio('confirm', 3, null) ?></td>
-                                                    <td>Quotation refer to schedule of price and attachment</td>
-                                                </tr>
-                                            </table>
-                                            <h4>Attachment</h4>
-                                            <hr>
-                                            <div class="form-group text-right">
-                                                <button type="button" id="btn-attachment" class="btn btn-primary">Upload File</button>
-                                            </div>
-                                            <table id="attachment-table" class="table" style="font-size: 12px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Type</th>
-                                                        <th>File</th>
-                                                        <th>Upload At</th>
-                                                        <th>Uploader</th>
-                                                        <th class="text-right">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </fieldset>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -360,11 +368,15 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Select Attachment Type</label>
-                    <?= $this->form->select('attachment_modal_select_type', array('' => 'Pease Select')+$this->m_arf_attachment->enum('type'), null, 'id="attachment-modal-select_type" class="form-control"') ?>
+                    <!-- <label>Select Attachment Type</label>
+                    <?= $this->form->select('attachment_modal_select_type', array('' => 'Pease Select')+$this->m_arf_attachment->enum('type'), null, 'id="attachment-modal-select_type" class="form-control"') ?> -->
                 </div>
-                <div id="form-group-attachment-modal-type" class="form-group" style="display: none;">
+                <!-- <div id="form-group-attachment-modal-type" class="form-group" style="display: none;">
                     <?= $this->form->text('attachment_modal_type', null, 'id="attachment-modal-type" class="form-control"') ?>
+                </div> -->
+                <div class="form-group">
+                    <label>File Name</label>
+                    <input name="file_name" id="attachment-modal-file-name" class="form-control" required="">
                 </div>
                 <div class="form-group">
                     <label>Chose File</label>
@@ -378,7 +390,6 @@
         </div>
     </div>
 </div>
-
 <script>
     var attachment_row = $('#attachment-table tbody tr').length;
     $(function() {
@@ -420,23 +431,57 @@
         });
 
         $('#btn-submit').click(function() {
-            var answer = swalConfirm('Amendment Notification', 'Are you sure to proceed ?', function() {
-                $.ajax({
-                    url : '<?= base_url('vn/info/arf_notification/submit/'.$arf->id) ?>',
-                    type : 'post',
-                    data : $('#form-response').serialize(),
-                    dataType : 'json',
-                    success : function(response) {
-                        if (response.success) {
-                            setTimeout(function(){ swal('Done','Data is successfully submitted','success'); window.location.href = '<?=  base_url('vn/info/arf_notification') ?>'; }, 3000);
-                        } else {
-                            setTimeout(function() {
-                                swal('Ooops', response.message, 'error');
-                            }, 3000);
+            var valConfirm = $("input[name='confirm']:checked"). val();
+            if(valConfirm == '3')
+            {
+                var addAttachment = $(".add-attachment").length;
+                if(parseInt(addAttachment) > 0)
+                {
+                    var answer = swalConfirm('Amendment Notification', 'Are you sure to proceed ?', function() {
+                        $.ajax({
+                            url : '<?= base_url('vn/info/arf_notification/submit/'.$arf->id) ?>',
+                            type : 'post',
+                            data : $('#form-response').serialize(),
+                            dataType : 'json',
+                            success : function(response) {
+                                if (response.success) {
+                                    setTimeout(function(){ swal('Done','Data is successfully submitted','success'); window.location.href = '<?=  base_url('vn/info/arf_notification') ?>'; }, 3000);
+                                } else {
+                                    setTimeout(function() {
+                                        swal('Ooops', response.message, 'error');
+                                    }, 3000);
+                                }
+                            }
+                        });
+                    });
+                }
+                else
+                {
+                    swal('Amendment Notification', 'Attachment Required', 'warning');
+                }
+
+            }
+            else
+            {
+                var answer = swalConfirm('Amendment Notification', 'Are you sure to proceed ?', function() {
+                    $.ajax({
+                        url : '<?= base_url('vn/info/arf_notification/submit/'.$arf->id) ?>',
+                        type : 'post',
+                        data : $('#form-response').serialize(),
+                        dataType : 'json',
+                        success : function(response) {
+                            if (response.success) {
+                                setTimeout(function(){ swal('Done','Data is successfully submitted','success'); window.location.href = '<?=  base_url('vn/info/arf_notification') ?>'; }, 3000);
+                            } else {
+                                setTimeout(function() {
+                                    swal('Ooops', response.message, 'error');
+                                }, 3000);
+                            }
                         }
-                    }
-                });
-            });
+                    });
+                });   
+            }
+            /**/
         });
     });
 
@@ -478,7 +523,7 @@
     function attachment_upload() {
         $('#attachment-modal #error_message').remove();
         var formData = new FormData;
-        formData.append('type', $('#attachment-modal-type').val());
+        formData.append('file_name', $('#attachment-modal-file-name').val());
         formData.append('file', $('#attachment-modal-file')[0].files[0]);
         $.ajax({
             type:'POST',
@@ -490,7 +535,7 @@
             url : '<?= base_url('vn/info/arf_notification/attachment_upload') ?>',
             success : function(response) {
                 if (response.success) {
-                    add_attachment($('#attachment-modal-type').val(), response.data.file_name, Localization.humanDatetime(new Date()), '<?= $_SESSION['NAME'] ?>')
+                    add_attachment(response.nama_file, response.data.file_name, Localization.humanDatetime(new Date()), '<?= $_SESSION['NAME'] ?>')
                     $('#attachment-modal').modal('hide');
                 } else {
                     $('#attachment-modal .modal-body').prepend('<div id="error_message" class="alert alert-danger">'+response.message+'</div>');
@@ -500,9 +545,9 @@
     }
 
     function add_attachment(type, file_name, upload_at, upload_by) {
-        var html_attachment_table = '<tr data-row-id="'+attachment_row+'">';
+        var html_attachment_table = '<tr class="add-attachment" data-row-id="'+attachment_row+'">';
             html_attachment_table += '<td>';
-                html_attachment_table += '<input type="hidden" name="attachment['+attachment_row+'][type]" value="'+type+'">'+type;
+                html_attachment_table += '<input type="hidden" name="attachment['+attachment_row+'][nama_file]" value="'+type+'">'+type;
             html_attachment_table += '</td>';
             html_attachment_table += '<td>';
                 html_attachment_table += '<input type="hidden" name="attachment['+attachment_row+'][file]" value="'+file_name+'"><a href="<?= base_url($document_path) ?>/'+file_name+'" target="_blank">'+file_name+'</a>';

@@ -402,7 +402,7 @@
               </div>
           </a>
       </div> -->
-      <div class="col-xl-3 col-lg-6 col-12">
+      <!-- <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/arf_notification/closed')?>" class="card">
               <div class="card-content">
                   <div class="card-body">
@@ -424,7 +424,7 @@
                   </div>
               </div>
           </a>
-      </div>
+      </div> -->
       <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/arf_notification/submitted')?>" class="card">
               <div class="card-content">
@@ -447,7 +447,7 @@
               </div>
           </a>
       </div>
-      <div class="col-xl-3 col-lg-6 col-12">
+      <!-- <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/arf_notification/closed')?>" class="card">
               <div class="card-content">
                   <div class="card-body">
@@ -468,7 +468,7 @@
                   </div>
               </div>
           </a>
-      </div>
+      </div> -->
 
       <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/negotiation_amendment')?>" class="card">
