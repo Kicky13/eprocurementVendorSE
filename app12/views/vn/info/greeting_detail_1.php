@@ -161,14 +161,20 @@
 										        <input type="hidden" name="id_currency" value="<?=$row->id_currency?>">
 										        <input type="hidden" name="id_currency_base" value="<?=$row->id_currency_base?>">
 												<div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="alert alert-danger" style="width: 100%"><b><i>File Max Size 10Mb</i></b></div>
+                                                        </div>
+                                                    </div>
 													<div class="col-md-6">
 														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Administration <i class="fa fa-info-circle"></i></label>
+														  <label class="col-12" style="font-weight:bold;">Administration <i class="fa fa-info-circle"></i> </label>
 														</div>
 														<div class="form-group row">
 														   <label class="col-md-4">Statement of Conformity  (PDF Files)</label>
     										                <div class="col-md-8">
-    										                    <input type="file" name="soc" required="">
+    										                    <input type="file" name="soc" id="soc" required="">
+                                                                <div id="soc_preview"></div>
     										                    <input name="soc_file" type="hidden" value="<?= @$bidHead->soc ?>">
     										                    <?php if (@$bidHead->soc) { ?>
     										                        <a href="<?= base_url('upload/bid/'.$bidHead->soc) ?>" class="download-link-form" target="_blank"><i class="fa fa-download"></i> Statement of Conformity File</a>
@@ -182,7 +188,8 @@
 														<div class="form-group row">
 															<label class="col-4">Technical Proposal (PDF Files)</label>
 										                    <div class="col-md-8">
-										                        <input type="file" name="tp" required="">
+										                        <input type="file" name="tp" id="tp" required="">
+                                                                <div id="tp_preview"></div>
 										                        <input name="tp_file" type="hidden" value="<?= @$bidHead->tp ?>">
 										                        <?php if (@$bidHead->tp) { ?>
 										                            <a target="_blank" href="<?= base_url('upload/bid/'.$bidHead->tp) ?>" class="download-link-form"><i class="fa fa-download"></i> Technical Proposal File</a>
@@ -215,7 +222,8 @@
     										                            <input name="bid_letter_file" type="hidden" value="<?= @$bidHead->bid_letter_path ?>">
     										                        </div>
     										                        <div class="col-md-6">
-    										                            <input type="file" name="bid_letter_path" required="">
+    										                            <input type="file" name="bid_letter_path" id="bid_letter_path" required="">
+                                                                        <div id="bid_letter_path_preview"></div>
     										                        </div>
     										                    </div>
     										                    <?php if (@$bidHead->bid_letter_path) { ?>
@@ -252,7 +260,8 @@
 															</div>
 															<div class="col-md-4"></div>
 															<div class="col-md-8">
-																<input type="file" name="local_content_path" required="">
+																<input type="file" name="local_content_path" id="local_content_path" required="">
+                                                                        <div id="local_content_path_preview"></div>
 															</div>
 															<div class="col-md-4"></div>
 															<div class="col-md-4">
@@ -264,8 +273,10 @@
 														<div class="form-group row">
 															<label class="col-4">Other Commercial Document (PDF Files)</label>
 										                    <div class="col-md-8">
-    										                    <input type="file" name="pb">
-    										                    <input name="pb_file" type="hidden" value="<?= @$bidHead->pl ?>">
+    										                    <input type="file" name="pb" id="pb">
+    										                    <input name="pb_file" id="pb_file" type="hidden" value="<?= @$bidHead->pl ?>">
+                                                                        <div id="pb_preview"></div>
+
     										                    <?php if (@$bidHead->pl) { ?>
     										                        <a target="_blank" href="<?= base_url('upload/bid/'.$bidHead->pl) ?>" class="download-link-form"><i class="fa fa-download"></i> Price Book/Price List File</a>
     										                    <?php } ?>
@@ -967,6 +978,34 @@ $(function() {
     $('#delivery_satuan').change(function() {
         $('[name*="unit_uom"]').val($('#delivery_satuan').val());
     });
+
+    $("#soc").change(function(event){
+        var tmppath = URL.createObjectURL(event.target.files[0]);
+        previewFile('soc', tmppath);
+    })
+    $("#tp").change(function(event){
+        var tmppath = URL.createObjectURL(event.target.files[0]);
+        previewFile('tp', tmppath);
+    })
+    $("#tp").change(function(event){
+        var tmppath = URL.createObjectURL(event.target.files[0]);
+        previewFile('tp', tmppath);
+    })
+    $("#bid_letter_path").change(function(event){
+        var tmppath = URL.createObjectURL(event.target.files[0]);
+        previewFile('bid_letter_path', tmppath);
+    })
+    $("#local_content_path").change(function(event){
+        var tmppath = URL.createObjectURL(event.target.files[0]);
+        previewFile('local_content_path', tmppath);
+    })
+    $("#pb").change(function(event){
+        var tmppath = URL.createObjectURL(event.target.files[0]);
+        previewFile('pb', tmppath);
+    })
+    function previewFile(param, tmppath) {
+        $("#"+param+"_preview").html("<a href='"+tmppath+"' target='_blank'>Preview Here</a>");
+    }
 });
 function find_exchange_rate_base() {
     rate = "<?=find_exchange_rate_base($row->currency, 'USD')?>";
