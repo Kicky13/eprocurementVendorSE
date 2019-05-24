@@ -142,8 +142,8 @@ $dbstr ="(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.1.1.65)(PORT=1521))(CONNEC
 $db['oracle'] = array(
 	'dsn'	=> '',
 	'hostname' => $dbstr,
-	'username' => 'proddta',
-	'password' => 'proddta',
+	'username' => 'crpdta',
+	'password' => 'crpdta',
 	'database' => '',
 	'dbdriver' => 'oci8',
 	'dbprefix' => '',
