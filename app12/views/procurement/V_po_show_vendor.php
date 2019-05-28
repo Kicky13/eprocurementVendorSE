@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="<?= base_url() ?>ast11/css/custom/custom.css">
 <?php /* page specific */
 $opt_blanket = ['' => '', 1 => 'Blanket', 0 => 'Non Blanket'];
 $opt_yesno = array('' => '', '1' => 'Yes', 0 => 'No');
@@ -5,7 +6,6 @@ $po_document_type = $this->M_purchase_order_document->getTypes();
 
 $delivery_date_label = $po->po_type == $this->M_purchase_order_type::TYPE_GOODS ? "Delivery Date" : "Expired Date";
 ?>
-<link rel="stylesheet" type="text/css" href="<?= base_url() ?>ast11/app-assets/css/plugins/forms/wizard.css">
 <link rel="stylesheet" type="text/css" href="<?= base_url() ?>ast11/app-assets/vendors/css/pickers/pickadate/pickadate.css">
 <link rel="stylesheet" type="text/css" href="<?= base_url() ?>ast11/app-assets/vendors/css/tables/datatable/jquery.dataTables.min.css">
 
@@ -460,16 +460,37 @@ body {
 <script>
 $(document).ready(function() {
 
+$("#purchase_order_form").steps({
+      headerTag: "h6",
+      bodyTag: "fieldset",
+      transitionEffect: "fade",
+      titleTemplate: '#title#',
+      enableFinishButton: false,
+      enablePagination: true,
+      enableAllSteps: true,
+      labels: {
+          finish: 'Done'
+      },
+      onFinished: function (event, currentIndex) {
+          // alert("Form submitted.");
+      },
+      onStepChanged: function (event, currentIndex, priorIndex) {
 
+      }
+    });
+  //hide next and previous button
+  $('a[href="#next"]').hide();
+  $('a[href="#previous"]').hide();
+  
 var form = $('#purchase_order_form');
 
-$('#purchase_order_form').steps({
+/*$('#purchase_order_form').steps({
 headerTag: "h6",
 bodyTag: "fieldset",
 enableFinishButton: false,
 transitionEffect: "fade",
 titleTemplate: '<span class="step">#index#</span> #title#'
-});
+});*/
 
 var po_date = $('#po_date').datetimepicker({
   format: 'D MMMM YYYY',
