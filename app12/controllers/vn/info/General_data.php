@@ -29,7 +29,8 @@ class General_data extends CI_Controller {
         $dt1 = array();
         $dt2 = array();
         foreach ($supp as $k => $v) {
-            $dt1[$k] = $v->DESKRIPSI_IND;
+            //$dt1[$k] = $v->DESKRIPSI_IND;
+            $dt1[$k] = $v->DESKRIPSI_ENG;
             $cek = 0;
             foreach ($pil as $kk => $vv) {
                 if ($vv == $v->DESKRIPSI_IND) {
@@ -37,10 +38,12 @@ class General_data extends CI_Controller {
                 }
             }
             if ($cek > 0) {
-                $dt2[$k]['value'] = $v->DESKRIPSI_IND;
+				//$dt2[$k]['value'] = $v->DESKRIPSI_IND;
+                $dt2[$k]['value'] = $v->DESKRIPSI_ENG;
                 $dt2[$k]['tambahan'] = 'checked';
             } else {
-                $dt2[$k]['value'] = $v->DESKRIPSI_IND;
+                //$dt2[$k]['value'] = $v->DESKRIPSI_IND;
+                $dt2[$k]['value'] = $v->DESKRIPSI_ENG;
                 $dt2[$k]['tambahan'] = 'none';
             }
         }
