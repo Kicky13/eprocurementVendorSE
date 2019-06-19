@@ -33,7 +33,8 @@ class General_data extends CI_Controller {
             $dt1[$k] = $v->DESKRIPSI_ENG;
             $cek = 0;
             foreach ($pil as $kk => $vv) {
-                if ($vv == $v->DESKRIPSI_IND) {
+                //if ($vv == $v->DESKRIPSI_IND) {
+                if ($vv == $v->DESKRIPSI_ENG) {
                     $cek++;
                 }
             }
