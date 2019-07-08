@@ -766,7 +766,7 @@ class M_all_vendor extends CI_Model {
 
     public function get_header(){
       $this->db->where("active", '1');
-      $query = $this->db->get("m_vendor_checklist_group");
+      $query = $this->db->order_by('sort', 'ASC')->get("m_vendor_checklist_group");
       return $query->result_array();
     }
 
