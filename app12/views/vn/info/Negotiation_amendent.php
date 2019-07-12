@@ -53,7 +53,7 @@
                                                                 <td><?= $row->title ?></td>
                                                                 <td><?= $row->company ?></td>
                                                                 <td><?= dateToIndo($row->nego_date) ?></td>
-                                                                <td><?= $row->vendor_response_date ?dateToIndo($row->vendor_response_date) : '' ?></td>
+                                                                <td><?= isset($row->vendor_response_date) ? dateToIndo($row->vendor_response_date) : '' ?></td>
                                                                 <td class="text-center" style="overflow-y:hidden;">
                                                                     <a href="<?= base_url('vn/info/negotiation_amendment/show/'.$row->nego_id) ?>" class="btn btn-primary btn-sm">Process</a>
                                                                 </td>

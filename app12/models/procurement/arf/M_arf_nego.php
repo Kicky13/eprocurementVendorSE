@@ -65,12 +65,12 @@ class M_arf_nego extends CI_Model {
     	$post = $this->input->post();
     	$arf_nego_id = $post['arf_nego_id'];
     	$new_price = $post['new_price'];
-    	$id_local_content_type = $post['id_local_content_type'];
+    	// $id_local_content_type = $post['id_local_content_type'];
     	$bid_letter_no = $post['bid_letter_no'];
-    	$local_content = $post['local_content'];
+    	// $local_content = $post['local_content'];
     	$note = $post['note'];
 
-    	$updateField = ['status'=>1, 'bid_letter_no'=>$bid_letter_no, 'id_local_content_type'=>$id_local_content_type, 'local_content'=>$local_content, 'note_vendor'=>$note ];
+    	$updateField = ['status'=>1, 'bid_letter_no'=>$bid_letter_no,  'note_vendor'=>$note ];
     	
     	$config['upload_path']  = './upload/arf_nego/';
         if (!is_dir($config['upload_path'])) {
