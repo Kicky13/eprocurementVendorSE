@@ -104,6 +104,13 @@
                                     <textarea name="bid_note" id="bid_note" class="form-control"><?= $negotiation->bid_note ?></textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-md-2">Delivery Time</label>
+                                <div class="col-md-1">
+                                    <input type="text" name="delivery_time" id="delivery_time" class="form-control">
+                                </div>
+                                &nbsp;Day
+                            </div>
                             <table id="negotiation-table" class="table table-striped table-no-wrap table-price" style="font-size: 12px">
                                  <thead>
                                     <tr>
