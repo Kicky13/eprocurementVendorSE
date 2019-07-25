@@ -1,3 +1,6 @@
+<?php 
+    $arfRevisionTime = isset($arf->revision['time']) ? dateToIndo($arf->revision['time']->value) : '-';
+?>
 <link href="<?= base_url() ?>ast11/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<?= base_url() ?>ast11/css/custom/custom.css">
 <script src="<?= base_url() ?>ast11/js/plugins/datapicker/bootstrap-datepicker.js"></script>
@@ -95,10 +98,11 @@
                                                             Up to
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <?php if (isset($arf->revision['time'])) { ?>
-                                                                <?= dateToIndo($arf->revision['time'],false,false ) ?>
+                                                            <?php if (isset($arf->revision['time'])) {
+                                                             ?>
+                                                                <?= dateToIndo($arf->revision['time']->value,false,false ) ?>
                                                             <?php } else { ?>
-                                                                <?= dateToIndo($arf->amended_date,false,false ) ?>
+                                                                -
                                                             <?php } ?>
                                                         </div>
                                                     </div>
@@ -134,7 +138,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <?php if (isset($arf->revision['time'])) { ?>
-                                                                <?= dateToIndo($arf->revision['time'],false,false ) ?>
+                                                                <?= dateToIndo($arf->revision['time']->value,false,false ) ?>
                                                             <?php } else { ?>
                                                                 <?= dateToIndo($arf->amended_date,false,false ) ?>
                                                             <?php } ?>
@@ -494,14 +498,30 @@
             n = n.replace(/\,/g, '');
             return n;
         }
-        var additionalValue = $("#amd-total-<?= $arf->doc_no ?>").html();
+
+        function get_ajax_last_agreement() {
+            var additionalValue = $("#amd-total-<?= $arf->doc_no ?>").html();
+            $("#additional-value").html(additionalValue)
+            $.ajax({
+                type:'post',
+                url:"<?= base_url('procurement/browse/last_amd_when_create_amd/'.$arf->doc_no) ?>",
+                success: function (data) {
+                    $("#latest-agreement-value").text(Localization.number(data))
+                    var new_agreement = (toFloat(data) + toFloat(numberNormal($("#additional-value").text())));
+                    $("#new-agreement-value").text(Localization.number(new_agreement))
+                }
+            })
+        }
+        get_ajax_last_agreement()
+
+        /*var additionalValue = $("#amd-total-<?= $arf->doc_no ?>").html();
         $("#additional-value").html(additionalValue)
         // var originalValue = '<?= $arf->amount_po ?>';
         var new_agreement = $("#all-amd-<?= $arf->doc_no ?>").text();
         // var total = toFloat(originalValue) +
         $("#new-agreement-value").text(new_agreement) 
         var latest_agreement_value = (toFloat(numberNormal(new_agreement)) - toFloat(numberNormal(additionalValue)));
-        $("#latest-agreement-value").text(Localization.number(latest_agreement_value))
+        $("#latest-agreement-value").text(Localization.number(latest_agreement_value))*/
 
         
     });
