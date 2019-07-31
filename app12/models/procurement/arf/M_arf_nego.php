@@ -70,7 +70,7 @@ class M_arf_nego extends CI_Model {
     	// $local_content = $post['local_content'];
     	$note = $post['note'];
 
-    	$updateField = ['status'=>1, 'bid_letter_no'=>$bid_letter_no,  'note_vendor'=>$note ];
+    	$updateField = ['status'=>2, 'bid_letter_no'=>$bid_letter_no,  'note_vendor'=>$note ];
     	
     	$config['upload_path']  = './upload/arf_nego/';
         if (!is_dir($config['upload_path'])) {
@@ -95,7 +95,8 @@ class M_arf_nego extends CI_Model {
 
     	foreach ($new_price as $key => $value) {
 
-    		$fieldDetail = ['unit_price'=>str_replace(',','.',str_replace('.', '', $value))];
+            // $fieldDetail = ['unit_price'=>str_replace(',','.',str_replace('.', '', $value))];
+    		$fieldDetail = ['unit_price'=>str_replace(',', '', $value)];
     		$this->db->where(['id'=>$key]);
     		$this->db->update('t_arf_nego_detail',$fieldDetail);
 
@@ -113,7 +114,7 @@ class M_arf_nego extends CI_Model {
     }
     public function not_in_approval($column='')
     {
-        $sql = "$column not in (select id_ref from t_approval_arf_recom group by id_ref)";
+        $sql = "$column not in (select id_ref from t_approval_arf_recom WHERE description = 'Award Recommendation Issuance' and status = 1 group by id_ref)";
         // $sql = "1=1";
         return $sql;
     }
