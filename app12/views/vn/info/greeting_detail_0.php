@@ -300,7 +300,7 @@
           <div class="form-group">
             <div class="col-sm-12 text-center">
               <center>
-                Are you sure participate ?
+                  Are you sure to participation ?
               </center>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
               <button type="submit" class="btn btn-success">Participate</button>
