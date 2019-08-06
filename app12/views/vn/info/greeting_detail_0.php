@@ -82,23 +82,22 @@
 									  </tr>
 									</table>
 									<br>
-									<p>
+									<p style="text-align:justify; text-justify:inter-word">
 									  <?=$row->company_name?> (COMPANY) invite <?=$this->session->userdata('NAME');?> to submit Bid Proposal subject tender.
-									  <br>
 									  Should you desire to bid or unable to bid, we request you to confirm your participation or notify your withdraw by <?=dateToIndo(date('Y-m-d', strtotime($row->issued_date.' +1 days')))?>.
-									  <br>
 									  We trust the information contained in the Enquiry Document is sufficient to the preparation of your Bid Proposal and look forward for your participation.
-									  <br>
 									  COMPANY reserves the right to reject any or all Bid Proposals without providing any reason thereof
-									  <br>
-									  <br>
-									  Regards,
-									  <br>
-									  <br>
-									  <br>
-									  <br>
-									  Procurement Commite
 									</p>
+                  <br>
+                  <br>
+                  <p>
+                  Regards,
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  Procurement Commite
+                  </p>
 								  </div>
 								  <!-- <div class="col-md-12 text-center"> -->
 									<!-- <a style="position: relative;top: 45px;margin-left: 20px;z-index: 9" href="#" class="btn btn-success" data-toggle="modal" data-target="#myModal">Participate</a>
