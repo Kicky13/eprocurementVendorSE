@@ -73,11 +73,12 @@ class Vendor_lib
 			->where('t_eq_data.closing_date >=', date('Y-m-d H:i:s'));
 		}
 
-		return $ci->db->select('t_bl_detail.*,t_bl.*,m_company.DESCRIPTION company_name, m_company.ABBREVIATION abbreviation,t_bl_detail.created_at invitation_date,t_eq_data.prebiddate prebiddate,t_eq_data.prebid_loc prebid_loc,t_eq_data.closing_date closing_date,t_eq_data.currency as id_currency,m_currency.CURRENCY currency,m_pmethod.PMETHOD_DESC pmethod_name,t_msr.dpoint_desc loc,t_eq_data.prebid_address,t_eq_data.bid_validity,t_eq_data.bid_bond_validity,t_eq_data.bid_bond,t_bl_detail.id bldetail_id,t_eq_data.bid_bond_type, bid_opening, t_msr.id_msr_type, t_msr.id_currency_base, t_msr.id_dpoint,(case when closing_date >= now() then \'Open\' ELSE \'Close\' END) `status_closing_date`, t_eq_data.envelope_system, t_eq_data.incoterm, t_eq_data.packet, t_eq_data.issued_date, unread_message.unread_message, addendum.unread_message as addendum')
+		return $ci->db->select('t_bl_detail.*,t_bl.*,m_company.DESCRIPTION company_name, m_company.ABBREVIATION abbreviation,t_bl_detail.created_at invitation_date,t_eq_data.prebiddate prebiddate,t_eq_data.prebid_loc prebid_loc,t_eq_data.closing_date closing_date,t_eq_data.currency as id_currency,m_currency.CURRENCY currency,m_pmethod.PMETHOD_DESC pmethod_name,m_deliverypoint.DPOINT_DESC loc,t_eq_data.prebid_address,t_eq_data.bid_validity,t_eq_data.bid_bond_validity,t_eq_data.bid_bond,t_bl_detail.id bldetail_id,t_eq_data.bid_bond_type, bid_opening, t_msr.id_msr_type, t_msr.id_currency_base, t_msr.id_dpoint,(case when closing_date >= now() then \'Open\' ELSE \'Close\' END) `status_closing_date`, t_eq_data.envelope_system, t_eq_data.incoterm, t_eq_data.packet, t_eq_data.issued_date, unread_message.unread_message, addendum.unread_message as addendum')
 		->join('t_bl','t_bl.msr_no = t_bl_detail.msr_no', 'left')
 		->join('t_msr','t_msr.msr_no = t_bl.msr_no', 'left')
 		->join('m_company','m_company.ID_COMPANY = t_msr.id_company', 'left')
 		->join('t_eq_data','t_eq_data.msr_no = t_msr.msr_no', 'left')
+        ->join('m_deliverypoint', 't_eq_data.delivery_point = m_deliverypoint.ID_DPOINT')
 		->join('m_currency','m_currency.ID = t_eq_data.currency', 'left')
 		->join('m_pmethod','m_pmethod.ID_PMETHOD = t_bl.pmethod', 'left')
 		->join('m_pre_bid_location','m_pre_bid_location.id = t_eq_data.prebid_loc', 'left')
