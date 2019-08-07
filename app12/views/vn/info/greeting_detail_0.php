@@ -88,8 +88,8 @@
 									  We trust the information contained in the Enquiry Document is sufficient to the preparation of your Bid Proposal and look forward for your participation.
 									  COMPANY reserves the right to reject any or all Bid Proposals without providing any reason thereof
 									</p>
-                  <br>
-                  <br>
+                  <br/>
+                  <br/>
                   <p>
                   Regards,
                   <br>
@@ -200,11 +200,8 @@
                 <td colspan="3">Dear Sir,</td>
               </tr>
               <tr>
-                <td colspan="3">
-                  We acknowledge receipt your complete set of Enquiry Document dated on <?=dateToIndo($row->issued_date)?> for subject services, and<br>
-                  hereby confirm that we withdraw from further participation in the bidding process .<br>
-                  We further confirm that we shall treat the Enquiry Document as confidential matter and only disclose to others<br>
-                  such information as is necessary for the preparation of the Bid Proposal.<br>
+                <td colspan="3" style="text-align:justify; text-justify:inter-word">
+                  We acknowledge receipt your complete set of Enquiry Document dated on <?=dateToIndo($row->issued_date)?> for subject services, and hereby confirm that we withdraw from further participation in the bidding process. We further confirm that we shall treat the Enquiry Document as confidential matter and only disclose to others such information as is necessary for the preparation of the Bid Proposal.
                 </td>
               </tr>
             </table>
@@ -282,16 +279,8 @@
                 <td colspan="3">Dear Sir,</td>
               </tr>
               <tr>
-                <td colspan="3">
-                  We acknowledge receipt your complete set of Enquiry Document dated on <?=dateToIndo($row->issued_date)?> for subject services, and
-                  <br>
-                  hereby confirm that we: intend to participate in the bidding process and will submit our Bid Proposal in
-                  <br>
-                  accordance with the terms and requirements therein.
-                  <br>
-                  We further confirm that we shall treat the Enquiry Document as confidential matter and only disclose to others
-                  <br>
-                  such information as is necessary for the preparation of the Bid Proposal.
+                <td colspan="3" style="text-align:justify; text-justify:inter-word">
+                  We acknowledge receipt your complete set of Enquiry Document dated on <?=dateToIndo($row->issued_date)?> for subject services, and hereby confirm that we: intend to participate in the bidding process and will submit our Bid Proposal in accordance with the terms and requirements there in. We further confirm that we shall treat the Enquiry Document as confidential matter and only disclose to others such information as is necessary for the preparation of the Bid Proposal.
                 </td>
               </tr>
             </table>
