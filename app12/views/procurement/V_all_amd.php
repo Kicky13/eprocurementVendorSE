@@ -16,10 +16,10 @@ $countAllResult = count($findAllResult);
               <th>Description</th>
               <th class="text-center">Qty</th>
               <th class="text-center">UoM</th>
-              <th class="text-center">Item Modif</th>
+              <!-- <th class="text-center">Item Modif</th>
               <th class="text-center">Inventory Type</th>
               <th class="text-center">Cost Center</th>
-              <th class="text-center">Acc Sub</th>
+              <th class="text-center">Acc Sub</th> -->
               <th class="text-right">Unit Price</th>
               <th class="text-right">Total</th>
           </tr>
@@ -40,10 +40,10 @@ $countAllResult = count($findAllResult);
                   <td><?= $item->item ?></td>
                   <td class="text-center"><?= $qty ?></td>
                   <td class="text-center"><?= $uom ?></td>
-                  <td class="text-center"><?= ($item->item_modification) ? '<i class="fa fa-check-square text-success"></i>' : '<i class=" fa fa-times text-danger"></i>' ?></td>
+                  <!-- <td class="text-center"><?= ($item->item_modification) ? '<i class="fa fa-check-square text-success"></i>' : '<i class=" fa fa-times text-danger"></i>' ?></td>
                   <td class="text-center"><?= $item->inventory_type ?></td>
                   <td class="text-center"><?= $item->id_costcenter ?> - <?= $item->costcenter_desc ?></td>
-                  <td class="text-center"><?= $item->id_accsub ?> - <?= $item->accsub_desc ?></td>
+                  <td class="text-center"><?= $item->id_accsub ?> - <?= $item->accsub_desc ?></td> -->
                   <td class="text-right"><?= numIndo($price) ?></td>
                   <td class="text-right">
                       <?= numIndo($subTotalPrice) ?>
