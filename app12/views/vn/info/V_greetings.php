@@ -18,6 +18,23 @@
           <h4><?= lang("Supplier Management", "Supplier Management"); ?></h4>
       </div>
       <div class="col-xl-3 col-lg-6 col-12">
+          <a href="<?= base_url('vn/info/supplier_account')?>" class="card">
+              <div class="card-content">
+                  <div class="card-body">
+                      <div class="media d-flex">
+                          <div class="align-self-center">
+                              <i class="icon-user primary icons font-large-3 float-left"></i>
+                          </div>
+                          <div class="media-body text-right">
+                              <h6><b>Supplier Account</b></h6>
+                              <h5> &nbsp; </h5>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </a>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/general_data')?>" class="card">
               <div class="card-content">
                   <div class="card-body">
@@ -43,50 +60,17 @@
                               <i class="icon-close danger icons font-large-3 float-left"></i>
                           </div>
                           <div class="media-body text-right">
-                              <h6><b>Expiry Document</b></h6>
+                              <h6><b>Expired Document</b></h6>
                               <?php
                                 $un   = $this->vendor_lib->getDocExpired()->num_rows();
                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/document_expired')."'>" :  "<a href='".base_url('vn/info/document_expired')."'>";
                                 $aend = $un > 0 ? "</a>" : "</a>";
                                 if ($un<=0) {
                                   $un = "0";
-                                }
+                                }else{
                               ?>
                               <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-xl-3 col-lg-6 col-12">
-          <a href="<?= base_url('vn/info/supplier_account')?>" class="card">
-              <div class="card-content">
-                  <div class="card-body">
-                      <div class="media d-flex">
-                          <div class="align-self-center">
-                              <i class="icon-user primary icons font-large-3 float-left"></i>
-                          </div>
-                          <div class="media-body text-right">
-                              <h6><b>Supplier Account</b></h6>
-                              <h5> &nbsp; </h5>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-xl-3 col-lg-6 col-12">
-          <a href="#" class="card user_guide">
-              <div class="card-content">
-                  <div class="card-body">
-                      <div class="media d-flex">
-                          <div class="align-self-center">
-                              <i class="fa fa-address-book primary icons font-large-3 float-left"></i>
-                          </div>
-                          <div class="media-body text-right">
-                              <h6><b>User Guide</b></h6>
-                              <h5> &nbsp; </h5>
+                            <?php } ?>
                           </div>
                       </div>
                   </div>
@@ -116,8 +100,10 @@
                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/greetings/list/0')."'>" : "";
                                 $aend = $un > 0 ? "</a>" : "";
                                 // echo $a.$un.$aend;
+                                if ($un > 0) {
                               ?>
                               <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
+                            <?php } ?>
                           </div>
                       </div>
                   </div>
@@ -139,7 +125,10 @@
                                 $un   = $this->vendor_lib->greeting_list_confirmed()->num_rows();
                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/greetings/list/1')."'>" : "";
                                 $aend = $un > 0 ? "</a>" : "";
-                                echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+
+                                if ($un > 0) {
+                                  echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                }
                                 $unread_message = $this->vendor_lib->count_unread_message(1);
                                 if ($unread_message) {
                                   if ($unread_message->unread_message <> 0) {
@@ -168,7 +157,7 @@
                               <i class="icon-close danger icons font-large-3 float-left"></i>
                           </div>
                           <div class="media-body text-right">
-                              <h6><b>Decline Participation</b></h6>
+                              <h6><b>Declined Participation</b></h6>
                               <h5>
                               <?php
                                  $un   = $this->vendor_lib->greeting_list(10)->num_rows();
@@ -176,7 +165,9 @@
                                  $aend = $un > 0 ? "</a>" : "";
 
                                 $unread_message = $this->vendor_lib->count_unread_message(10);
-                                echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                if ($un > 0) {
+                                  echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                }
 
                                 if ($unread_message) {
                                   if ($unread_message->unread_message <> 0) {
@@ -211,7 +202,7 @@
                               $un   = $this->vendor_lib->greeting_list(11)->num_rows();
                                $a    = $un > 0 ? "<a href='".base_url('vn/info/greetings/list/11')."'>" : "";
                                $aend = $un > 0 ? "</a>" : "";
-                               echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                               // echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
                                $unread_message = $this->vendor_lib->count_unread_message(11);
                                if ($unread_message) {
                                 if ($unread_message->unread_message <> 0) {
@@ -246,7 +237,13 @@
                                 $a    = "<a href='".base_url('vn/info/greetings/negotiation')."'>";
                                 $aend = "</a>";
                               ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
+                              <h5>
+                                <?php
+                                  if ($un > 0) {
+                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                  }
+                                ?>
+                              </h5>
                           </div>
                       </div>
                   </div>
@@ -276,7 +273,13 @@
                                 $a    = "<a href='".base_url('vn/info/greetings/loi')."'>" ;
                                 $aend = "</a>";
                               ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
+                              <h5>
+                                <?php
+                                  if ($un > 0) {
+                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                  }
+                                ?>
+                              </h5>
                           </div>
                       </div>
                   </div>
@@ -298,14 +301,20 @@
                                 $a    = "<a href='".base_url('vn/info/greetings/agreement')."'>";
                                 $aend = "</a>";
                               ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
+                              <h5>
+                                <?php
+                                  if ($un > 0) {
+                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                  }
+                                ?>
+                              </h5>
                           </div>
                       </div>
                   </div>
               </div>
           </a>
       </div>
-      <div class="col-xl-3 col-lg-6 col-12">
+      <!-- <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/greetings/regretLetterList')?>" class="card">
               <div class="card-content">
                   <div class="card-body">
@@ -326,7 +335,7 @@
                   </div>
               </div>
           </a>
-      </div>
+      </div> -->
 
     </div>
 
@@ -350,36 +359,20 @@
                                 $aend = $un > 0 ? "</a>" : "";
                                 // echo $a.$un.$aend;
                               ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
+                              <h5>
+                                <?php
+                                  if ($un > 0) {
+                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                  }
+                                ?>
+                              </h5>
                           </div>
                       </div>
                   </div>
               </div>
           </a>
       </div>
-      <div class="col-xl-3 col-lg-6 col-12">
-          <a href="<?= base_url('vn/info/amendment_acceptance')?>" class="card">
-              <div class="card-content">
-                  <div class="card-body">
-                      <div class="media d-flex">
-                          <div class="align-self-center">
-                              <i class="icon-check success icons font-large-3 float-left"></i>
-                          </div>
-                          <div class="media-body text-right">
-                              <h6><b>Acceptance Amendment</b></h6>
-                              <?php
-                                $un   = $this->T_approval_arf_recom->arf_response_done()->num_rows();
-                                $a    = "<a href='".base_url('vn/info/amendment_acceptance')."'>";
-                                $aend = "</a>";
-                                // echo $a.$un.$aend;
-                              ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </a>
-      </div>
+      
       <!-- <div class="col-xl-3 col-lg-6 col-12">
           <a href="<?= base_url('vn/info/greetings/acceptance_amendment')?>" class="card">
               <div class="card-content">
@@ -434,13 +427,19 @@
                               <i class="icon-check success icons font-large-3 float-left"></i>
                           </div>
                           <div class="media-body text-right">
-                              <h6><b>Accepted</b></h6>
+                              <h6><b>Amendment Notification Response</b></h6>
                               <?php
                                 $un   = $this->m_arf_notification->view('arf_notification')->scope(array('auth_vendor', 'responsed'))->count_all_results();
                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/arf_notification/submitted')."'>" : "";
                                 $aend = $un > 0 ? "</a>" : "";
                               ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
+                              <h5>
+                                <?php
+                                  if ($un > 0) {
+                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                  }
+                                ?>
+                              </h5>
                           </div>
                       </div>
                   </div>
@@ -476,16 +475,51 @@
                   <div class="card-body">
                       <div class="media d-flex">
                           <div class="align-self-center">
-                              <i class="icon-check danger icons font-large-3 float-left"></i>
+                              <i class="icon-doc primary icons font-large-3 float-left"></i>
                           </div>
                           <div class="media-body text-right">
-                              <h6><b>Negotiation Amendent</b></h6>
+                              <h6><b>Negotiation</b></h6>
                               <?php
                                 $un   = $this->m_arf_nego->with_vendor()->num_rows();
                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/negotiation_amendment')."'>" : "";
                                 $aend = $un > 0 ? "</a>" : "";
                               ?>
-                              <h5><span class="badge badge badge-info badge-pill float-right "><?= $un; ?></span></h5>
+                              <h5>
+                                <?php
+                                  if ($un > 0) {
+                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                  }
+                                ?>
+                              </h5>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </a>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-12">
+          <a href="<?= base_url('vn/info/amendment_acceptance')?>" class="card">
+              <div class="card-content">
+                  <div class="card-body">
+                      <div class="media d-flex">
+                          <div class="align-self-center">
+                              <i class="icon-check success icons font-large-3 float-left"></i>
+                          </div>
+                          <div class="media-body text-right">
+                              <h6><b>Amendment Acceptance</b></h6>
+                              <?php
+                                $un   = $this->T_approval_arf_recom->arf_response_done()->num_rows();
+                                $a    = "<a href='".base_url('vn/info/amendment_acceptance')."'>";
+                                $aend = "</a>";
+                                // echo $a.$un.$aend;
+                              ?>
+                              <h5>
+                                <?php
+                                  if ($un > 0) {
+                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+                                  }
+                                ?>
+                              </h5>
                           </div>
                       </div>
                   </div>
@@ -495,7 +529,7 @@
 
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-12">
           <h4><?= lang("Agreement Excecution", "Agreement Excecution"); ?></h4>
       </div>
@@ -652,7 +686,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 </div>
 
 <script type="text/javascript">

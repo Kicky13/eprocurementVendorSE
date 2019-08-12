@@ -501,6 +501,11 @@
                         <ul class="nav navbar-nav mr-auto float-left">
                             <li class="nav-item d-none d-md-block"><a href="<?= base_url('vn/info/greetings'); ?>" class="nav-link nav-menu-main"><i class="fa fa-home fa-lg"></i></a></li>
                             <li class="nav-item d-none d-md-block"><a href="#" class="nav-link nav-link-expand"><i class="fa fa-window-maximize"></i></a></li>
+                            <li class="nav-item d-none d-md-block user_guide">
+                              <a href="#" class="nav-link" style="padding-top:1rem; padding-bottom:0;" title="User Guide">
+                                <i class="fa fa-address-book icons font-large-1"></i>
+                              </a>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav float-right">
                             <li class="dropdown dropdown-language nav-item">
@@ -723,6 +728,37 @@
             </div>
         </div>
         <script>
+          $(document).ready(function() {
+            $(".user_guide").on('click', function(e){
+              e.preventDefault();  //stop the browser from following
+              swal({
+                title: "User Guide",
+                text: "Continue to download User Guide ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Yes",
+                closeOnConfirm: true
+              },function () {
+                $.ajax({
+                  url: '<?= base_url('vn/info/user_guide/get_user_guide')?>',
+                  type: 'POST',
+                  dataType: 'JSON',
+                  data: {param: ''},
+                })
+                .done(function() {
+                  console.log("success");
+                })
+                .fail(function() {
+                  console.log("error");
+                })
+                .always(function(res) {
+                  window.location.href = '<?= base_url('upload/')?>'+res.file;
+                });
+
+              })
+            })
+          });
             $(function ()
             {
                 lang();
