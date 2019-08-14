@@ -613,7 +613,7 @@
         });
 
         $('#btn-submit').click(function() {
-            swalConfirm('Amendment Accumulative', 'Are you sure to proceed ?', function() {
+            swalConfirm(' ', 'Are you sure to proceed ?', function() {
                 $.ajax({
                     url: '<?= base_url('vn/info/amendment_acceptance/store/'.$arf->id) ?>',
                     type: 'post',
