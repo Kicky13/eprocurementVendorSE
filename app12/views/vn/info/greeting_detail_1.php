@@ -168,8 +168,13 @@
                                                     </div>
 													<div class="col-md-6">
 														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Administration <i class="fa fa-info-circle"></i> </label>
+														  <label class="col-12" style="font-weight:bold;">Administration <div onclick="info_show(1)"><i id="info-adm" class="fa fa-info-circle"></i></div> </label>
 														</div>
+                                                        <div id="msg-adm" class="form-group row" style="display:none;">
+                                                            <div class="col-12 alert alert-info">
+                                                                <i>Bidder shall submit Statement of Conformity and other administration document (if any) as detailed in the "SECTION 1 – ADMINISTRATION DATA" of Form of Bid.</i>
+                                                            </div>
+                                                        </div>
 														<div class="form-group row">
 														   <label class="col-md-4">Statement of Conformity  (PDF Files)</label>
     										                <div class="col-md-8">
@@ -183,8 +188,13 @@
 														</div>
 														<br>
 														<div class="form-group row">
-															<label class="col-12" style="font-weight:bold;">Technical <i class="fa fa-info-circle"></i></label>
+															<label class="col-12" style="font-weight:bold;">Technical <div onclick="info_show(2)"><i id="info-tech" class="fa fa-info-circle"></i></div></label>
 														</div>
+                                                        <div id="msg-tech" class="form-group row" style="display:none;">
+                                                            <div class="col-12 alert alert-info">
+                                                                <i>Bidder shall submit all bidder's technical document as detailed in the "SECTION 2 – TECHNICAL DATA" of Form of Bid.<br/>Bidder may submit it in ZIP file format.<br/>Delivery Time/Work Duration is bidder proposed schedule to complete the work or deliver all required goods after award.</i>
+                                                            </div>
+                                                        </div>
 														<div class="form-group row">
 															<label class="col-4">Technical Proposal (PDF Files)</label>
 										                    <div class="col-md-8">
@@ -211,8 +221,13 @@
 													</div>
 													<div class="col-md-6">
 														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Commercial <i class="fa fa-info-circle"></i></label>
+														  <label class="col-12" style="font-weight:bold;">Commercial <div onclick="info_show(3)"><i id="info-comm" class="fa fa-info-circle"></i></div></label>
 														</div>
+                                                        <div id="msg-comm" class="form-group row" style="display:none;">
+                                                            <div class="col-12 alert alert-info">
+                                                                <i>Bidder shall submit all bidder's commercial document as detailed in the "SECTION 3 – COMMERCIAL DATA" of Form of Bid.<br/>Bid Validity requirement shall refer to Instruction to Bid and Bid Letter form.</i>
+                                                            </div>
+                                                        </div>
 														<div class="form-group row">
 														   <label class="col-md-4">Bid Letter No</label>
     										                <div class="col-md-8">
@@ -948,6 +963,22 @@ $(function() {
 		}
 	});
 });
+
+function info_show(i){
+    var x;
+    if(i == 1){
+        x = $('#msg-adm');
+    }elseif(i == 2){
+        x = $('#msg-tech');
+    }elseif(i == 3){
+        x = $('#msg-comm');
+    }
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
 function deleteBidBond(id) {
     swalConfirm('BID Bond', 'Are you sure to proceed ?', function() {
