@@ -368,7 +368,7 @@ body {
                 </fieldset>
 
 
-                <h6><i class="step-icon icon-directions"></i>Completeness</h6>
+                <h6><i class="step-icon icon-directions"></i>Supporting Document</h6>
                 <fieldset>
                 <?php foreach($po_required_doc as $po_rdoc): ?>
                 <div class="row open-this">
@@ -656,7 +656,7 @@ $('#purchase_order_form').steps({
   enablePagination: true,
   enableAllSteps: true,
   labels: {
-    'finish': 'Completeness'
+    'finish': 'Submit'
   },
   onFinishing: function (event, currentIndex)
   {

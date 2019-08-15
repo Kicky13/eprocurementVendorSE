@@ -85,7 +85,7 @@
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    Accumulative Amendment
+                                                    Accumulative Amendment(s) value exceeds 30% of original Contract Value
                                                     <br>
                                                     <?php if ($arf->aa) { ?>
                                                         <i class="fa fa-square-o"></i> No
@@ -613,7 +613,7 @@
         });
 
         $('#btn-submit').click(function() {
-            swalConfirm('Amendment Accumulative', 'Are you sure to proceed ?', function() {
+            swalConfirm(' ', 'Are you sure to proceed ?', function() {
                 $.ajax({
                     url: '<?= base_url('vn/info/amendment_acceptance/store/'.$arf->id) ?>',
                     type: 'post',
