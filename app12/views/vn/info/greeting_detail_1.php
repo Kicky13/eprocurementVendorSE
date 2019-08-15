@@ -178,7 +178,7 @@
 														<div class="form-group row">
 														   <label class="col-md-4">Statement of Conformity  (PDF Files)</label>
     										                <div class="col-md-8">
-    										                    <input type="file" name="soc" id="soc" required="">
+    										                    <input type="file" name="soc" id="soc" required="" >
                                                                 <div id="soc_preview"></div>
     										                    <input name="soc_file" type="hidden" value="<?= @$bidHead->soc ?>">
     										                    <?php if (@$bidHead->soc) { ?>
@@ -198,7 +198,7 @@
 														<div class="form-group row">
 															<label class="col-4">Technical Proposal (PDF Files)</label>
 										                    <div class="col-md-8">
-										                        <input type="file" name="tp" id="tp" required="">
+										                        <input type="file" name="tp" id="tp" required="" >
                                                                 <div id="tp_preview"></div>
 										                        <input name="tp_file" type="hidden" value="<?= @$bidHead->tp ?>">
 										                        <?php if (@$bidHead->tp) { ?>
