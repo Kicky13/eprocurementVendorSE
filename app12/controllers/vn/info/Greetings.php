@@ -1084,6 +1084,7 @@ class Greetings extends CI_Controller {
             'local_content' => $post['local_content'],
             'local_content_file' => $post['local_content_file'],
             'bid_note' => $post['bid_note'],
+            'delivery_time' => $post['delivery_time'],
             'status' => 1,
             'responsed_at' => date('Y-m-d H:i:s')
         ));
