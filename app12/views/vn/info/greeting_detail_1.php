@@ -168,7 +168,7 @@
                                                     </div>
 													<div class="col-md-6">
 														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Administration <i class="fa fa-info-circle"></i> </label>
+														  <label class="col-12" style="font-weight:bold;">Administration <i class="fa fa-info-circle" alt="Bidder shall submit Statement of Conformity and other administration document (if any) as detailed in the *SECTION 1 – ADMINISTRATION DATA* of Form of Bid."></i> </label>
 														</div>
 														<div class="form-group row">
 														   <label class="col-md-4">Statement of Conformity  (PDF Files)</label>
@@ -183,7 +183,7 @@
 														</div>
 														<br>
 														<div class="form-group row">
-															<label class="col-12" style="font-weight:bold;">Technical <i class="fa fa-info-circle"></i></label>
+															<label class="col-12" style="font-weight:bold;">Technical <i class="fa fa-info-circle" alt="Bidder shall submit all bidder's technical document as detailed in the *SECTION 2 – TECHNICAL DATA* of Form of Bid.<br/>Bidder may submit it in ZIP file format.<br/>Delivery Time/Work Duration is bidder proposed schedule to complete the work or deliver all required goods after award."></i></label>
 														</div>
 														<div class="form-group row">
 															<label class="col-4">Technical Proposal (PDF Files)</label>
@@ -211,7 +211,7 @@
 													</div>
 													<div class="col-md-6">
 														<div class="form-group row">
-														  <label class="col-12" style="font-weight:bold;">Commercial <i class="fa fa-info-circle"></i></label>
+														  <label class="col-12" style="font-weight:bold;">Commercial <i class="fa fa-info-circle" alt="Bidder shall submit all bidder's commercial document as detailed in the *SECTION 3 – COMMERCIAL DATA* of Form of Bid.<br/>Bid Validity requirement shall refer to Instruction to Bid and Bid Letter form."></i></label>
 														</div>
 														<div class="form-group row">
 														   <label class="col-md-4">Bid Letter No</label>
