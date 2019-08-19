@@ -107,7 +107,7 @@ if ($row->prebid_loc == 0) {
                                                                         <br>
                                                                         <br>
                                                                         <br>
-                                                                        Procurement Commite
+                                                                        Reference & Procurement Committee
                                                                     </p>
                                                                 </div>
                                                                 <!-- <div class="col-md-12 text-center"> -->
