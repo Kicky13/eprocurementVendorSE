@@ -78,7 +78,7 @@ class Vendor_lib
 		->join('t_msr','t_msr.msr_no = t_bl.msr_no', 'left')
 		->join('m_company','m_company.ID_COMPANY = t_msr.id_company', 'left')
 		->join('t_eq_data','t_eq_data.msr_no = t_msr.msr_no', 'left')
-        ->join('m_deliverypoint', 't_eq_data.delivery_point = m_deliverypoint.ID_DPOINT')
+        ->join('m_deliverypoint', 't_eq_data.delivery_point = m_deliverypoint.ID_DPOINT','left')
 		->join('m_currency','m_currency.ID = t_eq_data.currency', 'left')
 		->join('m_pmethod','m_pmethod.ID_PMETHOD = t_bl.pmethod', 'left')
 		->join('m_pre_bid_location','m_pre_bid_location.id = t_eq_data.prebid_loc', 'left')
