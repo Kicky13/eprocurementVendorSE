@@ -1021,14 +1021,14 @@ function minbidbond() {
 }
 
 function commercialInfo() {
-    swal('Info', 'Bidder shall submit all bidder\'s commercial document as detailed in the <strong>SECTION 3 – COMMERCIAL DATA</strong> of Form of Bid.<br/>Bid Validity requirement shall refer to Instruction to Bid and Bid Letter form.', 'info');
+    swal('Info', 'Bidder shall submit all bidder\'s commercial document as detailed in the "SECTION 3 – COMMERCIAL DATA" of Form of Bid. Bid Validity requirement shall refer to Instruction to Bid and Bid Letter form.', 'info');
 }
 
 function technicalInfo() {
-    swal('Info', 'Bidder shall submit all bidder\'s technical document as detailed in the <strong>SECTION 2 – TECHNICAL DATA</strong> of Form of Bid.<br/>Bidder may submit it in ZIP file format.<br/>Delivery Time/Work Duration is bidder proposed schedule to complete the work or deliver all required goods after award.', 'info');
+    swal('Info', 'Bidder shall submit all bidder\'s technical document as detailed in the "SECTION 2 – TECHNICAL DATA" of Form of Bid. Bidder may submit it in ZIP file format. Delivery Time/Work Duration is bidder proposed schedule to complete the work or deliver all required goods after award.', 'info');
 }
 
 function adminInfo() {
-    swal('Info', 'Bidder shall submit Statement of Conformity and other administration document (if any) as detailed in the <strong>SECTION 1 – ADMINISTRATION DATA</strong> of Form of Bid.', 'info');
+    swal('Info', 'Bidder shall submit Statement of Conformity and other administration document (if any) as detailed in the "SECTION 1 – ADMINISTRATION DATA" of Form of Bid.', 'info');
 }
 </script>
