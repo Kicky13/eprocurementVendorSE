@@ -107,7 +107,7 @@ if ($row->prebid_loc == 0) {
                                                                         <br>
                                                                         <br>
                                                                         <br>
-                                                                        Procurement Commite
+                                                                        Reference & Procurement Committee
                                                                     </p>
                                                                 </div>
                                                                 <!-- <div class="col-md-12 text-center"> -->
@@ -261,7 +261,7 @@ if ($row->prebid_loc == 0) {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Paricipation Confirmation</h4>
+                <h4 class="modal-title" id="myModalLabel">Participation Confirmation</h4>
             </div>
             <div class="modal-body">
                 <form method="post" class="form-horizontal  open-this" enctype="multipart/form-data"
@@ -279,7 +279,7 @@ if ($row->prebid_loc == 0) {
                             <tr>
                                 <td>Attn</td>
                                 <td width="15">:</td>
-                                <td>Procurement Commite</td>
+                                <td>Procurement Committee</td>
                             </tr>
                             <tr>
                                 <td>Subject</td>
@@ -301,7 +301,7 @@ if ($row->prebid_loc == 0) {
                                 <td colspan="3" style="text-align:justify; text-justify:inter-word">
                                     We acknowledge receipt your complete set of Enquiry Document dated
                                     on <?= dateToIndo($row->issued_date) ?> for subject services, and hereby confirm
-                                    that we: intend to participate in the bidding process and will submit our Bid
+                                    that we intend to participate in the bidding process and will submit our Bid
                                     Proposal in accordance with the terms and requirements there in. We further confirm
                                     that we shall treat the Enquiry Document as confidential matter and only disclose to
                                     others such information as is necessary for the preparation of the Bid Proposal.

@@ -145,6 +145,29 @@ class Greetings extends CI_Controller {
     public function confirmation()
     {
         $x = $this->input->post();
+        $img1 = '';
+        $img2 = '';
+
+        $query = $this->db->query('SELECT bl.vendor_id as vendor, bl.msr_no as msr, vendor.ID_VENDOR as email, notif.TITLE as title, notif.OPEN_VALUE as open, notif.CLOSE_VALUE as close FROM t_bl_detail bl
+            JOIN m_vendor vendor ON bl.vendor_id = vendor.ID
+            JOIN m_notic notif ON notif.ID = 81
+            WHERE bl.id = "' . $x['id'] . '"');
+
+        $data_replace = $query->result();
+
+        $str = $data_replace[0]->open;
+
+        $data = array(
+            'img1' => $img1,
+            'img2' => $img2,
+            'title' => $data_replace[0]->title,
+            'open' => $str,
+            'close' => $data_replace[0]->close
+        );
+
+        $data['dest'][0] = $data_replace[0]->email;
+
+        $flag = $this->sendMail($data);
         $this->db->where(['id'=>$x['id']]);
         $this->db->update('t_bl_detail', array(
             'confirmed' => $x['status'],
@@ -155,29 +178,6 @@ class Greetings extends CI_Controller {
                 'message' => __('success_accept'),
                 'type' => 'success'
             ));
-            $img1 = '';
-            $img2 = '';
-
-            $query = 'SELECT bl.vendor_id as vendor, bl.msr_no as msr, vendor.ID_VENDOR as email, notif.TITLE as title, notif.OPEN_VALUE as open, notif.CLOSE_VALUE as close FROM t_bl_detail bl
-            JOIN m_vendor vendor ON bl.vendor_id = vendor.ID
-            JOIN m_notic notif ON notif.ID = 81
-            WHERE bl.id = "' . $x['id'] . '"';
-
-            $data_replace = $query->result();
-
-            $str = $data_replace[0]->open;
-
-            $data = array(
-                'img1' => $img1,
-                'img2' => $img2,
-                'title' => $data_replace[0]->title,
-                'open' => $str,
-                'close' => $data_replace[0]->close
-            );
-
-            $data['dest'][0] = $data_replace[0]->email;
-
-            $flag = $this->sendMail($data);
 
         } else {
             $this->session->set_flashdata('message', array(
@@ -1084,6 +1084,7 @@ class Greetings extends CI_Controller {
             'local_content' => $post['local_content'],
             'local_content_file' => $post['local_content_file'],
             'bid_note' => $post['bid_note'],
+            'delivery_time' => $post['delivery_time'],
             'status' => 1,
             'responsed_at' => date('Y-m-d H:i:s')
         ));

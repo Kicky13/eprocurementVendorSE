@@ -354,7 +354,7 @@
                           <div class="media-body text-right">
                               <h6><b>Amendment Notification</b></h6>
                               <?php
-                                $un   = $this->m_arf_notification->view('arf_notification')->scope(array('auth_vendor', 'unresponse', 'open'))->count_all_results();
+                                $un   = $this->m_arf_notification->view('arf_notification')->scope(array('auth_vendor', 'unresponse'))->count_all_results();
                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/arf_notification')."'>" : "";
                                 $aend = $un > 0 ? "</a>" : "";
                                 // echo $a.$un.$aend;
