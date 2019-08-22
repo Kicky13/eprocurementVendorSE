@@ -33,6 +33,17 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-md-6">
+                 <table class="table table-condensed">
+                    <tbody>
+                        <tr>
+                            <td>Currency</td>
+                            <td>:</td>
+                            <td><?= $arf->currency ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <?= $this->form->open(null, 'id="form-acceptance" class="open-this"') ?>
         <div class="content-body">
