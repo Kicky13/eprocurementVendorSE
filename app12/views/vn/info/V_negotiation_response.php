@@ -109,7 +109,12 @@
                                 <div class="col-md-1">
                                     <input type="text" name="delivery_time" id="delivery_time" class="form-control">
                                 </div>
-                                &nbsp;Day
+                                <div class="col-md-1">
+                                    <select name="dt_type" id="dt_type" class="form-control">
+                                        <option value="Month">MONTH</option>
+                                        <option value="Year">YEAR</option>
+                                    </select>
+                                </div>
                             </div>
                             <table id="negotiation-table" class="table table-striped table-no-wrap table-price" style="font-size: 12px">
                                  <thead>
