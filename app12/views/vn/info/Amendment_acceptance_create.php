@@ -156,7 +156,7 @@
                                                             to
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <?= dateToIndo($arf->amended_date,false,false) ?>
+                                                            <?= dateToIndo(getLastTimeAmd($arf->doc_no, $po->delivery_date),false,false) ?>
                                                         </div>
                                                     </div>
                                                 </div>
