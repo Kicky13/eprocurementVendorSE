@@ -33,6 +33,17 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-md-6">
+                 <table class="table table-condensed">
+                    <tbody>
+                        <tr>
+                            <td>Currency</td>
+                            <td>:</td>
+                            <td><?= $arf->currency ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <?= $this->form->open(null, 'id="form-acceptance" class="open-this"') ?>
         <div class="content-body">
@@ -323,7 +334,7 @@
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <h6><i class="step-icon fa fa-check"></i> Completeness</h6>
+                                        <h6><i class="step-icon fa fa-check"></i> Supporting Document</h6>
                                         <fieldset>
                                             <?php if ($arf->extend1) { ?>
                                             <div class="form-group row">
@@ -466,7 +477,7 @@
                 </div>
             </section>
         </div>
-        <button type="button" id="btn-submit" class="btn btn-success">Completeness</button>
+        <button type="button" id="btn-submit" class="btn btn-success">Submit</button>
         <?= $this->form->close() ?>
     </div>
 </div>
