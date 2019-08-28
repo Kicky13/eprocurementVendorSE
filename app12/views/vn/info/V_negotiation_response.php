@@ -109,7 +109,7 @@
                                 <div class="col-md-1">
                                     <input type="text" name="delivery_time" id="delivery_time" class="form-control">
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-3">
                                     <select name="dt_type" id="dt_type" class="form-control">
                                         <option disabled selected>Please Pick One</option>
                                         <option value="Month">MONTH</option>

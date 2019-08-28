@@ -1061,6 +1061,8 @@ class Greetings extends CI_Controller {
         $this->form_validation->set_rules('local_content', 'Local Content', 'required');
         $this->form_validation->set_rules('bid_letter_file', 'Bid Letter File', 'required');
         $this->form_validation->set_rules('local_content_file', 'Local Content File', 'required');
+        $this->form_validation->set_rules('delivery_time', 'required');
+        $this->form_validation->set_rules('dt_type', 'required');
         foreach ($this->vendor_lib->get_negotiation_items($id)->result() as $item) {
             $this->form_validation->set_rules('negotiation['.$item->id.'][nego_price]', 'Nego Price '.$item->item, 'required');
         }
