@@ -73,11 +73,14 @@ class Amendment_acceptance extends CI_Controller {
         $po->doc_other = $this->m_arf_po_document->view('document')->scope('other')
         ->where('po_id', $po->id)
         ->get();
-        foreach ($this->m_arf_detail_revision->where('doc_id', $arf->doc_id)->get() as $revision) {
+        /*foreach ($this->m_arf_detail_revision->where('doc_id', $arf->doc_id)->get() as $revision) {
             $arf->revision[$revision->type] = $revision;
-        }
+        }*/
         $t_arf_notification = $this->db->where(['doc_no'=>$arf->doc_no])->get('t_arf_notification')->row();
-        
+        $markingType = [1=>'value', 2=>'time', 3=>'scope', 4=>'other'];
+        foreach ($this->db->where('doc_id', $t_arf_notification->id)->get('t_arf_notification_detail_revision')->result() as $revision) {
+            $arf->revision[$markingType[$revision->type]] = $revision;
+        }
         $findAll = $this->db->where(['po_no'=>$t_arf_notification->po_no])->get('t_arf_notification');
         
         $findAllResult = [];
@@ -112,9 +115,9 @@ class Amendment_acceptance extends CI_Controller {
         /*echo "<pre>";
         print_r($arf->item);
         exit();*/
-        foreach ($this->m_arf_detail_revision->where('doc_id', $arf->doc_id)->get() as $revision) {
+        /*foreach ($this->m_arf_detail_revision->where('doc_id', $arf->doc_id)->get() as $revision) {
             $arf->revision[$revision->type] = $revision;
-        }
+        }*/
         $arf->performance_bond = $this->m_arf_acceptance_document->view('document')
         ->scope('performance_bond')
         ->where('doc_no', $arf->doc_no)
@@ -157,7 +160,10 @@ class Amendment_acceptance extends CI_Controller {
         $data['document_path'] = $this->document_path;
 
         $t_arf_notification = $this->db->where(['doc_no'=>$arf->doc_no])->get('t_arf_notification')->row();
-        
+        $markingType = [1=>'value', 2=>'time', 3=>'scope', 4=>'other'];
+        foreach ($this->db->where('doc_id', $t_arf_notification->id)->get('t_arf_notification_detail_revision')->result() as $revision) {
+            $arf->revision[$markingType[$revision->type]] = $revision;
+        }
         $findAll = $this->db->where(['po_no'=>$t_arf_notification->po_no, 'id <= '=>$t_arf_notification->id])->get('t_arf_notification');
         
         $findAllResult = [];
