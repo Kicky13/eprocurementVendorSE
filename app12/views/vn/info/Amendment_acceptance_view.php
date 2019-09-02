@@ -149,11 +149,7 @@
                                                             to
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <?php if (isset($arf->revision['time'])) { ?>
-                                                                <?= dateToIndo($arf->revision['time']->value,false,false ) ?>
-                                                            <?php } else { ?>
-                                                                <?= dateToIndo($arf->amended_date,false,false ) ?>
-                                                            <?php } ?>
+                                                            <?=  dateToIndo(getLastTimeAmd($arf->doc_no, $arf->amended_date,"<="), false, false) ?>
                                                         </div>
                                                     </div>
                                                 </div>
