@@ -172,7 +172,7 @@
                                                             to
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <?= dateToIndo($arf->amended_date,false,false) ?>
+                                                            <?=  dateToIndo(getLastTimeAmd($arf->doc_no, $arf->amended_date,"<="), false, false) ?>
                                                         </div>
                                                     </div>
                                                 </div>
