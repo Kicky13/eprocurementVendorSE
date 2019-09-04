@@ -803,7 +803,7 @@ $('#po_required_doc<?= $po_rdoc->doc_type ?>').DataTable({
         if (rowData.file_name) {
           file_name = rowData.file_name
         }
-        $(td).html('<a href="'+ rowData.file_url +'">'+ file_name + '</a>')
+        $(td).html('<a href="'+ rowData.file_url +'" target="_blank">'+ file_name + '</a>')
     }},
     { 'data': 'file_url', 'title': 'File URL', 'visible': false }
   ]
@@ -863,7 +863,7 @@ $.get('<?= base_url('procurement/purchase_order/getPODocumentAgreement/'.$po->id
       if (d.file_name) {
         file_name = d.file_name
       }
-      p.append('<a href="'+ d.file_url +'">'+ d.file_name +'</a>');
+      p.append('<a href="'+ d.file_url +'" target="_blank">'+ d.file_name +'</a>');
     })
 
 
