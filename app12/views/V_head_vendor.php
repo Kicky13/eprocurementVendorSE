@@ -817,6 +817,7 @@
                             if (msg.status == "success")
                                 check_status();
                             lang();
+                            location.reload();
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             stop(elm);

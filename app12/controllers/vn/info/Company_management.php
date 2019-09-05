@@ -88,7 +88,7 @@ class Company_management extends CI_Controller {
             if ($_FILES[$k]['error'] == 4)
                 return "failed";
             $ImageExt = substr($v['name'], strrpos($v['name'], '.'));
-            if ($ImageExt != ".pdf")
+            if ($ImageExt != ".pdf" || $ImageExt != ".jpg" || $ImageExt != ".jpeg" || $ImageExt != ".png")
                 return "failed";
             if ($_FILES[$k]['size'] > 2000000)
                 return "size";
@@ -121,7 +121,7 @@ class Company_management extends CI_Controller {
             if ($_FILES[$k]['error'] == 4)
                 return "failed";
             $ImageExt = substr($v['name'], strrpos($v['name'], '.'));
-            if ($ImageExt != ".pdf")
+            if ($ImageExt != ".pdf" || $ImageExt != ".jpg" || $ImageExt != ".jpeg" || $ImageExt != ".png")
                 return "failed";
             if ($_FILES[$k]['size'] > 2000000)
                 return "size";
@@ -254,7 +254,7 @@ class Company_management extends CI_Controller {
             if ($_FILES[$k]['error'] == 4)
                 return "failed";
             $ImageExt = substr($v['name'], strrpos($v['name'], '.'));
-            if ($ImageExt != ".pdf")
+            if ($ImageExt != ".pdf" || $ImageExt != ".jpg" || $ImageExt != ".jpeg" || $ImageExt != ".png")
                 return "failed";
             if ($_FILES[$k]['size'] > 2000000)
                 return "size";

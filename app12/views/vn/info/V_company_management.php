@@ -274,11 +274,11 @@
             rules: {
                 full_name: {required: true, maxlength: 50},
                 jabatan: {required: true, maxlength: 30},
-                no_telp: {required: true, number: true, maxlength: 30},
+                no_tlpn: {required: true, number: true, maxlength: 16},
                 email: {required: true, email: true, maxlength: 50},
-                no_ktp: {required: true, number: true, maxlength: 60},
+                no_ktp: {required: true, number: true, maxlength: 18},
                 berlaku_sampai: {required: true},
-                npwp: {required: false, maxlength: 50}
+                npwp: {required: false, number: true, maxlength: 17}
             },
             errorPlacement: function (label, element) { // render error placement for each input type
                 var elmnt = element[0].id;
@@ -334,7 +334,7 @@
                 alamatemail: {required: true, email: true, maxlength: 50},
                 berlaku_sampai: {required: true},
                 saham: {required: true},
-                nonpwp: {required: false, maxlength: 50}
+                nonpwp: {required: false, number: true, maxlength: 18}
             },
             errorPlacement: function (label, element) { // render error placement for each input type
                 var elmnt = element[0].id;

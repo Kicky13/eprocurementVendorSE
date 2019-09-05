@@ -1575,11 +1575,11 @@ $tomorrow = date('d-m-Y',strtotime($date . "+1 days"));
             focusInvalid: false,
             rules: {
                 alamat_npwp: {required: true, maxlength: 100},
-                nomor_npwp: {required: true, maxlength: 40},
+                nomor_npwp: {required: true, maxlength: 18},
                 npwp_province: {required: true},
                 npwp_city: {required: true},
 //                file_npwp: {required: true},
-                postal_code: {required: true, maxlength: 10},
+                postal_code: {required: true, maxlength: 9},
             },
             errorPlacement: function (label, element) { // render error placement for each input type
                 var elmnt = element[0].id;

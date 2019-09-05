@@ -341,7 +341,7 @@ class General_data extends CI_Controller {
 
     public function doc_upload($files) {
         $config['upload_path']          = './upload/LEGAL_DATA/KTP';
-        $config['allowed_types']        = 'pdf';
+        $config['allowed_types']        = 'pdf|png|jpg|jpeg';
         $config['max_size']             = 10240;
         $config['encrypt_name']         = TRUE;
         $this->load->library('upload', $config);

@@ -850,7 +850,7 @@ $(function () {
                       },1000)
                     } else {
                       if (res.file == false) {
-                        msg_danger("Error", "Only PDF files are allowed");
+                        msg_danger("Error", "Only PDF, png, jpg and jpeg files are allowed");
                       } else {
                         msg_danger("Error", "Data gagal disimpan");
                       }
@@ -953,12 +953,12 @@ $(function () {
             COUNTRY: {required: true},
             POSTAL_CODE: {required: true,
                 number: true,
-                maxlength: 10,
+                maxlength: 9,
             },
-            TELP: {required: true, number: true, maxlength: 20},
+            TELP: {required: true, number: true, maxlength: 16},
 //                                                    HP: {required: true, number: true,maxlength:20},
-            FAX: {required: false, number: true, maxlength: 20},
-            WEBSITE: {required: false, maxlength: 40},
+            FAX: {required: false, number: true, maxlength: 10},
+            WEBSITE: {required: false, maxlength: 40, url: true},
         },
         errorPlacement: function (label, element) { // render error placement for each input type
             // console.log(label);
