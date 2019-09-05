@@ -345,7 +345,7 @@
                                                     <button type="button" class="btn btn-success" onclick="open_form_document(1)">Update</button>
                                                 </div>
                                             </div>
-                                            <table id="document-table-1" class="table table-bordered">
+                                            <table id="document-table-1" class="table table-bordered document-table">
                                                 <thead>
                                                     <tr>
                                                         <th>No.</th>
@@ -386,10 +386,10 @@
                                                     <h4>Insurance</h4>
                                                 </div>
                                                 <div class="col-md-6 text-right">
-                                                    <button type="button" class="btn btn-success" onclick="open_form_document(1)">Update</button>
+                                                    <button type="button" class="btn btn-success" onclick="open_form_document(2)">Update</button>
                                                 </div>
                                             </div>
-                                            <table id="document-table-2" class="table table-bordered">
+                                            <table id="document-table-2" class="table table-bordered document-table">
                                                 <thead>
                                                     <tr>
                                                         <th>No.</th>
@@ -433,7 +433,7 @@
                                                     <button type="button" class="btn btn-success" onclick="open_form_document(3)">Update</button>
                                                 </div>
                                             </div>
-                                            <table id="document-table-3" class="table table-bordered">
+                                            <table id="document-table-3" class="table table-bordered document-table">
                                                 <thead>
                                                     <tr>
                                                         <th>No.</th>
@@ -577,6 +577,8 @@
 <script>
     var document_row = [];
     document_row[1] = $('#document-table-1 tbody [data-row-id]').length;
+    document_row[2] = $('#document-table-2 tbody [data-row-id]').length;
+    document_row[3] = $('#document-table-3 tbody [data-row-id]').length;
     $('#document-modal-issued_date, #document-modal-effective_date, #document-modal-expired_date').datepicker({
         format: "yyyy-mm-dd"
     });
@@ -695,15 +697,17 @@
             html += '<td><input type="hidden" name="document['+data.type+']['+document_row[data.type]+'][description]" value="'+data.description+'">'+data.description+'</td>';
             html += '<td>';
                 html +='<a href="<?= base_url('upload/amd_acceptance_vendor') ?>/'+data.file.file_name+'" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download"></i></a> ';
-                html += '<button type="button" class="btn btn-danger btn-sm" onclick="remove_document(\''+document_row[data.type]+'\')"><i class="fa fa-trash"></i></button>';
+                html += '<button type="button" class="btn btn-danger btn-sm" onclick="remove_document('+data.type+',\''+document_row[data.type]+'\')"><i class="fa fa-trash"></i></button>';
             html += '</td>';
         html += '</tr>';
         $('#document-table-'+data.type+' tbody').append(html);
+        // console.log(data);
         document_row[data.type]++;
+        // console.log(document_row);
     }
 
-    function remove_document(id) {
-        $('#document-table tbody [data-row-id="'+id+'"]').remove();
+    function remove_document(type,id) {
+        $('#document-table-'+type+' tbody [data-row-id="'+id+'"]').remove();
     }
     function attachmentClick() {
       var form = $("#form-attachment-arf-acceptance")[0];
