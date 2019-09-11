@@ -133,8 +133,6 @@ class General_data extends CI_Controller {
 
     public function add_address() {
         $data_addr = ($_POST);
-        echo json_encode($data_addr);
-        die();
         $data_addr['ID_VENDOR'] = $this->session->ID;
         $data_addr['CREATE_BY'] = $this->session->ID;
         $data_addr['STATUS'] = "1";
