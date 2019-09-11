@@ -58,7 +58,7 @@ class Company_management extends CI_Controller {
             $dt[$k][7] = stripslashes($v->NPWP);
             $dt[$k][8] = $file_npwp;
             $dt[$k][9] = "<button class='btn btn-primary btn-sm' title='Update' onclick='update1(" . $v->ID . ")'><i class='fa fa-edit'></i></button>&nbsp"
-                    . "<button class='btn btn-danger btn-sm' title='Delete' onclick='delete_data(" . $v->ID . ")'><i class='fa fa-trash'></i></button>";
+                    . "<button class='btn btn-danger btn-sm' title='Delete' onclick='delete_director(" . $v->ID . ")'><i class='fa fa-trash'></i></button>";
         }
         echo json_encode($dt);
     }
@@ -86,7 +86,7 @@ class Company_management extends CI_Controller {
         $counter = 0;
         foreach ($data as $k => $v) {
             if ($_FILES[$k]['error'] == 4)
-                return "failed";
+                return "error";
             $ImageExt = substr($v['name'], strrpos($v['name'], '.'));
             if ($ImageExt != ".pdf" || $ImageExt != ".jpg" || $ImageExt != ".jpeg" || $ImageExt != ".png")
                 return "failed";
@@ -119,7 +119,7 @@ class Company_management extends CI_Controller {
         $counter = 0;
         foreach ($data as $k => $v) {
             if ($_FILES[$k]['error'] == 4)
-                return "failed";
+                return "error";
             $ImageExt = substr($v['name'], strrpos($v['name'], '.'));
             if ($ImageExt != ".pdf" || $ImageExt != ".jpg" || $ImageExt != ".jpeg" || $ImageExt != ".png")
                 return "failed";
@@ -140,7 +140,139 @@ class Company_management extends CI_Controller {
             return false;
     }
 
+    public function upload_scanKtp()
+    {
+        $data = $_FILES['scan_ktp'];
+        $Destination = 'upload/COMPANY_MANAGEMENT/DAFTAR_DEWAN_DIREKSI';
+        $ImageExt = substr($data['name'], strrpos($data['name'], '.'));
+
+        if (($ImageExt == '.pdf') || ($ImageExt == '.jpeg') || ($ImageExt == '.jpg') || ($ImageExt == '.png')) {
+            if ($data['error'] == 4) {
+                return "error";
+            }
+            if ($data['size'] > 2000000) {
+                return "size";
+            }
+            $NewImageName = 'Scan_KTP' . '_' . Date("Ymd_His") . $ImageExt;
+            move_uploaded_file($data['tmp_name'], "$Destination/$NewImageName");
+            return $NewImageName;
+        } else {
+            return "extension";
+        }
+    }
+
+    public function upload_npwpnew()
+    {
+        $data = $_FILES['datanpwp'];
+        $Destination = 'upload/COMPANY_MANAGEMENT/DAFTAR_DEWAN_DIREKSI';
+        $ImageExt = substr($data['name'], strrpos($data['name'], '.'));
+
+        if (($ImageExt == '.pdf') || ($ImageExt == '.jpeg') || ($ImageExt == '.jpg') || ($ImageExt == '.png')) {
+            if ($data['error'] == 4) {
+                return "error";
+            }
+            if ($data['size'] > 2000000) {
+                return "size";
+            }
+            $NewImageName = 'Scan_KTP' . '_' . Date("Ymd_His") . $ImageExt;
+            move_uploaded_file($data['tmp_name'], "$Destination/$NewImageName");
+            return $NewImageName;
+        } else {
+            return "extension";
+        }
+    }
+
     public function change_company_management() {
+        $data = array(
+            'NAME' => strtoupper(stripslashes($_POST['full_name'])),
+            'POSITION' => stripslashes($_POST['jabatan']),
+            'PHONE' => stripslashes(($_POST['no_tlpn'])),
+            'EMAIL' => stripslashes($_POST['email']),
+            'NO_ID' => strtoupper(stripslashes($_POST['no_ktp'])),
+            'VALID_UNTIL' => date("Y-m-d", strtotime($_POST['berlaku_sampai'])),
+            'NPWP' => strtoupper(stripslashes($_POST['npwp'])),
+            'UPDATE_BY' => $this->session->ID,
+            'ID_VENDOR' => $this->session->ID,
+            'STATUS' => 1,
+            'UPDATE_TIME' => date('Y-m-d H:i:s'),
+        );
+        $file = $_FILES['scan_ktp'];
+        if ($file['name'] !== '') {
+            $res = $this->upload_scanKtp();
+            if ($res == 'error' || $res == 'extension' || $res == 'size') {
+                switch ($res) {
+                    case 'error' :
+                        $this->output(array('msg' => "Oops, Something went wrong. Please Try Again", 'status' => 'Error'));
+                        break;
+                    case 'extension' :
+                        $this->output(array('msg' => "Only pdf, jpg, jpeg and png files", 'status' => 'Error'));
+                        break;
+                    case 'size' :
+                        $this->output(array('msg' => "File size too large, 20 Mb max", 'status' => 'Error'));
+                        break;
+                    default :
+                        $this->output(array('msg' => "Oops, Something went wrong. Please Try Again", 'status' => 'Error'));
+                        break;
+                }
+            } else {
+                $data['FILE_NO_ID'] = $res;
+
+                if ($_FILES['datanpwp']['name'] !== '') {
+                    $res2 = $this->upload_npwpnew();
+                    if ($res2 == 'error' || $res2 == 'extension' || $res2 == 'size') {
+                        switch ($res2) {
+                            case 'error' :
+                                $this->output(array('msg' => "Oops, something went wrong. Please try again", 'status' => 'Error'));
+                                break;
+                            case 'extension' :
+                                $this->output(array('msg' => 'Only pdf, jpeg, jpg and png files', 'status' => 'Error'));
+                                break;
+                            case 'size' :
+                                $this->output(array('msg' => "File size too large. 20 Mb maximum", 'status' => 'Error'));
+                                break;
+                            default :
+                                $this->output(array('msg' => 'Oops, something went wrong. Please try again', 'status' => 'Error'));
+                                break;
+                        }
+                    } else {
+                        $data['FILE_NPWP'] = $res2;
+                    }
+                }
+                $data['ID'] = $_POST['id'];
+                $data_akta = null;
+                $result = false;
+
+
+                // echopre($res);
+                if ($_POST['id'] == null) {//add data
+                    $data['CREATE_BY'] = $this->session->ID;
+
+                    $cek = $this->mcm->show_company_management(array("NAME" => strtoupper(stripslashes($_POST['full_name']))));
+                    if (count($cek) == 0) {//cek ketersediaan data
+                        // $data = array_merge($data, $res);
+                        $q = $this->mcm->add_company_management($data);
+                    } else {
+                        $this->output(array('msg' => "Nama Telah Digunakan", 'status' => 'Error'));
+                    }
+                } else {//update data
+                    //$data = array_merge($data, $res);
+                    $q = $this->mcm->update_company_management($_POST['id'], $data);
+                }
+
+                //CEK QUERY BERHASIL DIJALANKAN
+                if ($q == 1) {
+                    $this->output(array('msg' => "Successfuly Saved", 'status' => 'Sukses'));
+                } else {
+                    $this->output(array('msg' => "Error upload data", 'status' => 'Error'));
+                }
+            }
+        } else {
+            $this->output(array('msg' => "Scan KTP required", 'status' => 'Error'));
+        }
+        // echo json_encode($data);
+    }
+
+    public function change_company_managementOld() {
         //echopre($_POST);exit;
         $res = true;
         $flag = 0;
@@ -169,13 +301,13 @@ class Company_management extends CI_Controller {
         }
 
         if ($flag == 1) {
-          if ($_FILES['datanpwp']['name'] != ''){
-            $res2 = $this->upload_file_npwp();
-            //print_r($res2);
-            // $this->check_response($res2);
-            $flag = 1;
-            $data['FILE_NPWP'] = $res2;
-          }
+            if ($_FILES['datanpwp']['name'] != ''){
+                $res2 = $this->upload_file_npwp();
+                //print_r($res2);
+                // $this->check_response($res2);
+                $flag = 1;
+                $data['FILE_NPWP'] = $res2;
+            }
         }
 
         $data['ID'] = $_POST['id'];
@@ -245,32 +377,23 @@ class Company_management extends CI_Controller {
     }
 
     public function upload_vendor() {
-        $NewImageName = '';
-        $data = $_FILES;
-        $Destination = 'upload/COMPANY_MANAGEMENT/DAFTAR_PEMILIK_SAHAM';
-        $ret = array();
-        $counter = 0;
-        foreach ($data as $k => $v) {
-            if ($_FILES[$k]['error'] == 4)
-                return "failed";
-            $ImageExt = substr($v['name'], strrpos($v['name'], '.'));
-            if ($ImageExt != ".pdf" || $ImageExt != ".jpg" || $ImageExt != ".jpeg" || $ImageExt != ".png")
-                return "failed";
-            if ($_FILES[$k]['size'] > 2000000)
-                return "size";
-            if ($k == "npwpfile") {
-                $NewImageName = 'Scan_NPWP' . '_' . Date("Ymd_His") . $ImageExt;
-                move_uploaded_file($_FILES[$k]['tmp_name'], "$Destination/$NewImageName");
-                return $NewImageName;
-            }
-            if (move_uploaded_file($_FILES[$k]['tmp_name'], "$Destination/$NewImageName"))
-                $counter++;
-        }
+        $data = $_FILES['npwpfile'];
+        $Destination = 'upload/COMPANY_MANAGEMENT/DAFTAR_DEWAN_DIREKSI';
+        $ImageExt = substr($data['name'], strrpos($data['name'], '.'));
 
-        if ($counter == 1)
-            return $ret;
-        else
-            return false;
+        if (($ImageExt == '.pdf') || ($ImageExt == '.jpeg') || ($ImageExt == '.jpg') || ($ImageExt == '.png')) {
+            if ($data['error'] == 4) {
+                return "error";
+            }
+            if ($data['size'] > 2000000) {
+                return "size";
+            }
+            $NewImageName = 'Scan_KTP' . '_' . Date("Ymd_His") . $ImageExt;
+            move_uploaded_file($data['tmp_name'], "$Destination/$NewImageName");
+            return $NewImageName;
+        } else {
+            return "extension";
+        }
     }
 
     public function change_vendor_shareholders() {
@@ -290,12 +413,26 @@ class Company_management extends CI_Controller {
             'ID_VENDOR' => $this->session->ID,
             'UPDATE_TIME' => date('Y-m-d H:i:s')
         );
-
-        if ($_FILES['npwpfile']['name'] != "" ) {
-            $res = $this->upload_vendor();
-            // $this->check_response($res);
-            $data['FILE_NPWP'] = $res;
-            $flag = 1;
+        if ($_FILES['npwpfile']['name'] !== '') {
+            $res2 = $this->upload_vendor();
+            if ($res2 == 'error' || $res2 == 'extension' || $res2 == 'size') {
+                switch ($res2) {
+                    case 'error' :
+                        $this->output(array('msg' => "Oops, something went wrong. Please try again", 'status' => 'Error'));
+                        break;
+                    case 'extension' :
+                        $this->output(array('msg' => 'Only pdf, jpeg, jpg and png files', 'status' => 'Error'));
+                        break;
+                    case 'size' :
+                        $this->output(array('msg' => "File size too large. 20 Mb maximum", 'status' => 'Error'));
+                        break;
+                    default :
+                        $this->output(array('msg' => 'Oops, something went wrong. Please try again', 'status' => 'Error'));
+                        break;
+                }
+            } else {
+                $data['FILE_NPWP'] = $res2;
+            }
         }
 
         $data_akta = null;

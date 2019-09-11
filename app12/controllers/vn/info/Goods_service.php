@@ -240,14 +240,14 @@ class Goods_service extends CI_Controller {
         $fl=0;
         foreach ($data as $k => $v) {
             $ImageExt = strtolower(substr($v['name'], strrpos($v['name'], '.')));
-            if ($ImageExt != $ext) {
-                if($ext2 != null && $ImageExt != $ext2)
-                {
-                    if($ext3 != null && $ImageExt != $ext3)
-                        $fl=1;
-                }
-                if($fl==1)
-                    return "failed";
+            if ($ImageExt !== $ext) {
+//                if($ext2 != null && $ImageExt != $ext2)
+//                {
+//                    if($ext3 != null && $ImageExt != $ext3)
+//                        $fl=1;
+//                }
+//                if($fl==1)
+                return "failed";
             }
             if ($_FILES[$k]['size'] > 2000000)
                 return "size";

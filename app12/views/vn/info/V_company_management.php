@@ -276,7 +276,7 @@
                 jabatan: {required: true, maxlength: 30},
                 no_tlpn: {required: true, number: true, maxlength: 16},
                 email: {required: true, email: true, maxlength: 50},
-                no_ktp: {required: true, number: true, maxlength: 18},
+                no_ktp: {required: true, maxlength: 18},
                 berlaku_sampai: {required: true},
                 npwp: {required: false, number: true, maxlength: 17}
             },
@@ -499,7 +499,7 @@
         lang();
     }
 
-    function delete_data(id)
+    function delete_director(id)
     {
         var disb =<?php echo isset($all[0]->STATUS) ? $all[0]->STATUS : 0 ?>;
         if (disb == 5)

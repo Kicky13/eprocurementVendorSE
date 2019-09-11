@@ -1579,7 +1579,7 @@ $tomorrow = date('d-m-Y',strtotime($date . "+1 days"));
                 npwp_province: {required: true},
                 npwp_city: {required: true},
 //                file_npwp: {required: true},
-                postal_code: {required: true, maxlength: 9},
+                postal_code: {required: true, maxlength: 6},
             },
             errorPlacement: function (label, element) { // render error placement for each input type
                 var elmnt = element[0].id;
@@ -1821,9 +1821,9 @@ $tomorrow = date('d-m-Y',strtotime($date . "+1 days"));
             rules: {
                 issued_by_pajak: {required: true},
                 nomor_pajak: {required: true, maxlength: 40},
-                valid_from_pajak: {required: true},
-                valid_to_pajak: {required: true},
-                bidang_usaha_pajak: {required: true, maxlength: 500},
+                valid_from_pajak: {required: false},
+                valid_to_pajak: {required: false},
+                bidang_usaha_pajak: {required: false, maxlength: 500},
                 <?php echo(isset($SKT_PAJAK[0]["NO_DOC"]) != false ? "" : "file_pajak: {required: true},") ?>
             },
             errorPlacement: function (label, element) { // render error placement for each input type

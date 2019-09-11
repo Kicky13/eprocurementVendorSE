@@ -13,6 +13,7 @@ class General_data extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('vn/info/M_general_data', 'mgd');
         $this->load->model('vn/info/M_vn', 'mvn');
+        $this->load->model('vn/info/M_company_management', 'mcm');
         $this->load->model('vn/info/M_all_vendor', 'mav');
     }
 
@@ -273,6 +274,11 @@ class General_data extends CI_Controller {
         $id = $_POST['ID'];
         $key = $_POST['KEYS'];
         $result = $this->mgd->delete_data_contact($key, $id);
+        $this->output($result);
+    }
+
+    public function delete_director($id) {
+        $result = $this->mcm->delete_data($id);
         $this->output($result);
     }
 

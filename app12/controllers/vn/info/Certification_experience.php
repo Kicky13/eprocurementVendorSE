@@ -77,8 +77,8 @@ class Certification_experience extends CI_Controller {
                 return "failed";
             $ImageExt = substr($v['name'], strrpos($v['name'], '.'));
             if ($ImageExt != ".pdf")
-                return "failed";
-            if ($_FILES[$k]['size'] > 2000000)
+                return "extension";
+            if ($_FILES[$k]['size'] > 2500000)
                 return "size";
 
             $NewImageName = 'certificate' . '_' . Date("Ymd_His") . $ImageExt;
@@ -91,11 +91,11 @@ class Certification_experience extends CI_Controller {
 
     public function check_response($res) {
         if ($res == false)
-            $this->output(array('msg' => "Gagal upload file", 'status' => 'Error'));
-        else if ($res == "failed")
-            $this->output(array('msg' => "Hanya file pdf yang diijinkan", 'status' => 'Error'));
+            $this->output(array('msg' => "Failed to Upload File", 'status' => 'Error'));
+        else if ($res == "extension")
+            $this->output(array('msg' => "Only pdf file allowed", 'status' => 'Error'));
         else if ($res == "size")
-            $this->output(array('msg' => "Maksimal file 2MB", 'status' => 'Error'));
+            $this->output(array('msg' => "Maximum 20 Mb file size", 'status' => 'Error'));
     }
 
     public function remove_doc($dest, $data) {
@@ -274,7 +274,7 @@ class Certification_experience extends CI_Controller {
       }
       if ($result === true) {
           $this->output(array("status" => "Sukses", "msg" => "Data BPJS Successfuly Saved"));
-      } else if ($res === false) {
+      } else if ($result === false) {
           $this->output(array("status" => "Error", "msg" => "Data BPJS Failed"));
       }
     }
@@ -282,7 +282,7 @@ class Certification_experience extends CI_Controller {
     public function doc_upload($files, $doc_type) {
         $config['upload_path']          = './upload/LEGAL_DATA/'.$doc_type;
         $config['allowed_types']        = 'pdf';
-        $config['max_size']             = 10240;
+        $config['max_size']             = 2500000;
         $config['encrypt_name']         = TRUE;
         $this->load->library('upload', $config);
         if ($this->upload->do_upload($files)) {

@@ -131,11 +131,11 @@ class Financial_bank_data extends CI_Controller {
     public function check_response($res)
     {
         if ($res == false)
-            $this->output(array('msg' => "Gagal upload file", 'status' => 'Error'));
+            $this->output(array('msg' => "Oops !! Something error, upload failed", 'status' => 'Error'));
         else if ($res == "failed")
-            $this->output(array('msg' => "Hanya file pdf yang diijinkan", 'status' => 'Error'));
+            $this->output(array('msg' => "Only pdf allowed", 'status' => 'Error'));
         else if ($res == "size")
-            $this->output(array('msg' => "Maksimal file 15MB", 'status' => 'Error'));
+            $this->output(array('msg' => "Max 15 Mb", 'status' => 'Error'));
     }
 /*================================================    Add Data     ========================================*/
     public function add_data_bank()
