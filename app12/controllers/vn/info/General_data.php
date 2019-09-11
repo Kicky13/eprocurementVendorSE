@@ -133,6 +133,8 @@ class General_data extends CI_Controller {
 
     public function add_address() {
         $data_addr = ($_POST);
+        echo json_encode($data_addr);
+        die();
         $data_addr['ID_VENDOR'] = $this->session->ID;
         $data_addr['CREATE_BY'] = $this->session->ID;
         $data_addr['STATUS'] = "1";
@@ -294,6 +296,14 @@ class General_data extends CI_Controller {
         //     $this->output($res[0]->id);
         // else
         //     return null;
+    }
+
+    public function get_country_kode($name = '')
+    {
+        $country = stripslashes($this->input->post('name'));
+        $res = $this->mgd->get_country_kode($country);
+
+        echo json_encode($res);
     }
 
     public function add_info_ktp() {

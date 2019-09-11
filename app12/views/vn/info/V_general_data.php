@@ -686,16 +686,20 @@ $(function () {
     });
     $('#dataalamat tbody').on('click', 'tr .update-alamat', function () {
         var data2 = tabel2.row($(this).parents('tr')).data();
-        // console.log(data2);
+        console.log(data2);
 
         var id_prov = get_dt_wparam(data2.PROVINCE);
+        var kode_count = get_country_kode(data2.COUNTRY);
+
         console.log(id_prov);
+        console.log(kode_count);
+
         $('#BRANCH_TYPE').val(data2.BRANCH_TYPE);
         $('#company_address_update #ADDRESS').val(data2.ADDRESS);
         $('#company_address_update #ADDRESS2').val(data2.ADDRESS2);
         $('#company_address_update #ADDRESS3').val(data2.ADDRESS3);
         $('#company_address_update #ADDRESS4').val(data2.ADDRESS4);
-        $('#company_address_update #COUNTRY').val(data2.COUNTRY).trigger('change');
+        $('#company_address_update #COUNTRY').val(kode_count).trigger('change');
 
         setTimeout(function(){
           setTimeout(function(){
@@ -1216,7 +1220,7 @@ function get_dt_wparam(id)
 {
     var obj = {};
     obj.id = id;
-    var data;
+    var data = '';
     $.ajax({
         type: "POST",
         url: "<?php echo site_url('vn/info/general_data/get_dt_wparam'); ?>",
@@ -1227,6 +1231,23 @@ function get_dt_wparam(id)
         success: function(res){
           data = res.id;
         }
+    });
+    return data;
+}
+
+function get_country_kode(country) {
+    var arrCount = {};
+    arrCount.name = country;
+    $.ajax({
+        type: "POST",
+        url: "<?php echo site_url('vn/info/general_data/get_country_kode/'); ?>",
+        dataType: "JSOn",
+        data: arrCount,
+        cache: false,
+        async:false
+    }).done(function (res) {
+        data = res.sortname;
+        console.log(data);
     });
     return data;
 }

@@ -183,6 +183,15 @@ class M_general_data extends CI_Model {
         //     return false;
     }
 
+    public function get_country_kode($country)
+    {
+        $sql = $this->db->select("id, sortname, name")
+            ->from("m_loc_countries")
+            ->where("name", $country)
+            ->get();
+        return $sql->row();
+    }
+
     public function get_city($id,$sel=false) {
 
         $q = $this->db->select("name,id")

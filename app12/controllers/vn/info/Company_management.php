@@ -358,7 +358,7 @@ class Company_management extends CI_Controller {
           if ($v->FILE_NPWP == "" || $v->FILE_NPWP == 'failed') {
             $file_npwp = '-';
           } else {
-            $file_npwp = '<button onclick="review_gambar(\'' . base_url() . 'upload/COMPANY_MANAGEMENT/DAFTAR_PEMILIK_SAHAM/' . $v->FILE_NPWP . '\')" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i></button>';
+            $file_npwp = '<button onclick="review_gambar(\'' . base_url() . 'upload/COMPANY_MANAGEMENT/DAFTAR_DEWAN_DIREKSI/' . $v->FILE_NPWP . '\')" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i></button>';
           }
 
             $dt[$k][0] = $k + 1;

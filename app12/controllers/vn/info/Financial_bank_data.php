@@ -102,9 +102,9 @@ class Financial_bank_data extends CI_Controller {
     {
         foreach ($data as $k => $v) {
             if($pil == null)
-                unlink($dest.$v->FILE_URL);
+                @unlink($dest.$v->FILE_URL);
             else
-                unlink($dest.$data['FILE_URL']);
+                @unlink($dest.$data['FILE_URL']);
         }
     }
 
