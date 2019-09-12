@@ -962,7 +962,7 @@ $(function () {
             TELP: {required: true, number: true, maxlength: 16},
 //                                                    HP: {required: true, number: true,maxlength:20},
             FAX: {required: false, number: true, maxlength: 10},
-            WEBSITE: {required: false, maxlength: 40, url: true},
+            WEBSITE: {required: false, maxlength: 40},
         },
         errorPlacement: function (label, element) { // render error placement for each input type
             // console.log(label);

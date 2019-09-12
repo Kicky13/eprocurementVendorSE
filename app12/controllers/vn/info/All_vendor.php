@@ -277,8 +277,9 @@ class All_vendor extends CI_Controller {
                     $this->session->status_vendor = "5";
                 }
                 $this->output(array("status" => "success", "msg" => "Data sending successfully"));
-            } else
+            } else {
                 $this->output(array("status" => "failed", "msg" => "Data sending failed"));
+            }
         }
         else {
             $this->output(array("status" => "failed", "msg" => "Oops, Something wrong"));

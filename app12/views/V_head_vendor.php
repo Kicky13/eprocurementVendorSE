@@ -1022,17 +1022,17 @@
             function submit_data()
             {
                 swal({
-                    title: "Apakah anda yakin?",
-                    text: "Untuk Mengirim Data Ini",
+                    title: "Are you sure?",
+                    text: "To send this data",
                     type: "warning",
                     showCancelButton: true,
                     CancelButtonColor: "#DD6B55",
                     confirmButtonColor: "#d9534f",
-                    confirmButtonText: "Ya",
+                    confirmButtonText: "Yes",
                     closeOnConfirm: false
                 }, function () {
                     var elm = start($('.sweet-alert'));
-                    msg_default("Info", "Data Sedang Dikirim..");
+                    msg_default("Info", "Sending Data..");
                     var obj = {};
                     obj.API = "insert";
                     $.ajax({
@@ -1048,7 +1048,7 @@
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             stop(elm);
-                            msg_danger("Gagal", "Oops,Terjadi kesalahan");
+                            msg_danger("Failed", "Oops, Something Wrong");
                         }
                     });
                 }
@@ -1078,17 +1078,17 @@
             function update_submit_data()
             {
                 swal({
-                    title: "Apakah anda yakin?",
-                    text: "Untuk Mengirim Data Ini",
+                    title: "Are you sure?",
+                    text: "To Send this data",
                     type: "warning",
                     showCancelButton: true,
                     CancelButtonColor: "#DD6B55",
                     confirmButtonColor: "#d9534f",
-                    confirmButtonText: "Ya",
+                    confirmButtonText: "Yes",
                     closeOnConfirm: false
                 }, function () {
                     var elm = start($('.sweet-alert'));
-                    msg_default("Info", "Data Sedang Dikirim..");
+                    msg_default("Info", "Sending Data..");
                     var obj = {};
                     obj.API = "update";
                     $.ajax({
@@ -1104,7 +1104,7 @@
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             stop(elm);
-                            msg_danger("Gagal", "Oops,Terjadi kesalahan");
+                            msg_danger("Failed", "Oops, Something wrong");
                         }
                     });
                 }
