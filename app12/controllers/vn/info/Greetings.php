@@ -145,29 +145,6 @@ class Greetings extends CI_Controller {
     public function confirmation()
     {
         $x = $this->input->post();
-        $img1 = '';
-        $img2 = '';
-
-        $query = $this->db->query('SELECT bl.vendor_id as vendor, bl.msr_no as msr, vendor.ID_VENDOR as email, notif.TITLE as title, notif.OPEN_VALUE as open, notif.CLOSE_VALUE as close FROM t_bl_detail bl
-            JOIN m_vendor vendor ON bl.vendor_id = vendor.ID
-            JOIN m_notic notif ON notif.ID = 81
-            WHERE bl.id = "' . $x['id'] . '"');
-
-        $data_replace = $query->result();
-
-        $str = $data_replace[0]->open;
-
-        $data = array(
-            'img1' => $img1,
-            'img2' => $img2,
-            'title' => $data_replace[0]->title,
-            'open' => $str,
-            'close' => $data_replace[0]->close
-        );
-
-        $data['dest'][0] = $data_replace[0]->email;
-
-        $flag = $this->sendMail($data);
         $this->db->where(['id'=>$x['id']]);
         $this->db->update('t_bl_detail', array(
             'confirmed' => $x['status'],
