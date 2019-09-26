@@ -215,7 +215,7 @@ class T_approval_arf_recom extends CI_Model {
     {
       $greetings = " and t_arf_recommendation_preparation.doc_no not in (select doc_no from t_arf_acceptance)";
     }
-    $sql = "SELECT a.*, b.jml as total, c.jml as approve, e.doc_no doc_no, e.po_no, f.title, m_company.ABBREVIATION company, e.doc_date $s
+    $sql = "SELECT a.*, b.jml as total, c.jml as approve, e.doc_no doc_no, e.po_no, f.title, m_company.ABBREVIATION company, e.doc_date,t_arf_acceptance.id acceptance_id $s
     from t_arf_response a 
     left join 
     (select count(id)jml, id_ref from t_approval_arf_recom group by id_ref) b 
@@ -229,6 +229,7 @@ class T_approval_arf_recom extends CI_Model {
     left join t_msr on  t_msr.msr_no = f.msr_no
     left join m_company on m_company.ID_COMPANY = t_msr.id_company
     left join t_arf_recommendation_preparation on t_arf_recommendation_preparation.doc_no = e.doc_no
+    left join t_arf_acceptance on t_arf_acceptance.doc_no = t_arf_recommendation_preparation.doc_no
     where  b.jml = c.jml and f.id_vendor = ".$this->session->userdata('ID').$greetings;
     $rs = $this->db->query($sql);
     return $rs;
