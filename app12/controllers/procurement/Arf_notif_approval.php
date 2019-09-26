@@ -354,8 +354,8 @@ class Arf_notif_approval extends CI_Controller {
                 $rec_role = $res[0]['rec_role'];
                 $user = $this->mana->get_email_rec($rec, $rec_role);
                 if ($user != null) {
-                    $img1 = "<img src='https://4.bp.blogspot.com/-X8zz844yLKg/Wky-66TMqvI/AAAAAAAABkM/kG0k_0kr5OYbrAZqyX31iUgROUcOClTwwCLcBGAs/s1600/logo2.jpg'>";
-                    $img2 = "<img src='https://4.bp.blogspot.com/-MrZ1XoToX2s/Wky-9lp42tI/AAAAAAAABkQ/fyL__l-Fkk0h5HnwvGzvCnFasi8a0GjiwCLcBGAs/s1600/foot.jpg'>";
+                    $img1 = "";
+                    $img2 = "";
                     $dt = array(
                         'dest' => $user,
                         'img1' => $img1,
