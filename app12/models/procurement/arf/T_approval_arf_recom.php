@@ -225,7 +225,7 @@ class T_approval_arf_recom extends CI_Model {
     left join t_msr on  t_msr.msr_no = f.msr_no
     left join m_company on m_company.ID_COMPANY = t_msr.id_company
     left join t_arf_recommendation_preparation on t_arf_recommendation_preparation.doc_no = e.doc_no
-    where  b.jml = c.jml and f.id_vendor = ".$this->session->userdata('ID');
+    where  b.jml = c.jml and f.id_vendor = ".$this->session->userdata('ID')." and t_arf_recommendation_preparation.doc_no not in (select doc_no from t_arf_acceptance)";
     $rs = $this->db->query($sql);
     return $rs;
   }
