@@ -57,7 +57,7 @@
                                                                     <?php } ?>
                                                                 </td> -->
                                                                 <td class="text-center">
-                                                                    <a href="<?= base_url('vn/info/amendment_acceptance/create/'.$row->id) ?>" class="btn btn-primary btn-sm">Acceptance</a>
+                                                                    <a href="<?= base_url('vn/info/amendment_acceptance/create/'.$row->id) ?>" class="btn btn-primary btn-sm"><?= $row->acceptance_id ? 'View':'Acceptance' ?></a>
                                                                 </td>
                                                             </tr>
                                                         <?php } ?>
