@@ -429,7 +429,7 @@
                           <div class="media-body text-right">
                               <h6><b>Amendment Notification Response</b></h6>
                               <?php
-                                $un   = $this->m_arf_notification->view('arf_notification')->scope(array('auth_vendor', 'responsed'))->count_all_results();
+                                $un   = $this->m_arf_notification->view('arf_responsed')->scope(array('auth_vendor', 'responsed'))->count_all_results();
                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/arf_notification/submitted')."'>" : "";
                                 $aend = $un > 0 ? "</a>" : "";
                               ?>

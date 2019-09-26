@@ -503,7 +503,7 @@
                             <li class="nav-item d-none d-md-block"><a href="#" class="nav-link nav-link-expand"><i class="fa fa-window-maximize"></i></a></li>
                             <li class="nav-item d-none d-md-block user_guide">
                               <a href="#" class="nav-link" style="padding-top:1rem; padding-bottom:0;" title="User Guide">
-                                <i class="fa fa-address-book icons font-large-1"></i>
+                                <i class="fa fa-info-circle icons font-large-1"></i>
                               </a>
                             </li>
                         </ul>
