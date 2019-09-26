@@ -508,7 +508,7 @@
                           <div class="media-body text-right">
                               <h6><b>Amendment Acceptance</b></h6>
                               <?php
-                                $un   = $this->T_approval_arf_recom->arf_response_done()->num_rows();
+                                $un   = $this->T_approval_arf_recom->arf_response_done(0,true)->num_rows();
                                 $a    = "<a href='".base_url('vn/info/amendment_acceptance')."'>";
                                 $aend = "</a>";
                                 // echo $a.$un.$aend;

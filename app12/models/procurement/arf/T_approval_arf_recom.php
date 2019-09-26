@@ -200,7 +200,7 @@ class T_approval_arf_recom extends CI_Model {
       $this->db->update('t_arf_response', ['is_done'=>1]);
     }
   }
-  public function arf_response_done($switch_id=0)
+  public function arf_response_done($switch_id=0, $greetings=false)
   {
     /*NOT EXISTS (
             SELECT doc_no FROM t_arf_response
@@ -210,6 +210,10 @@ class T_approval_arf_recom extends CI_Model {
     if($switch_id > 0)
     {
       $s = ", t_arf_recommendation_preparation.id id";
+    }
+    if($greetings)
+    {
+      $greetings = " and t_arf_recommendation_preparation.doc_no not in (select doc_no from t_arf_acceptance)";
     }
     $sql = "SELECT a.*, b.jml as total, c.jml as approve, e.doc_no doc_no, e.po_no, f.title, m_company.ABBREVIATION company, e.doc_date $s
     from t_arf_response a 
@@ -225,7 +229,7 @@ class T_approval_arf_recom extends CI_Model {
     left join t_msr on  t_msr.msr_no = f.msr_no
     left join m_company on m_company.ID_COMPANY = t_msr.id_company
     left join t_arf_recommendation_preparation on t_arf_recommendation_preparation.doc_no = e.doc_no
-    where  b.jml = c.jml and f.id_vendor = ".$this->session->userdata('ID')." and t_arf_recommendation_preparation.doc_no not in (select doc_no from t_arf_acceptance)";
+    where  b.jml = c.jml and f.id_vendor = ".$this->session->userdata('ID').$greetings;
     $rs = $this->db->query($sql);
     return $rs;
   }
