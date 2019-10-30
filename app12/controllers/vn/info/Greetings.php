@@ -954,7 +954,7 @@ class Greetings extends CI_Controller {
 
         $this->template->display_vendor('procurement/V_po_show_vendor', compact(
             'menu', 'po', 'po_items', 'message', 'company', 'vendor', 'po_attachments', 'po_attachment_type',
-            'approval_list', 'po_required_doc', 'opt_po_required_doc', 'roles',
+            'po_required_doc', 'opt_po_required_doc', 'roles',
             'msr', 'opt_currency', 'opt_dpoint', 'opt_importation', 'opt_tkdn_type',
             'opt_item_type', 'requestor', 'requestor_dept', 'opt_msr_inventory_type'
         ));

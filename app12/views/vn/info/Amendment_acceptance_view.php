@@ -302,7 +302,7 @@
                                                 </tbody>
                                             </table>
                                         </fieldset>
-                                        <h6><i class="step-icon fa fa-check"></i> Completeness</h6>
+                                        <h6><i class="step-icon fa fa-check"></i> Supporting Document</h6>
                                         <fieldset>
                                             <?php if ($arf->extend1) { ?>
                                             <div class="form-group row">
