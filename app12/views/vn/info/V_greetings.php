@@ -158,29 +158,29 @@
                           </div>
                           <div class="media-body text-right">
                               <h6><b>Declined Participation</b></h6>
-                              <h5>
-                              <?php
-                                 $un   = $this->vendor_lib->greeting_list(10)->num_rows();
-                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/greetings/list/10')."'>" : "";
-                                 $aend = $un > 0 ? "</a>" : "";
-
-                                $unread_message = $this->vendor_lib->count_unread_message(10);
-                                if ($un > 0) {
-                                  echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
-                                }
-
-                                if ($unread_message) {
-                                  if ($unread_message->unread_message <> 0) {
-                                    echo ' <span class="badge badge-warning" data-toggle="tooltip" data-placement="top" title="'.$unread_message->unread_message.' Clarification"><i class="fa fa-bell fa-fw"></i> '.$unread_message->unread_message.'</span>';
-                                  }
-                                  if ($unread_message->addendum <> 0) {
-                                    echo ' <span class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="'.$unread_message->addendum.' Addendum"><i class="fa fa-exclamation fa-fw"></i> '.$unread_message->addendum.'</span>';
-                                  }
-                                } else {
-                                  echo '&nbsp;';
-                                }
-                              ?>
-                              </h5>
+<!--                              <h5>-->
+<!--                              --><?php
+//                                 $un   = $this->vendor_lib->greeting_list(10)->num_rows();
+//                                 $a    = $un > 0 ? "<a href='".base_url('vn/info/greetings/list/10')."'>" : "";
+//                                 $aend = $un > 0 ? "</a>" : "";
+//
+//                                $unread_message = $this->vendor_lib->count_unread_message(10);
+//                                if ($un > 0) {
+//                                  echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+//                                }
+//
+//                                if ($unread_message) {
+//                                  if ($unread_message->unread_message <> 0) {
+//                                    echo ' <span class="badge badge-warning" data-toggle="tooltip" data-placement="top" title="'.$unread_message->unread_message.' Clarification"><i class="fa fa-bell fa-fw"></i> '.$unread_message->unread_message.'</span>';
+//                                  }
+//                                  if ($unread_message->addendum <> 0) {
+//                                    echo ' <span class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="'.$unread_message->addendum.' Addendum"><i class="fa fa-exclamation fa-fw"></i> '.$unread_message->addendum.'</span>';
+//                                  }
+//                                } else {
+//                                  echo '&nbsp;';
+//                                }
+//                              ?>
+<!--                              </h5>-->
                           </div>
                       </div>
                   </div>
@@ -428,18 +428,18 @@
                           </div>
                           <div class="media-body text-right">
                               <h6><b>Amendment Notification Response</b></h6>
-                              <?php
-                                $un   = $this->m_arf_notification->view('arf_responsed')->where('t_arf.is_issued <> 1')->scope(array('auth_vendor', 'responsed'))->count_all_results();
-                                $a    = $un > 0 ? "<a href='".base_url('vn/info/arf_notification/submitted')."'>" : "";
-                                $aend = $un > 0 ? "</a>" : "";
-                              ?>
-                              <h5>
-                                <?php
-                                  if ($un > 0) {
-                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
-                                  }
-                                ?>
-                              </h5>
+<!--                              --><?php
+//                                $un   = $this->m_arf_notification->view('arf_responsed')->where('t_arf.is_issued <> 1')->scope(array('auth_vendor', 'responsed'))->count_all_results();
+//                                $a    = $un > 0 ? "<a href='".base_url('vn/info/arf_notification/submitted')."'>" : "";
+//                                $aend = $un > 0 ? "</a>" : "";
+//                              ?>
+<!--                              <h5>-->
+<!--                                --><?php
+//                                  if ($un > 0) {
+//                                    echo '<span class="badge badge badge-info badge-pill float-right ">'.$un.'</span>';
+//                                  }
+//                                ?>
+<!--                              </h5>-->
                           </div>
                       </div>
                   </div>
