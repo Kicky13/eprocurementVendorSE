@@ -166,7 +166,7 @@ class M_all_vendor extends CI_Model {
             'select DISTINCT u.email,x.user_roles as recipients,t.user_roles, t.sequence, t.reject_step, t.email_approve, t.email_reject, n.OPEN_VALUE, n.CLOSE_VALUE, n.TITLE
             FROM t_approval_supplier t
             JOIN m_notic n ON n.ID = t.email_approve
-            JOIN (select user_roles,supplier_id from t_approval_supplier where supplier_id='.$supp.' and sequence=4
+            JOIN (select user_roles,supplier_id from t_approval_supplier where supplier_id='.$supp.'
             and (status_approve=0 or status_approve=2)) x on x.supplier_id=t.supplier_id
             LEFT JOIN m_user u ON u.ROLES LIKE CONCAT(\'%,\',x.user_roles,\',%\') AND u.status=1
             WHERE t.id ='.$id);

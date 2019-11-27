@@ -357,11 +357,11 @@ class All_vendor extends CI_Controller {
 
     public function submit_data_new() {
         if ($_POST['API'] = "insert") {
-            $id=0;
+            $id = 0;
             $seq = 0;
             $supp = $_SESSION['ID'];
-            $res=$this->mav->get_fulldt($supp);
-            if(count($res)>0)
+            $res = $this->mav->get_fulldt($supp);
+            if(count($res) > 0)
             {
                 $id=$res[0]->id;
                 $seq=$res[0]->sequence;
@@ -381,11 +381,13 @@ class All_vendor extends CI_Controller {
 
             $res = $this->mav->upd('t_approval_supplier',$upd,$supp,0,0);
 
-            if ($res && count($content)>0) {
+            if ($res && count($content) > 0) {
                 $this->mav->submit_log($log);
                 date_default_timezone_set("Asia/Jakarta");
-                $img1 = "<img src='https://4.bp.blogspot.com/-X8zz844yLKg/Wky-66TMqvI/AAAAAAAABkM/kG0k_0kr5OYbrAZqyX31iUgROUcOClTwwCLcBGAs/s1600/logo2.jpg'>";
-                $img2 = "<img src='https://4.bp.blogspot.com/-MrZ1XoToX2s/Wky-9lp42tI/AAAAAAAABkQ/fyL__l-Fkk0h5HnwvGzvCnFasi8a0GjiwCLcBGAs/s1600/foot.jpg'>";
+//                $img1 = "<img src='https://4.bp.blogspot.com/-X8zz844yLKg/Wky-66TMqvI/AAAAAAAABkM/kG0k_0kr5OYbrAZqyX31iUgROUcOClTwwCLcBGAs/s1600/logo2.jpg'>";
+//                $img2 = "<img src='https://4.bp.blogspot.com/-MrZ1XoToX2s/Wky-9lp42tI/AAAAAAAABkQ/fyL__l-Fkk0h5HnwvGzvCnFasi8a0GjiwCLcBGAs/s1600/foot.jpg'>";
+                $img1 = '';
+                $img2 = '';
                 $var_link = "<br><br>Klik link berikut untuk memproses <a href='" . base_url() . "log_in/in' class='btn btn-primary btn-lg'>Link Portal</a><br><br>";
                 $open = str_replace("_var1_", $this->session->NAME, $content[0]['OPEN_VALUE'].$var_link);
 
@@ -406,8 +408,9 @@ class All_vendor extends CI_Controller {
                     $this->session->status_vendor = "5";
                 }
                 $this->output(array("status" => "success", "msg" => "Data sending successfully"));
-            } else
+            } else {
                 $this->output(array("status" => "failed", "msg" => "Data sending failed"));
+            }
         }
         else {
             $this->output(array("status" => "failed", "msg" => "Oops, Something Wrong"));
