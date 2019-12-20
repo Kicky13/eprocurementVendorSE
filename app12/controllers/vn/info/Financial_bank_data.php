@@ -314,7 +314,7 @@ class Financial_bank_data extends CI_Controller {
     public function delete_data_acc()
     {
             $key = stripslashes($this->input->post('KEYS'));
-            $result = $this->mfb->delete_data($key,"m_vendor_bank_account");
+            $result = $this->mfb->delete_bank_account_now($key,"m_vendor_bank_account");
             $this->output($result);
     }
 

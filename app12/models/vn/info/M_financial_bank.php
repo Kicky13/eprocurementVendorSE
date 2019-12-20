@@ -139,4 +139,15 @@ class M_financial_bank extends CI_Model {
             return $query;
     }
 
+    public function delete_bank_account_now ($key, $tbl) {
+        $query = $this->db
+                ->where('ID_VENDOR=', $this->session->ID)
+                ->where('KEYS=', $key)
+                ->delete($tbl);
+        if ($query)
+            return true;
+        else
+            return $query;
+    }
+
 }
