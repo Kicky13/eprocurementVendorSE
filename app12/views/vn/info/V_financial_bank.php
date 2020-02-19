@@ -161,7 +161,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 control-label" for="nilai_aset"><?= lang("Nilai Aset", "Asset Value"); ?></label>
                                     <div class="col-8">
-                                        <input type="text" class="form-control m-b" id="nilai_aset" name="nilai_aset" >
+                                        <input type="text" disabled class="form-control m-b" value="0" id="nilai_aset" name="nilai_aset" >
                                     </div>
                                 </div>
                             </div>
@@ -302,10 +302,25 @@
 <?php $this->load->view('vn/info/V_certification_experience'); ?>
 <script>
     $(document).ready(function () {
+      if ($('#jenis_laporan').val() == 'Laba Rugi') {
+          document.getElementById('nilai_aset').disabled = true;
+          document.getElementById('nilai_aset').value = '0';
+      }
       $(".Certification_experience").hide();
         $('.input-group.date').datetimepicker({
             format: 'YYYY'
         });
+        $('#jenis_laporan').change(function () {
+            tipe = $('#jenis_laporan').val();
+            if (tipe == 'Laba Rugi') {
+                $('#nilai_aset').val('0');
+                document.getElementById('nilai_aset').disabled = true;
+            } else {
+                $('#nilai_aset').val('');
+                document.getElementById('nilai_aset').disabled = false;
+            }
+            console.log(tipe);
+        })
         $('.input-group.datetahun_laporan').datetimepicker({
             viewMode: 'years',
             format: 'YYYY'

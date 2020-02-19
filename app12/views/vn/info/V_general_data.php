@@ -789,16 +789,16 @@ $(function () {
 
                     if (res == true)
                     {
-                        msg_info("Sukses", "Data sukses disimpan");
+                        msg_info("Success", "Savedata success");
                     } else {
-                        msg_danger("Error", "Data gagal disimpan");
+                        msg_danger("Error", "Savedata Failed");
                     }
                     stop(elm);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     stop(elm);
-                    msg_danger("Gagal", "Oops,Terjadi kesalahan");
-                    swal("Data Gagal di hapus", "", "failed");
+                    msg_danger("Error", "Oops,Something went wrong");
+                    swal("Delete Failed", "", "failed");
                 }
             });
         }
@@ -848,7 +848,7 @@ $(function () {
 
                     if (res.success == true && res.file == true)
                     {
-                      msg_info("Sukses", "Data sukses disimpan");
+                      msg_info("Success", "Data saved");
                       setTimeout(function(){
                         window.location.reload();
                       },1000)
@@ -856,7 +856,7 @@ $(function () {
                       if (res.file == false) {
                         msg_danger("Error", "Only PDF, png, jpg and jpeg files are allowed");
                       } else {
-                        msg_danger("Error", "Data gagal disimpan");
+                        msg_danger("Error", "Savedata failed");
                       }
 
                     }
@@ -864,8 +864,8 @@ $(function () {
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     stop(elm);
-                    msg_danger("Gagal", "Oops,Terjadi kesalahan");
-                    swal("Data Gagal di hapus", "", "failed");
+                    msg_danger("Failed", "Oops,Something went wrong");
+                    swal("Delete Failed", "", "failed");
                 }
             });
         }
@@ -929,16 +929,16 @@ $(function () {
                         $('#modal_kontak').modal('hide');
                         document.getElementById("company_contact_update").reset();
                         $('#datakontak').DataTable().ajax.reload();
-                        msg_info("Sukses", "Data berhasil disimpan");
+                        msg_info("Success", "Data saved");
                     } else {
-                        msg_danger("Error", "Data gagal disimpan");
+                        msg_danger("Error", "Savedata failed");
                     }
                     stop(elm);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     stop(elm);
-                    msg_danger("Gagal", "Oops,Terjadi kesalahan");
-                    swal("Data Gagal di hapus", "", "failed");
+                    msg_danger("Fail", "Oops, Something went wrong");
+                    swal("Delete Failed", "", "failed");
                 }
             })
 
@@ -1002,18 +1002,18 @@ $(function () {
                         document.getElementById("company_address_update").reset();
                         $('#company_address_update #keys1').val("0");
                         $('#dataalamat').DataTable().ajax.reload();
-                        msg_info("sukses", "Data sukses diupdate");
+                        msg_info("success", "Data Updated");
                         window.location.href = '<?= base_url('vn/info/general_data'); ?>';
                     } else
                     {
-                        msg_danger("Error", "Data gagal diupdate");
+                        msg_danger("Error", "Update failed");
                     }
                     stop(elm);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     stop(elm);
-                    msg_danger("Gagal", "Oops,Terjadi kesalahan");
-                    swal("Data Gagal di hapus", "", "failed");
+                    msg_danger("Fail", "Oops, Something went wrong");
+                    swal("Delete Failed", "", "failed");
                 }
             });
         }
@@ -1025,13 +1025,13 @@ $(function () {
 
     $('.demo3').click(function () {
         swal({
-            title: "Apakah anda yakin?",
-            text: "Pastikan Data umum dan Data Legal Telah Terisi,Data tidak akan bisa dirubah lagi",
+            title: "Are you sure?",
+            text: "Make sure general data and legal data have been filled, the data will not be changed again",
             type: "warning",
             showCancelButton: true,
             CancelButtonColor: "#DD6B55",
             confirmButtonColor: "#337ab7",
-            confirmButtonText: "Ya, simpan",
+            confirmButtonText: "Yes, save please",
             closeOnConfirm: false
         }, function () {
             var obj = {};
@@ -1044,14 +1044,14 @@ $(function () {
                 {
                     if (res == true)
                     {
-                        swal("Data Tersimpan!", "Anda Tidak bisa mengganti data hingga ada pemberitahuan", "success");
+                        swal("Data Saved! "," You cannot replace data until you are notified", "success");
                         check(2);
                     } else {
-                        swal("Failed!", "Oops, There is some errors,please try again", "failed");
+                        swal("Failed!", "Oops, There is some errors, please try again", "failed");
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    msg_danger("Gagal", "Oops,Terjadi kesalahan");
+                    msg_danger("Gagal", "Oops, Something went wrong");
                 }
             });
         });
@@ -1110,8 +1110,8 @@ function delete_kontak(key, id)
 function delete_data(obj, dt)
 {
     swal({
-        title: "Apakah anda yakin?",
-        text: "Untuk menghapus data ini",
+        title: "Are you sure?",
+        text: "To delete this data?",
         type: "warning",
         showCancelButton: true,
         CancelButtonColor: "#DD6B55",
@@ -1119,7 +1119,7 @@ function delete_data(obj, dt)
         confirmButtonText: "Ya, hapus",
         closeOnConfirm: false
     }, function () {
-        msg_default('Proses', "Data Sedang dihapus");
+        msg_default('Processing', "Delete on progress");
 
         $.ajax({
             type: "POST",
@@ -1134,13 +1134,13 @@ function delete_data(obj, dt)
                         $('#dataalamat').DataTable().ajax.reload();
                     else
                         $('#datakontak').DataTable().ajax.reload();
-                    swal("Data Berhasil dihapus", "", "success");
+                    swal("Data deleted", "", "success");
                 } else {
-                    swal("Data Gagal dihapus", "", "failed");
+                    swal("Delete failed", "", "failed");
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                msg_danger("Gagal", "Oops,Terjadi kesalahan");
+                msg_danger("Gagal", "Oops, Something went wrong");
             }
         });
     });
@@ -1160,7 +1160,7 @@ function delete_addr(key, id)
         {
             if (res == true)
             {
-                msg_danger("Error", "Data tidak diperbolehkan untuk diubah");
+                msg_danger("Error", "Data is not allowed to be changed");
                 return;
             }
             else

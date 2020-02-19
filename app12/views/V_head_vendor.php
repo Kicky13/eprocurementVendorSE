@@ -795,13 +795,13 @@
             function update_data()
             {
                 swal({
-                    title: "Apakah anda yakin?",
-                    text: "Untuk Melakukan Update, Data anda akan melalui proses persetujuan kembali",
+                    title: "Are you sure?",
+                    text: "To Update, your data will go through the approval process again",
                     type: "warning",
                     showCancelButton: true,
                     CancelButtonColor: "#DD6B55",
                     confirmButtonColor: "#d9534f",
-                    confirmButtonText: "Ya",
+                    confirmButtonText: "Yes, please",
                     closeOnConfirm: false
                 }, function () {
                     var elm = start($('.sweet-alert'));

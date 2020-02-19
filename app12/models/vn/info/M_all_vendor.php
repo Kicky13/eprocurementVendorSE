@@ -167,7 +167,7 @@ class M_all_vendor extends CI_Model {
             FROM t_approval_supplier t
             JOIN m_notic n ON n.ID = t.email_approve
             JOIN (select user_roles,supplier_id from t_approval_supplier where supplier_id='.$supp.'
-            and (status_approve=0 or status_approve=2)) x on x.supplier_id=t.supplier_id
+            and (status_approve=0 or status_approve=2) and sequence = 1) x on x.supplier_id=t.supplier_id
             LEFT JOIN m_user u ON u.ROLES LIKE CONCAT(\'%,\',x.user_roles,\',%\') AND u.status=1
             WHERE t.id ='.$id);
         // return echopre($this->db->last_query());
